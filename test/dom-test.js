@@ -17,16 +17,6 @@ function getElement(selector) {
   });
 }
 
-function elementCount(selector) {
-  return new Promise((resolve, reject) => {
-    JsDom.env(
-      markup,
-      (err, window) => {
-        resolve(window.document.querySelectorAll(selector).length);
-      });
-  });
-}
-
 describe('Q map dom tests', function() {
   it('should have a correct title element', function() {
     return getElement('.s-q-item__title').then(element => {

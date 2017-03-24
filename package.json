@@ -106,6 +106,7 @@
     "escape-json-node": "^1.0.8",
     "eslint": "^3.18.0",
     "jsdom": "^9.12.0",
+    "jspm": "^0.17.0-beta.41",
     "mocha": "^3.2.0"
   }
 }
