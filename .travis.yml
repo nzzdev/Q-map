@@ -6,6 +6,7 @@ language: node_js
 node_js:
 - '7.6'
 install:
+- npm install -g jspm
 - npm install
 - jspm install
 before_script:
