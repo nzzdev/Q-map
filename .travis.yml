@@ -7,6 +7,7 @@ node_js:
 - '7.6'
 install:
 - npm install
+- jspm install
 before_script:
 - DOCKER_IMAGE_NAME="q-map"
 - DOCKER_TAG=$TRAVIS_BRANCH
