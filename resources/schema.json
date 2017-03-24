@@ -114,7 +114,7 @@
       "type": "object",
       "title": "Punkt auf der Karte",
       "Q:type": "geojsonPoint",
-      "required": ["type, properties, geometry"],
+      "required": ["type", "properties"],
       "properties": {
         "type": {
           "type": "string",
