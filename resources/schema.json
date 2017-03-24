@@ -38,45 +38,6 @@
         "compact": true
       }
     },
-    "options": {
-      "title": "Kartenoptionen",
-      "type": "object",
-      "properties": {
-        "baseLayer": {
-          "title": "Basiskarte",
-          "type": "string",
-          "default": "streets",
-          "enum": ["streets"],
-          "Q:options": {
-            "enum_titles": ["Strassenkarte"]
-          }
-        },
-        "hideTitle": {
-          "title": "Titel im Artikel nicht anzeigen",
-          "type": "boolean",
-          "default": false
-        },
-        "initialZoomLevel": {
-          "title": "Zoom Level",
-          "type": "string",
-          "default": "auto",
-          "enum": ["auto",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
-          "Q:options": {
-            "enum_titles": ["automatisch","1 - Welt",2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,"18 - Haus"]
-          }
-        },
-        "minimap": {
-          "title": "Minimap anzeigen",
-          "type": "boolean",
-          "default": true 
-        },
-        "labelsBelowMap": {
-          "title": "Labels unter Karte anzeigen",
-          "type": "boolean",
-          "default": false
-        }
-      }
-    },
     "notes": {
       "title": "Anmerkungen",
       "type": "string"
@@ -103,11 +64,46 @@
               },
               "isValid": {
                 "type": "boolean"
-              }    
+              }
             }
           }
         }
       }
+    },
+    "options": {
+      "title": "Kartenoptionen",
+      "type": "object",
+      "properties": {
+        "baseLayer": {
+          "title": "Basiskarte",
+          "type": "string",
+          "default": "streets",
+          "enum": ["streets"],
+          "Q:options": {
+            "enum_titles": ["Strassenkarte"]
+          }
+        },
+        "initialZoomLevel": {
+          "title": "Zoom Level",
+          "type": "string",
+          "default": "auto",
+          "enum": ["auto",1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+          "Q:options": {
+            "enum_titles": ["automatisch","1 - Welt",2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,"18 - Haus"]
+          }
+        },
+        "minimap": {
+          "title": "Minimap anzeigen",
+          "type": "boolean",
+          "default": true
+        },
+        "labelsBelowMap": {
+          "title": "Labels unter Karte anzeigen",
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": ["baseLayer", "initialZoomLevel", "minimap", "labelsBelowMap"]
     }
   },
   "required": [
@@ -239,7 +235,7 @@
             }
           ]
         },
-        "properties": { 
+        "properties": {
           "type": "object"
         }
       }
