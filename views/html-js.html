@@ -1,0 +1,40 @@
+<div class="s-q-item">
+  <h3 class="s-q-item__title">{{title}}</h3>
+  <div class="q-map-container" id="{{ mapContainerId }}"></div>
+  <div class="s-q-item__footer">
+    {{#if options.labelsBelowMap}}
+      <div class="q-map-footer__marker-labels">
+      {{#each numberedLabels as label}}
+        <div class="q-map-footer__marker-labels__label s-font-note">{{label}}</div>
+      {{/each}}
+      </div>
+    {{/if}}
+    <div class="s-q-item__footer__notes">{{notes}}</div>
+  </div>
+</div>
+<script>
+export default {
+  computed: {
+    numberedLabels: (geojson) => {
+      return geojson.features
+        .map((feature, index) => {
+          let codePoint = null;
+          if (index < 20) {
+            codePoint = 9312 + index;
+          } else if (index >= 20 && index < 36) {
+            codePoint = 12881 + index;
+          } else if (index >= 36 && index < 50) {
+            codePoint = 12977 + index;
+          }
+          if (codePoint) {
+            return String.fromCodePoint(codePoint) + ' ' + feature.properties.label;
+          }
+          return null;
+        })
+        .filter(label => {
+          return label !== null;
+        });
+    }
+  }
+}
+</script>

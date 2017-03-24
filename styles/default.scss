@@ -1,0 +1,203 @@
+@import '../jspm_packages/npm/leaflet@1.0.3/dist/leaflet.css';
+@import '../jspm_packages/npm/leaflet-minimap@3.4.0/dist/Control.MiniMap.min.css';
+
+.q-map-container {
+  height: 250px;
+  overflow: hidden;
+}
+
+$label-height: 21px;
+$label-padding: 5px;
+$line-height-baseline-correction: 2px;
+
+// overwrite some styles from leaflet
+.leaflet-bar {
+  box-shadow: none;
+  border-radius: 0;
+  border: 1px solid #8E8E8E;
+}
+.leaflet-bar a:first-child, .leaflet-bar a:last-child {
+  border-radius: 0;
+}
+
+.leaflet-container {
+  font-family: Roboto, Arial, sans-serif;
+}
+// end
+
+// overwrite some styles from leaflet Control.MiniMap
+.leaflet-control-minimap {
+  border-radius: 0;
+  box-shadow: none;
+  border: 1px solid #8E8E8E;
+}
+// end
+
+.leaflet-control-minimap-toggle-display {
+  background-image: none;
+}
+
+.q-map-marker {
+  border-radius: 50%;
+  background: black;
+  box-sizing: content-box;
+  box-shadow: 0px 0px 0px 2px currentColor;
+
+  &--without-point {
+    background: none;
+    box-shadow: none;
+  }
+}
+
+.q-map-marker__label {
+  height: 21px;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 14px;
+  line-height: $label-height;
+  font-weight: bold;
+  padding: 0px 5px 0 5px;
+  position: absolute;
+  white-space: nowrap;
+
+  text-shadow: rgb(250, 250, 250) 2px 0px 0px, rgb(250, 250, 250) 1.75517px 0.958851px 0px, rgb(250, 250, 250) 1.0806px 1.68294px 0px, rgb(250, 250, 250) 0.141474px 1.99499px 0px, rgb(250, 250, 250) -0.832294px 1.81859px 0px, rgb(250, 250, 250) -1.60229px 1.19694px 0px, rgb(250, 250, 250) -1.97998px 0.28224px 0px, rgb(250, 250, 250) -1.87291px -0.701566px 0px, rgb(250, 250, 250) -1.30729px -1.5136px 0px, rgb(250, 250, 250) -0.421592px -1.95506px 0px, rgb(250, 250, 250) 0.567324px -1.91785px 0px, rgb(250, 250, 250) 1.41734px -1.41108px 0px, rgb(250, 250, 250) 1.92034px -0.558831px 0px;
+
+  left: 4px;
+  transform: translateX(-50%);
+
+  .emoji {
+    font-weight: normal;
+    padding: 0 2px;
+  }
+}
+
+.q-map-marker__label--light {
+  font-size: 12px;
+
+  &.q-map-marker__label--top {
+    top: -18px;
+  }
+
+  &.q-map-marker__label--bottom {
+    bottom: -18px;
+  }
+}
+
+.q-map-marker__label--heavy {
+
+  &.q-map-marker__label--top {
+    top: -20px;
+  }
+
+  &.q-map-marker__label--bottom {
+    bottom: -20px;
+  }
+}
+
+.q-map-marker__label--event {
+  @extend .q-map-marker__label--heavy;
+  
+  &.q-map-marker__label--top {
+
+    top: -46px;
+  
+    &::after {
+      content: '\2193';
+      font-family: Arial, sans;
+      font-size: 25px;
+      display: block;
+      color: black;
+      text-align: center;
+      position: relative;
+      top: -4px;
+    }
+
+  }
+
+  &.q-map-marker__label--bottom {
+
+    bottom: -28px;
+
+    &::before {
+      content: '\2191';
+      font-family: Arial, sans;
+      font-size: 25px;
+      display: block;
+      color: black;
+      text-align: center;
+      position: relative;
+      top: -5px;
+    }
+  }
+}
+
+.q-map-marker__label--without-point {
+  @extend .q-map-marker__label--light;
+  left: 0;
+  
+  &.q-map-marker__label--top {
+    top: 0;
+  }
+
+  &.q-map-marker__label--bottom {
+    bottom: 0;
+  }
+  transform: translate(-50%, -50%);
+}
+
+.q-map-footer__marker-labels__label {
+  margin-bottom: 3px;
+}
+
+.leaflet-control-button {
+  cursor: pointer;
+}
+
+.q-enable-leaflet-interaction-button {
+  width: 35px;
+  height: 35px;
+  font-size: 10px;
+  text-transform: uppercase;
+  border: 1px solid #8E8E8E;
+  background: white;
+  padding: 5px 9px;
+  svg {
+    width: 100%;
+    display: block;
+  }
+}
+
+.leaflet-control-minimap {
+  pointer-events: none;
+}
+
+.leaflet-bottom .leaflet-control-scale {
+  margin: 0;
+  padding: 3px 5px 5px 5px;
+}
+
+.with-base-layer-aerial .leaflet-control-scale {
+  background: rgba(255,255,255,0.7);
+}
+
+.leaflet-control-scale-line {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #333;
+  overflow: visible;
+  text-align: center;
+  position: relative;
+  &::before, &::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 6px;
+    background: black;
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+  }
+  &::after {
+    left: auto;
+    right: 0;
+  }
+}

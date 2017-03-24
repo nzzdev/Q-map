@@ -1,0 +1,111 @@
+{
+  "name": "q-map",
+  "version": "1.0.0",
+  "description": "Q map tool",
+  "main": "q-map.js",
+  "scripts": {
+    "test": "LAYER_CONFIGS='{\"terrain\":{\"label\":\"Terrain\",\"url\":\"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png\",\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18},\"toner\":{\"label\":\"Toner\",\"url\":\"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18}}' ./node_modules/mocha/bin/mocha",
+    "build": "node tasks/build.js",
+    "lint": "./node_modules/eslint/bin/eslint.js '**/*.js'",
+    "start:dev": "LAYER_CONFIGS='{\"terrain\":{\"label\":\"Terrain\",\"url\":\"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png\",\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18},\"toner\":{\"label\":\"Toner\",\"url\":\"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18}}' node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nzzdev/Q-map.git"
+  },
+  "author": "Beni Buess <beni.buess@nzz.ch>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nzzdev/Q-map/issues"
+  },
+  "homepage": "https://github.com/nzzdev/Q-map#readme",
+  "dependencies": {
+    "autoprefixer": "^6.7.1",
+    "babel-plugin-import": "^1.1.0",
+    "cssnano": "^3.10.0",
+    "enjoi": "^2.1.0",
+    "hapi": "^16.1.0",
+    "hoek": "^4.1.0",
+    "inert": "^4.1.0",
+    "json-schema-faker": "^0.4.0",
+    "node-sass": "^4.3.0",
+    "postcss-import": "^9.1.0",
+    "svelte": "1.6.3",
+    "systemjs": "0.20.4",
+    "systemjs-builder": "0.16.1"
+  },
+  "jspm": {
+    "name": "q-map",
+    "dependencies": {
+      "babel": "npm:babel-core@^6.22.1",
+      "leaflet": "npm:leaflet@^1.0.3",
+      "leaflet-minimap": "npm:leaflet-minimap@^3.4.0",
+      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.20",
+      "text": "github:systemjs/plugin-text@^0.0.9"
+    },
+    "devDependencies": {},
+    "peerDependencies": {
+      "assert": "npm:jspm-nodelibs-assert@^0.2.0",
+      "buffer": "npm:jspm-nodelibs-buffer@^0.2.0",
+      "child_process": "npm:jspm-nodelibs-child_process@^0.2.0",
+      "constants": "npm:jspm-nodelibs-constants@^0.2.0",
+      "crypto": "npm:jspm-nodelibs-crypto@^0.2.0",
+      "events": "npm:jspm-nodelibs-events@^0.2.0",
+      "fs": "npm:jspm-nodelibs-fs@^0.2.0",
+      "module": "npm:jspm-nodelibs-module@^0.2.0",
+      "os": "npm:jspm-nodelibs-os@^0.2.0",
+      "path": "npm:jspm-nodelibs-path@^0.2.0",
+      "process": "npm:jspm-nodelibs-process@^0.2.0",
+      "stream": "npm:jspm-nodelibs-stream@^0.2.0",
+      "string_decoder": "npm:jspm-nodelibs-string_decoder@^0.2.0",
+      "util": "npm:jspm-nodelibs-util@^0.2.0",
+      "vm": "npm:jspm-nodelibs-vm@^0.2.0"
+    },
+    "overrides": {
+      "npm:debug@2.6.0": {
+        "main": "src/browser.js",
+        "jspmNodeConversion": false,
+        "format": "cjs",
+        "map": {
+          "./src/browser.js": {
+            "node": "./src/node.js"
+          },
+          "./node.js": {
+            "browser": "./src/browser.js"
+          },
+          "fs": "@node/fs",
+          "net": "@node/net",
+          "tty": "@node/tty",
+          "util": "@node/util"
+        }
+      },
+      "npm:inherits@2.0.3": {
+        "ignore": [
+          "test.js"
+        ]
+      },
+      "npm:leaflet@1.0.3": {
+        "jspmNodeConversion": false
+      },
+      "npm:lodash@4.17.4": {
+        "map": {
+          "buffer": "@empty",
+          "process": "@empty"
+        }
+      },
+      "npm:ms@0.7.2": {
+        "jspmNodeConversion": false,
+        "format": "cjs"
+      }
+    }
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.1",
+    "chai": "^3.5.0",
+    "es-module-loader": "^2.0.0",
+    "escape-json-node": "^1.0.8",
+    "eslint": "^3.18.0",
+    "jsdom": "^9.12.0",
+    "mocha": "^3.2.0"
+  }
+}

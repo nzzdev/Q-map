@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Q Map</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://service.sophie.nzz.ch/bundle/sophie-q@~0.1.1,sophie-font@^0.1.0,sophie-color@~1.0.0,sophie-viz-color@^1.0.0[diverging-6].css">
+    <script src="https://rawgit.com/filamentgroup/loadCSS/master/src/loadCSS.js"></script>
+    <script src="https://rawgit.com/filamentgroup/loadJS/master/loadJS.js"></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      let data = {
+        title: 'Erste Karte',
+        notes: 'Anmerkung',
+        geojson: {
+          type: "FeatureCollection",
+          features: [
+            {
+              type: "Feature",
+              geometry: {
+                type: "LineString",
+                coordinates: [[-180, 0], [180, 0]]
+              },
+              properties: {
+                style: {
+                  color: 'purple',
+                  interactive: false
+                },
+                useForInitialView: false
+              }
+            },
+            {
+              type: "Feature",
+              geometry: {
+                type: "Point",
+                coordinates: [48.2, 16.36],
+              },
+              properties: {
+                label: 'balbaba',
+                type: 'event',
+                labelPosition: 'bottom',
+              }
+            },
+            {
+              type: "Feature",
+              geometry: {
+                type: "Point",
+                coordinates: [47.2, 16.36],
+              },
+              properties: {
+                label: 'balbaba',
+                type: 'event',
+                labelPosition: 'top',
+              }
+            },
+            {
+              type: "Feature",
+              geometry: {
+                type: "Point",
+                coordinates: [48.2, 17.36],
+              },
+              properties: {
+                label: '😇blablalba',
+                type: 'pointHeavyLabel',
+                labelPosition: 'top',
+              }
+            },
+            {
+              type: "Feature",
+              geometry: {
+                type: "Point",
+                coordinates: [48.4, 16.36],
+              },
+              properties: {
+                label: 'balbaba',
+                type: 'pointLightLabel',
+                labelPosition: 'bottom',
+              }
+            }
+          ]
+        },
+        options: {
+          baseLayer: 'terrain',
+          initialZoomLevel: 'auto',
+          minimap: true,
+          labelsBelowMap: false
+        }
+      }
+      
+      function loadAllScripts(scripts, index, callback) {
+        if (scripts[index] && scripts[index].url) {
+          loadJS(scripts[index].url, () => {
+            loadAllScripts(scripts, index + 1, callback)
+          })
+        } else {
+          callback();
+        }
+      }
+
+      const body = {
+        item: data,
+        toolRuntimeConfig: {
+          toolBaseUrl: 'http://localhost:3000'
+        }
+      }
+
+      fetch("http://localhost:3000/rendering-info/html-js", {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => {
+          return response.json()
+        })
+        .then(data => {
+          data.stylesheets.forEach(stylesheet => {
+            if (stylesheet.name) {
+              stylesheet.url = `http://localhost:3000/stylesheet/${stylesheet.name}`
+            }
+            loadCSS(stylesheet.url)
+          })
+
+          document.getElementById('map').innerHTML = data.markup;
+
+          data.scripts = data.scripts
+            .map(script => {
+              if (script.name) {
+                script.url = `http://localhost:3000/script/${script.name}`
+              }
+              return script;
+            })
+
+          let urlScripts = data.scripts
+            .filter(script => script.url)
+
+          let contentScripts = data.scripts
+            .filter(script => script.content)
+
+          loadAllScripts(urlScripts, 0, () => {
+            contentScripts.forEach(script => {
+              let scriptElement = document.createElement('script');
+              scriptElement.innerHTML = script.content;
+              document.getElementById('map').appendChild(scriptElement);
+            })
+          })
+        })
+    </script>
+  </body>
+</html>
