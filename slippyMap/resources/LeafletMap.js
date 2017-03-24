@@ -34,14 +34,23 @@ export default class LeafletMap {
           return feature.properties.useForInitialView !== false;
         }
       });
-      this.featureGroup = L.geoJSON(item.geojson, geoJsonOptionsMarkers).addTo(this.map);
+      try {
+        this.featureGroup = L.geoJSON(item.geojson, geoJsonOptionsMarkers).addTo(this.map);
+      } catch (e) {
+        // nevermind and just don't show them features
+      }
 
       let geoJsonOptionsOthers = Object.assign({}, geoJsonOptions, {
         filter: feature => {
           return feature.properties.useForInitialView === false;
         }
       });
-      L.geoJSON(item.geojson, geoJsonOptionsOthers).addTo(this.map);
+
+      try {
+        L.geoJSON(item.geojson, geoJsonOptionsOthers).addTo(this.map);
+      } catch (e) {
+        // nevermind and just don't show them features
+      }
 
       this.setZoomAndPositionInitial();
       this.invalidateSize();
