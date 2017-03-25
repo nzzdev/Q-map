@@ -68,7 +68,7 @@ module.exports = {
   },
   options: {
     baseLayer: 'terrain',
-    initialZoomLevel: 'auto',
+    initialZoomLevel: -1,
     minimap: true,
     labelsBelowMap: false
   }
