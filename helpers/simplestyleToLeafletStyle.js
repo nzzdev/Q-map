@@ -17,6 +17,9 @@ const mapping = {
 };
 
 function simplestyleToLeafletStyle(properties) {
+  if (!properties) {
+    return properties;
+  }
   for (let mappingProperty in mapping) {
     if (properties.hasOwnProperty(mappingProperty)) {
       properties[mapping[mappingProperty]] = properties[mappingProperty];

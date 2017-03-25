@@ -19,6 +19,9 @@ export default {
   computed: {
     numberedLabels: (geojson) => {
       return geojson.features
+        .filter(feature => {
+          return feature.geometry.type === 'Point'
+        })
         .map((feature, index) => {
           let codePoint = null;
           if (index < 20) {
