@@ -71,7 +71,8 @@ module.exports = {
       ],
       scripts: [
         {
-          name: 'system.js'
+          name: 'system.js',
+          loadInEditorPreview: false
         },
         {
           content: loaderScript
