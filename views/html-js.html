@@ -9,7 +9,9 @@
       {{/each}}
       </div>
     {{/if}}
-    <div class="s-q-item__footer__notes">{{notes}}</div>
+    {{#if notes}}
+      <div class="s-q-item__footer__notes">{{notes}}</div>
+    {{/if}}
   </div>
 </div>
 <script>
