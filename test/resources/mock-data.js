@@ -11,10 +11,8 @@ module.exports = {
           coordinates: [[-180, 0], [180, 0]]
         },
         properties: {
-          style: {
-            color: 'purple',
-            interactive: false
-          },
+          color: 'purple',
+          interactive: false,
           useForInitialView: false
         }
       },

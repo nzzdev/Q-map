@@ -11,6 +11,8 @@ const viewsDir      = __dirname + '/../../views/';
 require('svelte/ssr/register');
 const staticTpl = require(`${viewsDir}/html-js.html`);
 
+const simplestyleToLeafletStyle = require(__dirname + '/../../helpers/simplestyleToLeafletStyle.js');
+
 module.exports = {
   method: 'POST',
   path: '/rendering-info/html-js',
@@ -38,7 +40,13 @@ module.exports = {
       mapContainerId: `q-map-${id}`
     }, request.payload.item);
 
+    // pass the config for the configured baseLayer in toolRuntimeConfig
     request.payload.toolRuntimeConfig.baseLayer = layerConfigs[data.options.baseLayer];
+
+    // transform any simplestyle properties to the leaflet path style properties on the GeoJSON features
+    for (let feature of data.geojson.features) {
+      feature.properties = simplestyleToLeafletStyle(feature.properties);
+    }
 
     let loaderScript = `
         System.config({
