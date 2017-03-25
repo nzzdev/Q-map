@@ -149,7 +149,7 @@ export default class LeafletMap {
 
   setMaxMinZoom() {
     let maxZoom;
-    if (this.getZoomLevelForCurrentAspectRatio() !== 'auto') {
+    if (this.getZoomLevelForCurrentAspectRatio() !== -1) {
       maxZoom = this.map.getZoom() + 3;
     }
     if (!maxZoom || maxZoom > (this.toolRuntimeConfig.baseLayer.maxZoom || 18)) {
@@ -179,11 +179,11 @@ export default class LeafletMap {
       }
 
       let zoomLevel = this.getZoomLevelForCurrentAspectRatio();
-      if (zoomLevel === 'auto' && this.featureGroup.getLayers().length > 1) {
+      if (zoomLevel === -1 && this.featureGroup.getLayers().length > 1) {
         this.map[moveFunctions.bounds](this.getBoundsWithMargin(this.featureGroup.getBounds()));
       } else if (zoomLevel !== undefined) {
         // default zoom level when only one marker is 9
-        if (zoomLevel === 'auto') {
+        if (zoomLevel === -1) {
           zoomLevel = 9;
         }
 
@@ -270,8 +270,8 @@ export default class LeafletMap {
   }
 
   getZoomLevelForCurrentAspectRatio() {
-    // if zoomLevel is not 'auto', we want to show zoomLevel - 1 for maps that have an aspectRatio smaller than 16:9 (the default for large maps)
-    if (this.zoomLevel !== 'auto' && this.aspectRatio < (16 / 9) && this.zoomLevel > 1) {
+    // if zoomLevel is not -1, we want to show zoomLevel - 1 for maps that have an aspectRatio smaller than 16:9 (the default for large maps)
+    if (this.zoomLevel !== -1 && this.aspectRatio < (16 / 9) && this.zoomLevel > 1) {
       return this.zoomLevel - 1;
     }
     return this.zoomLevel;
