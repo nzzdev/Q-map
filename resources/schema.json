@@ -7,35 +7,21 @@
       "type": "string",
       "title": "Titel"
     },
-    "geojson": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "default": "FeatureCollection",
-          "Q:options": {
-            "hideInEditor": true
-          }
-        },
-        "features": {
-          "type": "array",
-          "title": "Punkte auf der Karte",
-          "items": {
-            "oneOf": [
-              { "$ref": "#/definitions/geojson-point" },
-              { "$ref": "#/definitions/geojson-feature" }
-            ]
-          },
-          "Q:options": {
-            "compact": true,
-            "expandable": {
-              "itemLabelProperty": "properties.label"
-            }
-          }
-        }
+    "geojsonList": {
+      "title": "Elemente auf der Karte",
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "$ref": "#/definitions/geojson-point" },
+          { "$ref": "#/definitions/geojson-feature" },
+          { "$ref": "#/definitions/geojson-featureCollection" }
+        ]
       },
       "Q:options": {
-        "compact": true
+        "compact": true,
+        "expandable": {
+          "itemLabelProperty": "properties.label"
+        }
       }
     },
     "notes": {
@@ -112,7 +98,7 @@
   "definitions": {
     "geojson-point": {
       "type": "object",
-      "title": "Punkt auf der Karte",
+      "title": "Punkt",
       "Q:type": "geojsonPoint",
       "required": ["type", "properties"],
       "properties": {
@@ -166,16 +152,40 @@
               "Q:options": {
                 "enum_titles": ["oben", "unten"]
               }
+            },
+            "useForInitialView": {
+              "title": "Für die Berechnung der initialen Ansicht einbeziehen",
+              "type": "boolean",
+              "default": true,
+              "Q:options": {
+                "hideInEditor": true
+              }
             }
           }
         }
+      }
+    },
+    "geojson-featureCollection": {
+      "type": "object",
+      "Q:type": "json",
+      "title": "GeoJSON FeatureCollection",
+      "required": [ "features" ],
+      "properties": {
+          "type": { 
+            "type": "string",
+            "default": "FeatureCollection",
+            "enum": [ "FeatureCollection" ] 
+          },
+          "features": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/geojson-feature" }
+          }
       }
     },
     "geojson-feature": {
       "type": "object",
       "Q:type": "json",
       "title": "GeoJSON Feature",
-      "description": "A Geo JSON feature object",
       "properties": {
         "type": {
           "type": "string",
@@ -187,6 +197,14 @@
           "description": "One geometry as defined by GeoJSON",
           "type": "object",
           "oneOf": [
+            {
+              "title": "Point",
+              "type": "object",
+              "properties": {
+                "type": { "enum": [ "Point" ] },
+                "coordinates": { "$ref": "#/definitions/position" }
+              }
+            },
             {
               "title": "MultiPoint",
               "type": "object",

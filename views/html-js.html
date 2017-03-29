@@ -2,7 +2,7 @@
   <h3 class="s-q-item__title">{{title}}</h3>
   <div class="q-map-container" id="{{ mapContainerId }}"></div>
   <div class="s-q-item__footer">
-    {{#if options.labelsBelowMap}}
+    {{#if options.labelsBelowMap === true}}
       <div class="q-map-footer__marker-labels">
       {{#each numberedLabels as label}}
         <div class="q-map-footer__marker-labels__label s-font-note">{{label}}</div>
@@ -17,10 +17,26 @@
 <script>
 export default {
   computed: {
-    numberedLabels: (geojson) => {
-      return geojson.features
+    numberedLabels: (geojsonList) => {
+      return geojsonList
+        .map(item => {
+          if (item.type === 'FeatureCollection') {
+            return item.features;
+          }
+          if (item.type === 'Feature') {
+            return item;
+          }
+        })
+        .reduce((features, value) => {
+          if (Array.isArray(value)) {
+            features.concat(value);
+          } else {
+            features.push(value);
+          }
+          return features;
+        }, [])
         .filter(feature => {
-          return feature.geometry.type === 'Point'
+          return feature.geometry.type === 'Point' && feature.properties.hasOwnProperty('label')
         })
         .map((feature, index) => {
           let codePoint = null;

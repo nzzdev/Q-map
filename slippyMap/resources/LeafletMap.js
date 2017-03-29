@@ -13,7 +13,7 @@ export default class LeafletMap {
 
   map;
   markers = [];
-  featureGroup;
+  featureGroup = new L.FeatureGroup();
 
   currentLayerType;
 
@@ -29,25 +29,35 @@ export default class LeafletMap {
 
       // add all the features that have no `useForInitialView: false` property set
       // they get added to this.featureGroup and thus used to calculate the map view
-      let geoJsonOptionsMarkers = Object.assign({}, geoJsonOptions, {
+      let geoJsonOptionsForInitialView = Object.assign({}, geoJsonOptions, {
         filter: feature => {
-          return feature.properties.useForInitialView !== false;
+          return feature.properties.useForInitialView === true;
         }
       });
       try {
-        this.featureGroup = L.geoJSON(item.geojson, geoJsonOptionsMarkers).addTo(this.map);
+        item.geojsonList
+          .forEach(geojson => {
+            L.geoJSON(geojson, geoJsonOptionsForInitialView).addTo(this.map)
+              .getLayers()
+              .forEach(layer => {
+                this.featureGroup.addLayer(layer);
+              });
+          });
       } catch (e) {
         // nevermind and just don't show them features
       }
 
       let geoJsonOptionsOthers = Object.assign({}, geoJsonOptions, {
         filter: feature => {
-          return feature.properties.useForInitialView === false;
+          return feature.properties.useForInitialView !== true;
         }
       });
 
       try {
-        L.geoJSON(item.geojson, geoJsonOptionsOthers).addTo(this.map);
+        item.geojsonList
+          .forEach(geojson => {
+            L.geoJSON(geojson, geoJsonOptionsOthers).addTo(this.map);
+          });
       } catch (e) {
         // nevermind and just don't show them features
       }

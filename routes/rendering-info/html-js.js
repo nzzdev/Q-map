@@ -44,8 +44,15 @@ module.exports = {
     request.payload.toolRuntimeConfig.baseLayer = layerConfigs[data.options.baseLayer];
 
     // transform any simplestyle properties to the leaflet path style properties on the GeoJSON features
-    for (let feature of data.geojson.features) {
-      feature.properties = simplestyleToLeafletStyle(feature.properties);
+    for (let geojson of data.geojsonList) {
+      if (geojson.hasOwnProperty('properties')) {
+        geojson.properties = simplestyleToLeafletStyle(geojson.properties);
+      }
+      if (geojson.hasOwnProperty('features')) {
+        for (let geojsonFeature of geojson.features) {
+          geojsonFeature.properties = simplestyleToLeafletStyle(geojsonFeature.properties);
+        }
+      }
     }
 
     let loaderScript = `
