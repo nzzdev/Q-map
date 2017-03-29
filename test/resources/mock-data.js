@@ -10,14 +10,14 @@ module.exports = {
       },
       properties: {
         color: 'purple',
-        interactive: false,
+        interactive: false
       }
     },
     {
       type: 'Feature',
       geometry: {
         type: 'Point',
-        coordinates: [48.2, 16.36],
+        coordinates: [48.2, 16.36]
       },
       properties: {
         label: 'aaaaaa',
@@ -30,7 +30,7 @@ module.exports = {
       type: 'Feature',
       geometry: {
         type: 'Point',
-        coordinates: [47.2, 16.36],
+        coordinates: [47.2, 16.36]
       },
       properties: {
         label: 'bbbbbb',
@@ -43,7 +43,7 @@ module.exports = {
       type: 'Feature',
       geometry: {
         type: 'Point',
-        coordinates: [48.2, 17.36],
+        coordinates: [48.2, 17.36]
       },
       properties: {
         label: '😇 cccccc',
@@ -56,12 +56,12 @@ module.exports = {
       type: 'Feature',
       geometry: {
         type: 'Point',
-        coordinates: [48.4, 16.36],
+        coordinates: [48.4, 16.36]
       },
       properties: {
         label: 'dddddd',
         type: 'pointLightLabel',
-        labelPosition: 'bottom',
+        labelPosition: 'bottom'
       }
     },
     {
