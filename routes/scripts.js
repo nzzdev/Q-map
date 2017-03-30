@@ -1,48 +1,21 @@
-const Builder = require('systemjs-builder');
-
-function getCompiledSlippyMap() {
-  const builder = new Builder('', 'jspm.config.js');
-  builder.config({
-    map: {
-      'systemjs-babel-build': 'jspm_packages/npm/systemjs-plugin-babel@0.0.20/systemjs-babel-node.js'
-    },
-    meta: {
-      '*.js': {
-        babelOptions: {
-          // stage1: true,
-        }
-      }
-    }
-  });
-  return builder.bundle('q-map/map.js', { normalize: true, runtime: false, minify: false})
-    .then(output => {
-      return output.source;
-    });
-}
-
-const slippyMapSource = getCompiledSlippyMap();
+const path = require('path');
 
 module.exports = [
   {
     method: 'GET',
-    path: '/script/slippy-map.js',
-    handler: async function(request, reply) {
-      try {
-        slippyMap = await slippyMapSource;
-        return reply(slippyMap).type('text/javascipt');
-      } catch (e) {
-        return Boom.notFound();
+    path: '/script/{filename}.{hash}.{extension}',
+    config: {
+      cors: true,
+      cache: {
+        expiresIn: 1000 * 60 * 60 * 24 * 365 // 1 year
+      },
+      files: {
+        relativeTo: path.join(__dirname, '/../scripts/')
       }
     },
-    config: {
-      cors: true
-    }
-  },
-  {
-    method: 'GET',
-    path: '/script/system.js',
     handler: function(request, reply) {
-      reply.file(__dirname + '/../node_modules/systemjs/dist/system-production.src.js');
+      console.log('filehandler', request.params);
+      return reply.file(`${request.params.filename}.${request.params.extension}`).type('text/javascript');
     }
   }
 ];

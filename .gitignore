@@ -1,5 +1,5 @@
 node_modules
 jspm_packages
-bundles
+scripts
 .DS_STORE
 .vscode

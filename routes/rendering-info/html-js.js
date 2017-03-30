@@ -3,10 +3,13 @@ const enjoi = require('enjoi');
 const Boom  = require('boom');
 
 const resourcesDir  = __dirname + '/../../resources/';
+const scriptsDir  = __dirname + '/../../scripts/';
 const dynamicSchema = require(resourcesDir + 'dynamicSchema.js');
 const schema        = enjoi(dynamicSchema);
 const layerConfigs  = JSON.parse(process.env.LAYER_CONFIGS);
 const viewsDir      = __dirname + '/../../views/';
+
+const hashMap = require(`${scriptsDir}/hashMap.json`);
 
 require('svelte/ssr/register');
 const staticTpl = require(`${viewsDir}/html-js.html`);
@@ -58,7 +61,7 @@ module.exports = {
     let loaderScript = `
         System.config({
           map: {
-            "q-map/map.js": "${request.payload.toolRuntimeConfig.toolBaseUrl}/script/slippy-map.js"
+            "q-map/map.js": "${request.payload.toolRuntimeConfig.toolBaseUrl}/script/${hashMap['slippy-map.js']}"
           }
         });
         System.import('q-map/map.js')
@@ -78,7 +81,7 @@ module.exports = {
       ],
       scripts: [
         {
-          name: 'system.js',
+          name: hashMap['system.js'],
           loadInEditorPreview: false
         },
         {
