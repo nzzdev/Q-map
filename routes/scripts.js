@@ -14,7 +14,6 @@ module.exports = [
       }
     },
     handler: function(request, reply) {
-      console.log('filehandler', request.params);
       return reply.file(`${request.params.filename}.${request.params.extension}`).type('text/javascript');
     }
   }
