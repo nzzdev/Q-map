@@ -58,12 +58,15 @@ module.exports = {
       }
     }
 
-    let loaderScript = `
+    let systemConfigScript = `
         System.config({
           map: {
             "q-map/map.js": "${request.payload.toolRuntimeConfig.toolBaseUrl}/script/${hashMap['slippy-map.js']}"
           }
         });
+    `;
+
+    let loaderScript = `
         System.import('q-map/map.js')
           .then(function(module) {
             return module.display(${JSON.stringify(request.payload.item)}, document.querySelector('#${data.mapContainerId}'), ${JSON.stringify(request.payload.toolRuntimeConfig)})
@@ -83,7 +86,12 @@ module.exports = {
       scripts: [
         {
           name: hashMap['system.js'],
+          loadOnce: true,
           loadInEditorPreview: false
+        },
+        {
+          content: systemConfigScript,
+          loadOnce: true
         },
         {
           content: loaderScript
