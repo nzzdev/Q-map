@@ -74,6 +74,7 @@ module.exports = {
       `;
 
     let responseData = {
+      polyfills: ['Promise', 'Object.assign'],
       stylesheets: [
         {
           name: 'default'
