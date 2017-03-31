@@ -13,9 +13,9 @@ before_script:
 - DOCKER_IMAGE_NAME="q-map"
 - DOCKER_TAG=$TRAVIS_BRANCH
 script:
-- npm run test
 - npm run lint
 - npm run build
+- npm run test
 - docker build -t $DOCKER_IMAGE_NAME:$DOCKER_TAG .
 after_success:
 - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"; docker tag $DOCKER_IMAGE_NAME:$DOCKER_TAG
