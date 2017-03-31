@@ -1,5 +1,7 @@
 # NZZ Storytelling Q Map
 
+
+
 ## Docker setup
 Dockerfile already included in skeleton repo. Renderer service can be dockerized locally with:
 * `docker build -t q-map .`
@@ -16,6 +18,7 @@ Travis needs the following environment variables (can be set in Travis' GUI) to 
 * `CATTLE_SECRET_KEY`
 * `RANCHER_SERVICE_ID_STAGING`
 
-To add slack notifications for your builds execute the following command with the suitable token:
-* `travis encrypt "nzzstorytelling:token" --add notifications.slack`
- 
+## License
+Copyright (c) 2017 Neue Zürcher Zeitung. All rights reserved.
+
+This software is published under the MIT license.
