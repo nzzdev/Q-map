@@ -12,8 +12,6 @@ server.register(plugins, pluginsError => {
     Hoek.assert(!err, err);
     /* eslint-disable */
     console.log('Server running at: ' + server.info.uri);
-    console.log('LAYER_CONFIGS is:');
-    console.log(process.env.LAYER_CONFIGS);
     /* eslint-enable */
   });
 });

@@ -32,7 +32,7 @@
     "postcss-import": "^9.1.0",
     "svelte": "1.6.3",
     "systemjs": "0.20.4",
-    "systemjs-builder": "0.16.1"
+    "systemjs-builder": "^0.16.4"
   },
   "jspm": {
     "name": "q-map",

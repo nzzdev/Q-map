@@ -77,18 +77,16 @@ module.exports = {
       `;
 
     let responseData = {
-      polyfills: ['Promise', 'Object.assign'],
+      loaderConfig: {
+        polyfills: ['Promise', 'Object.assign'],
+        loadSystemJs: 'full'
+      },
       stylesheets: [
         {
           name: 'default'
         }
       ],
       scripts: [
-        {
-          name: hashMap['system.js'],
-          loadOnce: true,
-          loadInEditorPreview: false
-        },
         {
           content: systemConfigScript,
           loadOnce: true
