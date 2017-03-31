@@ -1,22 +1,10 @@
-# NZZ Storytelling Q Map
+# Q Map
 
+Q map is one tool of the Q toolbox to produce simple pointer maps.
+Test it in the demo: https://q-demo.st.nzz.ch/
 
-
-## Docker setup
-Dockerfile already included in skeleton repo. Renderer service can be dockerized locally with:
-* `docker build -t q-map .`
-* `docker run -p 3000:3000 q-map`
-For more information see [Docker documentaion](https://docs.docker.com/)
-
-## Travis Setup
-Travis needs the following environment variables (can be set in Travis' GUI) to push docker image and update rancher accordingly:
-* `DOCKER_USERNAME`
-* `DOCKER_EMAIL`
-* `DOCKER_PASSWORD`
-* `RANCHER_URL`
-* `CATTLE_ACCESS_KEY`
-* `CATTLE_SECRET_KEY`
-* `RANCHER_SERVICE_ID_STAGING`
+## Implementation details
+The tool structure follows the general structure of each Q tool. Further information can be found in [Q server documentation - Developing tools](https://nzzdev.github.io/Q-server/developing-tools.html).
 
 ## License
 Copyright (c) 2017 Neue Zürcher Zeitung. All rights reserved.
