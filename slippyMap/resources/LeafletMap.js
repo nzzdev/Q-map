@@ -24,7 +24,7 @@ export default class LeafletMap {
   render(item, element) {
     return new Promise((resolve, reject) => {
       if (!this.map) {
-        this.init(element);
+        this.init(item, element);
       }
 
       // add all the features that have no `useForInitialView: false` property set
@@ -37,7 +37,8 @@ export default class LeafletMap {
       try {
         item.geojsonList
           .forEach(geojson => {
-            L.geoJSON(geojson, geoJsonOptionsForInitialView).addTo(this.map)
+            L.geoJSON(geojson, geoJsonOptionsForInitialView)
+              .addTo(this.map)
               .getLayers()
               .forEach(layer => {
                 this.featureGroup.addLayer(layer);
@@ -56,7 +57,8 @@ export default class LeafletMap {
       try {
         item.geojsonList
           .forEach(geojson => {
-            L.geoJSON(geojson, geoJsonOptionsOthers).addTo(this.map);
+            L.geoJSON(geojson, geoJsonOptionsOthers)
+              .addTo(this.map);
           });
       } catch (e) {
         // nevermind and just don't show them features
@@ -69,13 +71,31 @@ export default class LeafletMap {
     });
   }
 
-  init(element) {
+  hasPolygonsOrLineStrings(item) {
+    const types = ['Polygon', 'MultiPolygon', 'LineString'];
+    try {
+      return item.geojsonList
+        .filter(geojson => {
+          return types.indexOf(geojson.geometry.type) > -1;
+        })
+        .length > 0;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  init(item, element) {
     if (!this.map || this.map.getContainer() !== element) {
       this.map = Leaflet.map(element, {
         'zoomControl': false
       });
 
-      this.setLayers();
+      let layerMode = 'default';
+      if (this.hasPolygons(item)) {
+        layerMode = 'withSeparateLabelsLayer';
+      }
+
+      this.setLayers(this.toolRuntimeConfig.baseLayer, layerMode);
       this.setMaxMinZoom();
 
       this.map.attributionControl.setPrefix('');
@@ -113,18 +133,38 @@ export default class LeafletMap {
     }
   }
 
-  addTileLayer(layerConfig) {
-    this.baseLayer = Leaflet.tileLayer(layerConfig.url, layerConfig.config).addTo(this.map);
-    this.map.getContainer().classList.add(layerConfig.containerClass);
+  addTileLayer(url, config, containerClass) {
+    this.baseLayer = Leaflet.tileLayer(url, config)
+      .addTo(this.map);
+    this.map.getContainer().classList.add(containerClass);
   }
 
-  setLayers() {
+  setLayers(layer, mode = 'default') {
     this.map.whenReady(() => {
-      this.addTileLayer(this.toolRuntimeConfig.baseLayer);
+      if (mode === 'default') {
+        let url;
+        if (typeof layer.url === 'object') {
+          url = layer.url.full;
+        } else {
+          url = layer.url;
+        }
+        this.addTileLayer(url, layer.config, layer.containerClass);
+      } else if (mode === 'withSeparateLabelsLayer') {
+        this.map.createPane('labels');
+        if (typeof layer.url === 'string') {
+          this.addTileLayer(layer.url, layer.config, layer.containerClass);
+        } else if (typeof layer.url === 'object') {
+          this.addTileLayer(layer.url.background, layer.config, layer.containerClass);
+
+          let labelsLayerConfig = layer.config;
+          labelsLayerConfig.pane = 'labels';
+          this.addTileLayer(layer.url.labels, labelsLayerConfig, layer.containerClass);
+        }
+      }
     });
-    if (this.toolRuntimeConfig.baseLayer.minimapLayerUrl) {
+    if (layer.minimapLayerUrl) {
       this.tileLayerMiniMap =
-        Leaflet.tileLayer(this.toolRuntimeConfig.baseLayer.minimapLayerUrl, {
+        Leaflet.tileLayer(layer.minimapLayerUrl, {
           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
           maxZoom: 8
         });
