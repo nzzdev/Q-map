@@ -91,7 +91,7 @@ export default class LeafletMap {
       });
 
       let layerMode = 'default';
-      if (this.hasPolygons(item)) {
+      if (this.hasPolygonsOrLineStrings(item)) {
         layerMode = 'withSeparateLabelsLayer';
       }
 
