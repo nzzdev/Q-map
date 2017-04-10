@@ -16,7 +16,7 @@ const layerConfigs = {
     url: {
       full: 'https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png',
       background: 'https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png',
-      labels: 'https://stamen-tiles.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png',
+      labels: 'https://stamen-tiles.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png'
     },
     minimapLayerUrl: 'https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png',
     config: {
