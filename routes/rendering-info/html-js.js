@@ -6,7 +6,6 @@ const resourcesDir  = __dirname + '/../../resources/';
 const scriptsDir  = __dirname + '/../../scripts/';
 const dynamicSchema = require(resourcesDir + 'dynamicSchema.js');
 const schema        = enjoi(dynamicSchema);
-const layerConfigs  = JSON.parse(process.env.LAYER_CONFIGS);
 const viewsDir      = __dirname + '/../../views/';
 
 const hashMap = require(`${scriptsDir}/hashMap.json`);
@@ -42,6 +41,13 @@ module.exports = {
       id: id,
       mapContainerId: `q-map-${id}`
     }, request.payload.item);
+
+    let layerConfigs = JSON.parse(process.env.LAYER_CONFIGS);
+    // if there is layerConfigs passed in toolRuntimeConfig, we apply it to the layerConfigs and delete it afterwards to not pass it again in the dynamic js code
+    if (request.payload.toolRuntimeConfig.hasOwnProperty('layerConfigs')) {
+      layerConfigs = Object.assign(layerConfigs, request.payload.toolRuntimeConfig.layerConfigs);
+      delete request.payload.toolRuntimeConfig.layerConfigs;
+    }
 
     // pass the config for the configured baseLayer in toolRuntimeConfig
     request.payload.toolRuntimeConfig.baseLayer = layerConfigs[data.options.baseLayer];
