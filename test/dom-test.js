@@ -25,7 +25,7 @@ describe('Q map dom tests', function() {
   });
 
   it('should have a correct footer element', function() {
-    return getElement('.s-q-item__footer__notes').then(element => {
+    return getElement('.s-q-item__footer span:last-child').then(element => {
       expect(element.innerHTML).to.be.equal('notes in footer');
     });
   });
