@@ -62,6 +62,11 @@ module.exports = {
           geojsonFeature.properties = simplestyleToLeafletStyle(geojsonFeature.properties);
         }
       }
+      // we do not want any interactive properties
+      if (!geojson.hasOwnProperty('properties')) {
+        geojson.properties = {};
+      }
+      geojson.properties.interactive = false;
     }
 
     let systemConfigScript = `
