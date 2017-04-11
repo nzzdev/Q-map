@@ -6,8 +6,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://service.sophie.nzz.ch/bundle/sophie-q@~0.1.1,sophie-font@^0.1.0,sophie-color@~1.0.0,sophie-viz-color@^1.0.0[diverging-6].css">
-    <script src="https://rawgit.com/filamentgroup/loadCSS/master/src/loadCSS.js"></script>
-    <script src="https://rawgit.com/filamentgroup/loadJS/master/loadJS.js"></script>
+    <script src="https://gitcdn.xyz/repo/filamentgroup/loadCSS/master/src/loadCSS.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/loadjs/3.5.0/loadjs.min.js"></script>
   </head>
   <body>
     <div id="map"></div>
@@ -16,6 +16,22 @@
       let data = {
         title: 'Erste Karte',
         notes: 'Anmerkung',
+        sources: [
+          {
+            text: "quelle 1",
+            link: {
+              url: "www.nzz.ch",
+              isValid: true
+            }
+          },
+          {
+            text: "quelle 2",
+            link: {
+              url: "www.nzz.ch",
+              isValid: true
+            }
+          }
+        ],
         geojsonList: [
           {
             type: "Feature",

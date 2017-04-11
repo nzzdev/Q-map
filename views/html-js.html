@@ -9,14 +9,31 @@
       {{/each}}
       </div>
     {{/if}}
+    {{#if shouldHaveSources}}
+      {{#if sources.length > 1}} 
+        Quellen: 
+      {{else}} 
+        Quelle: 
+      {{/if}} 
+      {{#each sources as source, index}}
+        <!-- 	If you separate DOM siblings with newlines whitespaces cannot be removed by svelte renderer
+              To avoid unwanted whitespaces around commas separating each source, we keep render infos for sources at one line here.
+              See also: https://github.com/sveltejs/svelte/issues/189  -->
+        {{#if source.text !== ''}}{{#if source.link && source.link.isValid}}<a href="{{source.link.url}}" target="blank" rel="noopener noreferrer">{{source.text}}</a>{{else}}{{source.text}}{{/if}}{{#if index !== sources.length - 1 && sources[index + 1] !== ''}}, {{/if}}{{/if}} 
+      {{/each}}
+      {{#if notes}}&ndash;{{/if}}
+    {{/if}}
     {{#if notes}}
-      <div class="s-q-item__footer__notes">{{notes}}</div>
+      <span>{{notes}}</span>
     {{/if}}
   </div>
 </div>
 <script>
 export default {
   computed: {
+    shouldHaveSources: (sources) => {
+      return sources !== undefined && sources.length > 0; 
+    },
     numberedLabels: (geojsonList) => {
       return geojsonList
         .map(item => {
