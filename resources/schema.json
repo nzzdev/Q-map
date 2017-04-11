@@ -24,10 +24,6 @@
         }
       }
     },
-    "notes": {
-      "title": "Anmerkungen",
-      "type": "string"
-    },
     "sources": {
       "title": "Quellen",
       "type": "array",
@@ -55,6 +51,10 @@
           }
         }
       }
+    },
+    "notes": {
+      "title": "Anmerkungen",
+      "type": "string"
     },
     "options": {
       "title": "Kartenoptionen",
