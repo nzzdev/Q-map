@@ -16,6 +16,6 @@ export default {
     return null;
   },
   style: feature => {
-    return feature.properties.style;
+    return feature.properties;
   }
 };

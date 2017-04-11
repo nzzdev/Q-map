@@ -3,13 +3,17 @@ const enjoi = require('enjoi');
 const Boom  = require('boom');
 
 const resourcesDir  = __dirname + '/../../resources/';
+const scriptsDir  = __dirname + '/../../scripts/';
 const dynamicSchema = require(resourcesDir + 'dynamicSchema.js');
 const schema        = enjoi(dynamicSchema);
-const layerConfigs  = JSON.parse(process.env.LAYER_CONFIGS);
 const viewsDir      = __dirname + '/../../views/';
+
+const hashMap = require(`${scriptsDir}/hashMap.json`);
 
 require('svelte/ssr/register');
 const staticTpl = require(`${viewsDir}/html-js.html`);
+
+const simplestyleToLeafletStyle = require(__dirname + '/../../helpers/simplestyleToLeafletStyle.js');
 
 module.exports = {
   method: 'POST',
@@ -38,14 +42,42 @@ module.exports = {
       mapContainerId: `q-map-${id}`
     }, request.payload.item);
 
+    let layerConfigs = JSON.parse(process.env.LAYER_CONFIGS);
+    // if there is layerConfigs passed in toolRuntimeConfig, we apply it to the layerConfigs and delete it afterwards to not pass it again in the dynamic js code
+    if (request.payload.toolRuntimeConfig.hasOwnProperty('layerConfigs')) {
+      layerConfigs = Object.assign(layerConfigs, request.payload.toolRuntimeConfig.layerConfigs);
+      delete request.payload.toolRuntimeConfig.layerConfigs;
+    }
+
+    // pass the config for the configured baseLayer in toolRuntimeConfig
     request.payload.toolRuntimeConfig.baseLayer = layerConfigs[data.options.baseLayer];
 
-    let loaderScript = `
+    // transform any simplestyle properties to the leaflet path style properties on the GeoJSON features
+    for (let geojson of data.geojsonList) {
+      if (geojson.hasOwnProperty('properties')) {
+        geojson.properties = simplestyleToLeafletStyle(geojson.properties);
+      }
+      if (geojson.hasOwnProperty('features')) {
+        for (let geojsonFeature of geojson.features) {
+          geojsonFeature.properties = simplestyleToLeafletStyle(geojsonFeature.properties);
+        }
+      }
+      // we do not want any interactive properties
+      if (!geojson.hasOwnProperty('properties')) {
+        geojson.properties = {};
+      }
+      geojson.properties.interactive = false;
+    }
+
+    let systemConfigScript = `
         System.config({
           map: {
-            "q-map/map.js": "${request.payload.toolRuntimeConfig.toolBaseUrl}/script/slippy-map.js"
+            "q-map/map.js": "${request.payload.toolRuntimeConfig.toolBaseUrl}/script/${hashMap['slippy-map.js']}"
           }
         });
+    `;
+
+    let loaderScript = `
         System.import('q-map/map.js')
           .then(function(module) {
             return module.display(${JSON.stringify(request.payload.item)}, document.querySelector('#${data.mapContainerId}'), ${JSON.stringify(request.payload.toolRuntimeConfig)})
@@ -56,6 +88,10 @@ module.exports = {
       `;
 
     let responseData = {
+      loaderConfig: {
+        polyfills: ['Promise', 'Object.assign'],
+        loadSystemJs: 'full'
+      },
       stylesheets: [
         {
           name: 'default'
@@ -63,7 +99,8 @@ module.exports = {
       ],
       scripts: [
         {
-          name: 'system.js'
+          content: systemConfigScript,
+          loadOnce: true
         },
         {
           content: loaderScript

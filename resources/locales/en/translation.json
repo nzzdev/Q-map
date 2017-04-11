@@ -1,0 +1,21 @@
+{
+  "Karte": "Map",
+  "Titel": "title",
+  "Elemente auf der Karte": "elements on the map",
+  "Anmerkungen": "notes",
+  "Kartenoptionen": "Map options",
+  "Basiskarte": "basemap",
+  "Zoom Level": "zoom level",
+  "Minimap anzeigen": "show minimap",
+  "Labels unter Karte anzeigen": "show labels below map",
+  "Punkt": "point",
+  "Beschriftung": "label",
+  "Markertyp": "type of marker",
+  "Position des Labels": "label position",
+  "Für die Berechnung der initialen Ansicht einbeziehen": "use for calculation of initial view",
+  "Quellen": "sources",
+  "Quelle": "source",
+  "Text": "text",
+  "Link": "link",
+  "Url": "URL"
+}

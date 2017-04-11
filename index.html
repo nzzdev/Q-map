@@ -6,87 +6,133 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://service.sophie.nzz.ch/bundle/sophie-q@~0.1.1,sophie-font@^0.1.0,sophie-color@~1.0.0,sophie-viz-color@^1.0.0[diverging-6].css">
-    <script src="https://rawgit.com/filamentgroup/loadCSS/master/src/loadCSS.js"></script>
-    <script src="https://rawgit.com/filamentgroup/loadJS/master/loadJS.js"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.js?features=Promise,fetch,default"></script>
+    <script src="https://gitcdn.xyz/repo/filamentgroup/loadCSS/master/src/loadCSS.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/loadjs/3.5.0/loadjs.min.js"></script>
   </head>
   <body>
     <div id="map"></div>
+    <script src="node_modules/systemjs/dist/system-production.js"></script>    
     <script>
       let data = {
         title: 'Erste Karte',
         notes: 'Anmerkung',
-        geojson: {
-          type: "FeatureCollection",
-          features: [
-            {
-              type: "Feature",
-              geometry: {
-                type: "LineString",
-                coordinates: [[-180, 0], [180, 0]]
-              },
-              properties: {
-                style: {
-                  color: 'purple',
-                  interactive: false
-                },
-                useForInitialView: false
-              }
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [48.2, 16.36],
-              },
-              properties: {
-                label: 'balbaba',
-                type: 'event',
-                labelPosition: 'bottom',
-              }
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [47.2, 16.36],
-              },
-              properties: {
-                label: 'balbaba',
-                type: 'event',
-                labelPosition: 'top',
-              }
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [48.2, 17.36],
-              },
-              properties: {
-                label: '😇blablalba',
-                type: 'pointHeavyLabel',
-                labelPosition: 'top',
-              }
-            },
-            {
-              type: "Feature",
-              geometry: {
-                type: "Point",
-                coordinates: [48.4, 16.36],
-              },
-              properties: {
-                label: 'balbaba',
-                type: 'pointLightLabel',
-                labelPosition: 'bottom',
-              }
+        sources: [
+          {
+            text: "quelle 1",
+            link: {
+              url: "www.nzz.ch",
+              isValid: true
             }
-          ]
-        },
+          },
+          {
+            text: "quelle 2",
+            link: {
+              url: "www.nzz.ch",
+              isValid: true
+            }
+          }
+        ],
+        geojsonList: [
+          {
+            type: "Feature",
+            geometry: {
+              type: "LineString",
+              coordinates: [[-180, 0], [180, 0]]
+            },
+            properties: {
+              color: 'purple',
+              interactive: false,
+            }
+          },
+          {
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [48.2, 16.36],
+            },
+            properties: {
+              label: 'aaaaaa',
+              type: 'event',
+              labelPosition: 'bottom',
+              useForInitialView: true
+            }
+          },
+          {
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [47.2, 16.36],
+            },
+            properties: {
+              label: 'bbbbbb',
+              type: 'event',
+              labelPosition: 'top',
+              useForInitialView: true
+            }
+          },
+          {
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [48.2, 17.36],
+            },
+            properties: {
+              label: '😇 cccccc',
+              type: 'pointHeavyLabel',
+              labelPosition: 'top',
+              useForInitialView: true
+            }
+          },
+          {
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [48.4, 16.36],
+            },
+            properties: {
+              label: 'dddddd',
+              type: 'pointLightLabel',
+              labelPosition: 'bottom',
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {},
+            "geometry": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [
+                    48.6474609375,
+                    18.895892559415024
+                  ],
+                  [
+                    52.82226562499999,
+                    15.411319377980993
+                  ],
+                  [
+                    54.228515625,
+                    19.518375478601566
+                  ],
+                  [
+                    50.9326171875,
+                    21.166483858206583
+                  ],
+                  [
+                    48.6474609375,
+                    18.895892559415024
+                  ]
+                ]
+              ]
+            }
+          }
+        ],
         options: {
-          baseLayer: 'terrain',
-          initialZoomLevel: 'auto',
+          initialZoomLevel: 4,
+          baseLayer: 'toner',
           minimap: true,
-          labelsBelowMap: false
+          labelsBelowMap: true
         }
       }
       
@@ -103,11 +149,11 @@
       const body = {
         item: data,
         toolRuntimeConfig: {
-          toolBaseUrl: 'http://localhost:3000'
+          toolBaseUrl: `http://${window.location.hostname}:3000`,
         }
       }
 
-      fetch("http://localhost:3000/rendering-info/html-js", {
+      fetch(`http://${window.location.hostname}:3000/rendering-info/html-js`, {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {
@@ -120,7 +166,7 @@
         .then(data => {
           data.stylesheets.forEach(stylesheet => {
             if (stylesheet.name) {
-              stylesheet.url = `http://localhost:3000/stylesheet/${stylesheet.name}`
+              stylesheet.url = `http://${window.location.hostname}:3000/stylesheet/${stylesheet.name}`
             }
             loadCSS(stylesheet.url)
           })
@@ -130,7 +176,7 @@
           data.scripts = data.scripts
             .map(script => {
               if (script.name) {
-                script.url = `http://localhost:3000/script/${script.name}`
+                script.url = `http://${window.location.hostname}:3000/script/${script.name}`
               }
               return script;
             })
