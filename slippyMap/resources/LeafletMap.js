@@ -9,13 +9,12 @@ import geoJsonOptions from './geoJsonOptions.js';
 Leaflet.Control.Button = L.Control.extend(LeafletControlButton);
 Leaflet.Icon.Default.imagePath = 'jspm_packages/npm/leaflet@1.0.3/dist/images';
 
+
 export default class LeafletMap {
 
   map;
   markers = [];
-  featureGroup = new L.FeatureGroup();
-
-  currentLayerType;
+  featureGroup = new Leaflet.FeatureGroup();
 
   constructor(toolRuntimeConfig) {
     this.toolRuntimeConfig = toolRuntimeConfig;
@@ -27,7 +26,7 @@ export default class LeafletMap {
         this.init(item, element);
       }
 
-      // add all the features that have no `useForInitialView: false` property set
+      // add all the features that have `useForInitialView: true`
       // they get added to this.featureGroup and thus used to calculate the map view
       let geoJsonOptionsForInitialView = Object.assign({}, geoJsonOptions, {
         filter: feature => {
@@ -48,6 +47,8 @@ export default class LeafletMap {
         // nevermind and just don't show them features
       }
 
+      // add all the features without `useForInitialView: true` property
+      // they are not added to featureGroup, thus not used to calculate the initial view
       let geoJsonOptionsOthers = Object.assign({}, geoJsonOptions, {
         filter: feature => {
           return feature.properties.useForInitialView !== true;
@@ -84,52 +85,54 @@ export default class LeafletMap {
     }
   }
 
+  // initialises the map, this is only run once
   init(item, element) {
-    if (!this.map || this.map.getContainer() !== element) {
-      this.map = Leaflet.map(element, {
-        'zoomControl': false
-      });
+    if (this.map && this.map.getContainer() === element) {
+      return;
+    }
+    this.map = Leaflet.map(element, {
+      'zoomControl': false
+    });
 
-      let layerMode = 'default';
-      if (this.hasPolygonsOrLineStrings(item)) {
-        layerMode = 'withSeparateLabelsLayer';
+    let layerMode = 'default';
+    if (this.hasPolygonsOrLineStrings(item)) {
+      layerMode = 'withSeparateLabelsLayer';
+    }
+
+    this.setLayers(this.toolRuntimeConfig.baseLayer, layerMode);
+    this.setMaxMinZoom();
+
+    this.map.attributionControl.setPrefix('');
+
+    Leaflet.control.scale({
+      imperial: false
+    }).addTo(this.map);
+
+    this.enableInteractionButton = new Leaflet.Control.Button({
+      position: 'topleft',
+      className: 'q-enable-leaflet-interaction-button',
+      html: `${enableInteractionSvg}`
+    });
+
+    this.zoomControl = Leaflet.control.zoom({
+      position: 'topleft'
+    });
+
+    let w = 1;
+    let h = 1;
+    if (element.getBoundingClientRect) {
+      let rect = element.getBoundingClientRect();
+      if (rect && rect.width && rect.width > 450) {
+        w = 16;
+        h = 9;
       }
+    }
+    this.disableInteractions(this.map);
 
-      this.setLayers(this.toolRuntimeConfig.baseLayer, layerMode);
-      this.setMaxMinZoom();
-
-      this.map.attributionControl.setPrefix('');
-
-      Leaflet.control.scale({
-        imperial: false
-      }).addTo(this.map);
-
-      this.enableInteractionButton = new Leaflet.Control.Button({
-        position: 'topleft',
-        className: 'q-enable-leaflet-interaction-button',
-        html: `${enableInteractionSvg}`
-      });
-
-      this.zoomControl = Leaflet.control.zoom({
-        position: 'topleft'
-      });
-
-      let w = 1;
-      let h = 1;
-      if (element.getBoundingClientRect) {
-        let rect = element.getBoundingClientRect();
-        if (rect && rect.width && rect.width > 450) {
-          w = 16;
-          h = 9;
-        }
-      }
-      this.disableInteractions(this.map);
-
-      try {
-        this.setAspectRatio(w, h);
-      } catch (e) {
-        // ignore
-      }
+    try {
+      this.setAspectRatio(w, h);
+    } catch (e) {
+      // ignore
     }
   }
 
@@ -187,7 +190,12 @@ export default class LeafletMap {
           height: 100,
           toggleDisplay: false,
           aimingRectOptions: {
-            color: 'orange',
+            color: '#d28b00',
+            weight: 1,
+            interactive: false
+          },
+          shadowRectOptions: {
+            color: 'transparent',
             weight: 1,
             interactive: false
           }
@@ -209,6 +217,9 @@ export default class LeafletMap {
     this.map.options.minZoom = 1;
   }
 
+  // this function sets the zoom and position of the map based on a bounding box around all the features in featureGroup
+  // if only one feature is available, the zoomLevel is set to the default of 9 if it's not overwritten by options
+  // if animate is true, we
   setZoomAndPositionInitial(animate = false, setDefaultPositionAndZoomIfNoMarkers = false) {
     let moveFunctions = {
       bounds: 'fitBounds',
@@ -232,7 +243,7 @@ export default class LeafletMap {
       if (zoomLevel === -1 && this.featureGroup.getLayers().length > 1) {
         this.map[moveFunctions.bounds](this.getBoundsWithMargin(this.featureGroup.getBounds()));
       } else if (zoomLevel !== undefined) {
-        // default zoom level when only one marker is 9
+        // default zoom level when only one feature is 9
         if (zoomLevel === -1) {
           zoomLevel = 9;
         }
@@ -267,13 +278,11 @@ export default class LeafletMap {
   }
 
   disableInteractions() {
-    this.map.dragging.disable();
-    this.map.doubleClickZoom.disable();
-    this.map.touchZoom.disable();
-    this.map.scrollWheelZoom.disable();
     this.map.boxZoom.disable();
-
-    this.map.getContainer().style.pointerEvents = 'none';
+    this.map.doubleClickZoom.disable();
+    this.map.dragging.disable();
+    this.map.scrollWheelZoom.disable();
+    this.map.touchZoom.disable();
 
     this.zoomControl.remove();
 
@@ -286,13 +295,11 @@ export default class LeafletMap {
   }
 
   enableInteraction() {
-    this.map.dragging.enable();
-    this.map.doubleClickZoom.enable();
-    this.map.touchZoom.enable();
-    this.map.scrollWheelZoom.enable();
     this.map.boxZoom.enable();
-
-    this.map.getContainer().style.pointerEvents = 'initial';
+    this.map.doubleClickZoom.enable();
+    this.map.dragging.enable();
+    this.map.scrollWheelZoom.enable();
+    this.map.touchZoom.enable();
 
     this.enableInteractionButton.remove();
     this.zoomControl.addTo(this.map);
