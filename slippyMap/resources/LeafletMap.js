@@ -219,7 +219,6 @@ export default class LeafletMap {
 
   // this function sets the zoom and position of the map based on a bounding box around all the features in featureGroup
   // if only one feature is available, the zoomLevel is set to the default of 9 if it's not overwritten by options
-  // if animate is true, we
   setZoomAndPositionInitial(animate = false, setDefaultPositionAndZoomIfNoMarkers = false) {
     let moveFunctions = {
       bounds: 'fitBounds',
