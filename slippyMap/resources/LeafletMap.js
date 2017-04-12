@@ -76,6 +76,14 @@ export default class LeafletMap {
     const types = ['Polygon', 'MultiPolygon', 'LineString'];
     try {
       return item.geojsonList
+        .reduce((features, geojson) => {
+          if (geojson.type === 'FeatureCollection') {
+            features = features.concat(geojson.features);
+          } else {
+            features.concat(geojson);
+          }
+          return features;
+        }, [])
         .filter(geojson => {
           return types.indexOf(geojson.geometry.type) > -1;
         })
@@ -159,7 +167,7 @@ export default class LeafletMap {
         } else if (typeof layer.url === 'object') {
           this.addTileLayer(layer.url.background, layer.config, layer.containerClass);
 
-          let labelsLayerConfig = layer.config;
+          let labelsLayerConfig = JSON.parse(JSON.stringify(layer.config));
           labelsLayerConfig.pane = 'labels';
           this.addTileLayer(layer.url.labels, labelsLayerConfig, layer.containerClass);
         }

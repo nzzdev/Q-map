@@ -54,19 +54,25 @@ module.exports = {
 
     // transform any simplestyle properties to the leaflet path style properties on the GeoJSON features
     for (let geojson of data.geojsonList) {
-      if (geojson.hasOwnProperty('properties')) {
-        geojson.properties = simplestyleToLeafletStyle(geojson.properties);
-      }
       if (geojson.hasOwnProperty('features')) {
         for (let geojsonFeature of geojson.features) {
+          if (!geojsonFeature.hasOwnProperty('properties')) {
+            geojsonFeature.properties = {};
+          }
+          // we do not want any interactive properties
+          geojsonFeature.properties.interactive = false;
+
           geojsonFeature.properties = simplestyleToLeafletStyle(geojsonFeature.properties);
         }
+      } else {
+        if (!geojson.hasOwnProperty('properties')) {
+          geojson.properties = {};
+        }
+        // we do not want any interactive properties
+        geojson.properties.interactive = false;
+
+        geojson.properties = simplestyleToLeafletStyle(geojson.properties);
       }
-      // we do not want any interactive properties
-      if (!geojson.hasOwnProperty('properties')) {
-        geojson.properties = {};
-      }
-      geojson.properties.interactive = false;
     }
 
     let systemConfigScript = `
