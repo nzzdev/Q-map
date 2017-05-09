@@ -65,7 +65,6 @@ export default class LeafletMap {
         // nevermind and just don't show them features
       }
 
-      this.setZoomAndPositionInitial();
       this.invalidateSize();
 
       resolve(this.map);
@@ -138,7 +137,7 @@ export default class LeafletMap {
     this.disableInteractions(this.map);
 
     try {
-      this.setAspectRatio(w, h);
+      this.setAspectRatio(w, h, false);
     } catch (e) {
       // ignore
     }
@@ -184,7 +183,6 @@ export default class LeafletMap {
 
   setZoomLevel(value) {
     this.zoomLevel = value;
-    this.setZoomAndPositionInitial();
   }
 
   setMinimapVisibility(visible) {
@@ -238,7 +236,12 @@ export default class LeafletMap {
         center: 'flyTo'
       };
     }
-    if (this.featureGroup) {
+    const featureGroupBounds = this.featureGroup.getBounds();
+    let featureGroupCenter;
+    if (featureGroupBounds && featureGroupBounds.isValid()) {
+      featureGroupCenter = featureGroupBounds.getCenter();
+    }
+    if (this.featureGroup && featureGroupBounds && featureGroupCenter) {
       // reset max and min zoom to have all freedom for fitBounds
       this.map.options.minZoom = 1;
       this.map.options.maxZoom = 18;
@@ -248,15 +251,15 @@ export default class LeafletMap {
 
       let zoomLevel = this.getZoomLevelForCurrentAspectRatio();
       if (zoomLevel === -1 && this.featureGroup.getLayers().length > 1) {
-        this.map[moveFunctions.bounds](this.getBoundsWithMargin(this.featureGroup.getBounds()));
+        this.map[moveFunctions.bounds](this.getBoundsWithMargin(featureGroupBounds));
       } else if (zoomLevel !== undefined) {
         // default zoom level when only one feature is 9
         if (zoomLevel === -1) {
           zoomLevel = 9;
         }
 
-        if (this.featureGroup.getBounds() && this.featureGroup.getBounds().getCenter()) {
-          this.map[moveFunctions.center](this.featureGroup.getBounds().getCenter(), zoomLevel);
+        if (featureGroupBounds && featureGroupCenter) {
+          this.map[moveFunctions.center](featureGroupCenter, zoomLevel);
         }
       }
     } else if (setDefaultPositionAndZoomIfNoMarkers) {
@@ -294,7 +297,6 @@ export default class LeafletMap {
     this.zoomControl.remove();
 
     this.enableInteractionButton.addTo(this.map);
-    this.setZoomAndPositionInitial(true);
 
     this.enableInteractionButton.getContainer().addEventListener('click', (event) => {
       this.enableInteraction();
@@ -320,7 +322,10 @@ export default class LeafletMap {
     if (this.interactionTimer) {
       clearTimeout(this.interactionTimer);
     }
-    this.interactionTimer = setTimeout(this.disableInteractions.bind(this), this.toolRuntimeConfig.interactionDisableTime);
+    this.interactionTimer = setTimeout(() => {
+      this.setZoomAndPositionInitial(true);
+      this.disableInteractions();
+    }, this.toolRuntimeConfig.interactionDisableTime);
   }
 
   setAspectRatio(w, h) {
@@ -329,7 +334,6 @@ export default class LeafletMap {
 
     if (this.aspectRatio !== w / h) {
       this.aspectRatio = w / h;
-      this.setZoomAndPositionInitial(false, true);
     }
   }
 
