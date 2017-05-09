@@ -25,7 +25,7 @@ const optionsProcessors = {
           return features;
         }, [])
         .filter(feature => {
-          return feature.geometry.type === 'Point' && feature.properties.hasOwnProperty('label');
+          return feature.hasOwnProperty('geometry') && feature.geometry.type === 'Point' && feature.properties.hasOwnProperty('label');
         })
         .map((feature, index) => {
           if (index < 20) {
