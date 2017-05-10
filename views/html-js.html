@@ -37,6 +37,9 @@ export default {
     numberedLabels: (geojsonList) => {
       return geojsonList
         .map(item => {
+          if (!item.hasOwnProperty('type')) {
+            return undefined;
+          }
           if (item.type === 'FeatureCollection') {
             return item.features;
           }
@@ -47,13 +50,13 @@ export default {
         .reduce((features, value) => {
           if (Array.isArray(value)) {
             features.concat(value);
-          } else {
+          } else if (value !== undefined) {
             features.push(value);
           }
           return features;
         }, [])
         .filter(feature => {
-          return feature.geometry.type === 'Point' && feature.properties.hasOwnProperty('label')
+          return feature.hasOwnProperty('geometry') && feature.geometry.type === 'Point' && feature.properties.hasOwnProperty('label')
         })
         .map((feature, index) => {
           let codePoint = null;
