@@ -1,5 +1,7 @@
 <div class="s-q-item">
-  <h3 class="s-q-item__title">{{title}}</h3>
+  {{#if options.hideTitle !== true }}
+    <h3 class="s-q-item__title">{{title}}</h3>
+  {{/if}}
   <div class="q-map-container" id="{{ mapContainerId }}"></div>
   <div class="s-q-item__footer">
     {{#if options.labelsBelowMap === true}}
