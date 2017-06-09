@@ -137,7 +137,7 @@ export default class LeafletMap {
     this.disableInteractions(this.map);
 
     try {
-      this.setAspectRatio(w, h, false);
+      this.setAspectRatio(w, h);
     } catch (e) {
       // ignore
     }
@@ -241,7 +241,7 @@ export default class LeafletMap {
     if (featureGroupBounds && featureGroupBounds.isValid()) {
       featureGroupCenter = featureGroupBounds.getCenter();
     }
-    if (this.featureGroup && featureGroupBounds && featureGroupCenter) {
+    if (featureGroupBounds && featureGroupCenter) {
       // reset max and min zoom to have all freedom for fitBounds
       this.map.options.minZoom = 1;
       this.map.options.maxZoom = 18;
@@ -258,7 +258,7 @@ export default class LeafletMap {
           zoomLevel = 9;
         }
 
-        if (featureGroupBounds && featureGroupCenter) {
+        if (featureGroupCenter) {
           this.map[moveFunctions.center](featureGroupCenter, zoomLevel);
         }
       }
