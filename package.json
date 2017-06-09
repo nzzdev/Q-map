@@ -24,6 +24,7 @@
     "babel-plugin-import": "^1.1.0",
     "cssnano": "^3.10.0",
     "enjoi": "^2.1.0",
+    "fs": "0.0.1-security",
     "hapi": "^16.1.0",
     "hoek": "^4.1.0",
     "inert": "^4.1.0",

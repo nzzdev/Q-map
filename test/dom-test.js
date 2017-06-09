@@ -4,7 +4,12 @@ const expect = require('chai').expect;
 const mockData = require('./resources/mock-data');
 require('svelte/ssr/register');
 const staticTpl = require('../views/html-js.html');
-const markup = staticTpl.render(mockData);
+const renderingData = Object.assign({
+  toolRuntimeConfig: {
+    displayOptions: {}
+  }
+}, mockData);
+const markup = staticTpl.render(renderingData);
 
 
 function getElement(selector) {

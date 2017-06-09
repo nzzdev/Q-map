@@ -1,14 +1,18 @@
-const Joi   = require('joi');
-const enjoi = require('enjoi');
+const Enjoi = require('enjoi');
 const Boom  = require('boom');
+const fs = require('fs');
 
 const resourcesDir  = __dirname + '/../../resources/';
 const scriptsDir  = __dirname + '/../../scripts/';
 const dynamicSchema = require(resourcesDir + 'dynamicSchema.js');
-const schema        = enjoi(dynamicSchema);
+const schema        = Enjoi(dynamicSchema);
 const viewsDir      = __dirname + '/../../views/';
 
 const hashMap = require(`${scriptsDir}/hashMap.json`);
+
+const displayOptionsSchema = Enjoi(JSON.parse(fs.readFileSync(resourcesDir + 'display-options-schema.json', {
+  encoding: 'utf-8'
+})));
 
 require('svelte/ssr/register');
 const staticTpl = require(`${viewsDir}/html-js.html`);
@@ -25,7 +29,9 @@ module.exports = {
       },
       payload: {
         item: schema,
-        toolRuntimeConfig: Joi.object().required()
+        toolRuntimeConfig: {
+          displayOptions: displayOptionsSchema
+        }
       }
     },
     cors: true
@@ -39,7 +45,8 @@ module.exports = {
 
     let data = Object.assign({
       id: id,
-      mapContainerId: `q-map-${id}`
+      mapContainerId: `q-map-${id}`,
+      toolRuntimeConfig: request.payload.toolRuntimeConfig
     }, request.payload.item);
 
     let layerConfigs = JSON.parse(process.env.LAYER_CONFIGS);
