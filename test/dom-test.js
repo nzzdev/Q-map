@@ -4,12 +4,11 @@ const expect = require('chai').expect;
 const mockData = require('./resources/mock-data');
 require('svelte/ssr/register');
 const staticTpl = require('../views/html-js.html');
-const renderingData = {
-  item: mockData,
+const renderingData = Object.assign({
   toolRuntimeConfig: {
     displayOptions: {}
   }
-}
+}, mockData);
 const markup = staticTpl.render(renderingData);
 
 

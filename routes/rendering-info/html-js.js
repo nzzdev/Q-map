@@ -1,12 +1,11 @@
-const Joi   = require('joi');
-const enjoi = require('enjoi');
+const Enjoi = require('enjoi');
 const Boom  = require('boom');
 const fs = require('fs');
 
 const resourcesDir  = __dirname + '/../../resources/';
 const scriptsDir  = __dirname + '/../../scripts/';
 const dynamicSchema = require(resourcesDir + 'dynamicSchema.js');
-const schema        = enjoi(dynamicSchema);
+const schema        = Enjoi(dynamicSchema);
 const viewsDir      = __dirname + '/../../views/';
 
 const hashMap = require(`${scriptsDir}/hashMap.json`);

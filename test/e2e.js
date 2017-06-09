@@ -46,7 +46,10 @@ describe('rendering-info endpoints', () => {
       method: 'POST',
       url: '/rendering-info/html-js',
       payload: JSON.stringify({
-        item: mockData
+        item: mockData,
+        toolRuntimeConfig: {
+          displayOptions: {}
+        }
       })
     };
     server.inject(request, (res) => {
