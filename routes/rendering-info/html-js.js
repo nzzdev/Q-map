@@ -1,16 +1,16 @@
-const Enjoi = require('enjoi');
+const enjoi = require('enjoi');
 const Boom  = require('boom');
 const fs = require('fs');
 
 const resourcesDir  = __dirname + '/../../resources/';
 const scriptsDir  = __dirname + '/../../scripts/';
 const dynamicSchema = require(resourcesDir + 'dynamicSchema.js');
-const schema        = Enjoi(dynamicSchema);
+const schema        = enjoi(dynamicSchema);
 const viewsDir      = __dirname + '/../../views/';
 
 const hashMap = require(`${scriptsDir}/hashMap.json`);
 
-const displayOptionsSchema = Enjoi(JSON.parse(fs.readFileSync(resourcesDir + 'display-options-schema.json', {
+const displayOptionsSchema = enjoi(JSON.parse(fs.readFileSync(resourcesDir + 'display-options-schema.json', {
   encoding: 'utf-8'
 })));
 
