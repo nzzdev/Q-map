@@ -180,6 +180,14 @@
             "type": "array",
             "items": { "$ref": "#/definitions/geojson-feature" }
           }
+      },
+      "Q:options": {
+        "availabilityChecks": [
+          {
+            "type": "UserHasRole",
+            "role": "expert-map"
+          }
+        ]
       }
     },
     "geojson-feature": {
@@ -256,6 +264,14 @@
         "properties": {
           "type": "object"
         }
+      },
+      "Q:options": {
+        "availabilityChecks": [
+          {
+            "type": "UserHasRole",
+            "role": "expert-map"
+          }
+        ]
       }
     },
     "position": {
