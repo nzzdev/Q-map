@@ -61,7 +61,8 @@ describe('rendering-info endpoints', () => {
       payload: JSON.stringify({
         item: mockData,
         toolRuntimeConfig: {
-          toolBaseUrl: 'http://localhost:3000'
+          toolBaseUrl: 'http://localhost:3000',
+          displayOptions: {}
         }
       })
     };

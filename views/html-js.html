@@ -1,5 +1,5 @@
 <div class="s-q-item">
-  {{#if options.hideTitle !== true }}
+  {{#if options.hideTitle !== true && hideTitle !== true }}
     <h3 class="s-q-item__title">{{title}}</h3>
   {{/if}}
   <div class="q-map-container" id="{{ mapContainerId }}"></div>
@@ -12,16 +12,16 @@
       </div>
     {{/if}}
     {{#if shouldHaveSources}}
-      {{#if sources.length > 1}} 
-        Quellen: 
-      {{else}} 
-        Quelle: 
-      {{/if}} 
+      {{#if sources.length > 1}}
+        Quellen:
+      {{else}}
+        Quelle:
+      {{/if}}
       {{#each sources as source, index}}
         <!-- 	If you separate DOM siblings with newlines whitespaces cannot be removed by svelte renderer
               To avoid unwanted whitespaces around commas separating each source, we keep render infos for sources at one line here.
               See also: https://github.com/sveltejs/svelte/issues/189  -->
-        {{#if source.text !== ''}}{{#if source.link && source.link.isValid}}<a href="{{source.link.url}}" target="blank" rel="noopener noreferrer">{{source.text}}</a>{{else}}{{source.text}}{{/if}}{{#if index !== sources.length - 1 && sources[index + 1] !== ''}}, {{/if}}{{/if}} 
+        {{#if source.text !== ''}}{{#if source.link && source.link.isValid}}<a href="{{source.link.url}}" target="blank" rel="noopener noreferrer">{{source.text}}</a>{{else}}{{source.text}}{{/if}}{{#if index !== sources.length - 1 && sources[index + 1] !== ''}}, {{/if}}{{/if}}
       {{/each}}
       {{#if notes}}&ndash;{{/if}}
     {{/if}}
@@ -33,8 +33,11 @@
 <script>
 export default {
   computed: {
+    hideTitle: (toolRuntimeConfig) => {
+      return toolRuntimeConfig.displayOptions && toolRuntimeConfig.displayOptions.hideTitle;
+    },
     shouldHaveSources: (sources) => {
-      return sources !== undefined && sources.length > 0; 
+      return sources !== undefined && sources.length > 0;
     },
     numberedLabels: (geojsonList) => {
       return geojsonList
