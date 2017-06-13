@@ -49,7 +49,8 @@
               }
             }
           }
-        }
+        },
+        "required": ["text"]
       }
     },
     "notes": {
@@ -179,10 +180,10 @@
       "title": "GeoJSON FeatureCollection",
       "required": [ "features" ],
       "properties": {
-          "type": { 
+          "type": {
             "type": "string",
             "default": "FeatureCollection",
-            "enum": [ "FeatureCollection" ] 
+            "enum": [ "FeatureCollection" ]
           },
           "features": {
             "type": "array",
