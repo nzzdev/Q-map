@@ -201,3 +201,7 @@ $line-height-baseline-correction: 2px;
     right: 0;
   }
 }
+
+.q-map-container .leaflet-labels-pane img {
+  max-width: none !important;
+}
