@@ -15,7 +15,7 @@ const displayOptionsSchema = enjoi(JSON.parse(fs.readFileSync(resourcesDir + 'di
 })));
 
 require('svelte/ssr/register');
-const staticTpl = require(`${viewsDir}/html-js.html`);
+const staticTpl = require(`${viewsDir}/HtmlJs.html`);
 
 const simplestyleToLeafletStyle = require(__dirname + '/../../helpers/simplestyleToLeafletStyle.js');
 
