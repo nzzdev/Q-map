@@ -49,7 +49,8 @@
               }
             }
           }
-        }
+        },
+        "required": ["text"]
       }
     },
     "notes": {
@@ -87,6 +88,14 @@
           "title": "Labels unter Karte anzeigen",
           "type": "boolean",
           "default": false
+        },
+        "hideTitle": {
+          "type": "boolean",
+          "default": false,
+          "Q:deprecated": true,
+          "Q:options": {
+            "hideInEditor": true
+          }
         }
       },
       "required": ["baseLayer", "initialZoomLevel", "minimap", "labelsBelowMap"]
@@ -171,21 +180,37 @@
       "title": "GeoJSON FeatureCollection",
       "required": [ "features" ],
       "properties": {
-          "type": { 
+          "type": {
             "type": "string",
             "default": "FeatureCollection",
-            "enum": [ "FeatureCollection" ] 
+            "enum": [ "FeatureCollection" ]
           },
           "features": {
             "type": "array",
             "items": { "$ref": "#/definitions/geojson-feature" }
           }
+      },
+      "Q:options": {
+        "availabilityChecks": [
+          {
+            "type": "UserHasRole",
+            "role": "expert-map"
+          }
+        ]
       }
     },
     "geojson-feature": {
       "type": "object",
       "Q:type": "json",
       "title": "GeoJSON Feature",
+      "Q:options": {
+        "availabilityChecks": [
+          {
+            "type": "UserHasRole",
+            "role": "expert-map"
+          }
+        ]
+      },
       "properties": {
         "type": {
           "type": "string",
@@ -256,6 +281,14 @@
         "properties": {
           "type": "object"
         }
+      },
+      "Q:options": {
+        "availabilityChecks": [
+          {
+            "type": "UserHasRole",
+            "role": "expert-map"
+          }
+        ]
       }
     },
     "position": {

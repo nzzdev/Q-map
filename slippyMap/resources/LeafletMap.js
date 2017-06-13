@@ -72,7 +72,7 @@ export default class LeafletMap {
   }
 
   hasPolygonsOrLineStrings(item) {
-    const types = ['Polygon', 'MultiPolygon', 'LineString'];
+    const types = ['Polygon', 'MultiPolygon', 'LineString', 'MultiLineString'];
     try {
       return item.geojsonList
         .reduce((features, geojson) => {
