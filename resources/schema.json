@@ -96,6 +96,18 @@
           "Q:options": {
             "hideInEditor": true
           }
+        },
+        "createLegend": {
+          "type": "boolean",
+          "default": false,
+          "Q:options": {
+            "availabilityChecks": [
+              {
+                "type": "UserHasRole",
+                "role": "expert-map"
+              }
+            ]
+          }
         }
       },
       "required": ["baseLayer", "initialZoomLevel", "minimap", "labelsBelowMap"]
@@ -281,14 +293,6 @@
         "properties": {
           "type": "object"
         }
-      },
-      "Q:options": {
-        "availabilityChecks": [
-          {
-            "type": "UserHasRole",
-            "role": "expert-map"
-          }
-        ]
       }
     },
     "position": {

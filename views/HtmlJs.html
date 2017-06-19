@@ -2,6 +2,15 @@
   {{#if options.hideTitle !== true && hideTitle !== true }}
     <h3 class="s-q-item__title">{{title}}</h3>
   {{/if}}
+  {{#if options.generateLegend === true }}
+    <div class="q-map-legend">
+      {{#each legendItems as legendItem}}
+        <div class="q-map-legend__item" style="color: {{ legendItem.color }};">
+          <span class="s-font-note">{{ legendItem.label }}</span>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
   <div class="q-map-container" id="{{ mapContainerId }}"></div>
   <div class="s-q-item__footer">
     {{#if options.labelsBelowMap === true}}
@@ -38,6 +47,35 @@ export default {
     },
     shouldHaveSources: (sources) => {
       return sources !== undefined && sources.length > 0;
+    },
+    legendItems: (geojsonList) => {
+      const legend = geojsonList
+        .map(item => { // return arrays of features
+          if (item.type === "Feature") {
+            return [item];
+          }
+          if (item.type === "FeatureCollection") {
+            return item.features;
+          }
+        })
+        .reduce((a, b) => { // flat the features
+          return a.concat(b);
+        })
+        .filter(item => item.geometry && item.geometry.type !== "Point") // remove points
+        .filter(item => item.properties && item.properties.color) // only keep if color is defined
+        .filter(item => item.properties && item.properties.label) // only keep if label is defined
+        .filter((currentItem, index, self) => {
+          return self.findIndex(item => {
+            return item.properties.label === currentItem.properties.label && item.properties.color === currentItem.properties.color;
+          }) === index;
+        })
+        .map(item => {
+          return {
+            color: item.properties.color,
+            label: item.properties.label
+          }
+        })
+      return legend;
     },
     numberedLabels: (geojsonList) => {
       return geojsonList
