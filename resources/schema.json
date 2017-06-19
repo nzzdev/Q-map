@@ -89,7 +89,7 @@
           "type": "boolean",
           "default": false
         },
-        "createLegend": {
+        "showLegend": {
           "title": "Legende anzeigen",
           "type": "boolean",
           "default": false,

@@ -2,7 +2,7 @@
   {{#if options.hideTitle !== true && hideTitle !== true }}
     <h3 class="s-q-item__title">{{title}}</h3>
   {{/if}}
-  {{#if options.generateLegend === true }}
+  {{#if options.showLegend === true }}
     <div class="q-map-legend">
       {{#each legendItems as legendItem}}
         <div class="q-map-legend__item" style="color: {{ legendItem.color }};">
