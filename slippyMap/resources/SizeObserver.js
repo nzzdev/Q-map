@@ -17,7 +17,6 @@ function debounce(func, wait, immediate) {
 }
 
 export default class SizeObserver {
-
   resizeCallbacks = [];
   resizeListenerInstalled = false;
 

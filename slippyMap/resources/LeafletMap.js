@@ -11,7 +11,6 @@ Leaflet.Icon.Default.imagePath = 'jspm_packages/npm/leaflet@1.0.3/dist/images';
 
 
 export default class LeafletMap {
-
   map;
   markers = [];
   featureGroup = new Leaflet.FeatureGroup();
