@@ -1,11 +1,11 @@
 // this implements parts of https://github.com/mapbox/simplestyle-spec/tree/master/1.1.0
 
 const defaults = {
-  stroke: '#0084c7',
+  stroke: '#c31906',
   'stroke-width': 2,
   'stroke-opacity': 1,
-  fill: '#66b5dd',
-  'fill-opacity': 1
+  fill: '#c31906',
+  'fill-opacity': 0.35
 };
 
 const mapping = {
