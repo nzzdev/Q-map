@@ -18,8 +18,8 @@ describe('simplestyle to leaflet path style transformation', function() {
 
   it('should apply defaults for undefined simplestyle properties', function() {
     let style = simplestyleToLeafletStyle(properties);
-    expect(style.color).to.be.equal('#0084c7');
-    expect(style.fillColor).to.be.equal('#66b5dd');
+    expect(style.color).to.be.equal('#c31906');
+    expect(style.fillColor).to.be.equal('#c31906');
     expect(style.opacity).to.be.equal(1);
   });
 });

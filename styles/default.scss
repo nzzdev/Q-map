@@ -148,6 +148,31 @@ $line-height-baseline-correction: 2px;
   margin-bottom: 3px;
 }
 
+.q-map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.q-map-legend__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  span {
+    white-space: nowrap;
+  }
+  &::before {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 12px;
+    background-color: currentColor;
+    margin-right: 3px;
+    flex-shrink: 0;
+  }
+}
+
 .leaflet-control-button {
   cursor: pointer;
 }

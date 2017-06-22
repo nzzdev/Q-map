@@ -89,6 +89,19 @@
           "type": "boolean",
           "default": false
         },
+        "showLegend": {
+          "title": "Legende anzeigen",
+          "type": "boolean",
+          "default": false,
+          "Q:options": {
+            "availabilityChecks": [
+              {
+                "type": "UserHasRole",
+                "role": "expert-map"
+              }
+            ]
+          }
+        },
         "hideTitle": {
           "type": "boolean",
           "default": false,
@@ -281,14 +294,6 @@
         "properties": {
           "type": "object"
         }
-      },
-      "Q:options": {
-        "availabilityChecks": [
-          {
-            "type": "UserHasRole",
-            "role": "expert-map"
-          }
-        ]
       }
     },
     "position": {

@@ -1,6 +1,6 @@
 {
   "name": "@nzz/q-map",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Q map tool",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/nzzdev/Q-map#readme",
   "dependencies": {
-    "autoprefixer": "^6.7.1",
+    "autoprefixer": "^7.1.1",
     "babel-plugin-import": "^1.1.0",
     "cssnano": "^3.10.0",
     "enjoi": "^2.1.0",
@@ -28,12 +28,12 @@
     "hapi": "^16.1.0",
     "hoek": "^4.1.0",
     "inert": "^4.1.0",
-    "json-schema-faker": "^0.4.0",
+    "json-schema-faker": "^0.5.0-rc6",
     "jspm": "^0.17.0-beta.41",
     "node-sass": "^4.3.0",
-    "postcss-import": "^9.1.0",
-    "svelte": "1.22.3",
-    "systemjs": "0.20.4",
+    "postcss-import": "^10.0.0",
+    "svelte": "1.22.5",
+    "systemjs": "0.20.14",
     "systemjs-builder": "^0.16.4"
   },
   "jspm": {
@@ -103,11 +103,11 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.1",
-    "chai": "^3.5.0",
+    "chai": "^4.0.2",
     "es-module-loader": "^2.0.0",
     "escape-json-node": "^1.0.8",
-    "eslint": "^3.18.0",
-    "jsdom": "^9.12.0",
+    "eslint": "^4.0.0",
+    "jsdom": "^11.0.0",
     "jspm": "^0.17.0-beta.41",
     "mocha": "^3.2.0"
   }

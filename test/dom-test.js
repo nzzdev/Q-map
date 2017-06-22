@@ -1,4 +1,5 @@
-const JsDom = require('jsdom');
+const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
 const expect = require('chai').expect;
 
 const mockData = require('./resources/mock-data');
@@ -14,11 +15,8 @@ const markup = staticTpl.render(renderingData);
 
 function getElement(selector) {
   return new Promise((resolve, reject) => {
-    JsDom.env(
-      markup,
-      (err, window) => {
-        resolve(window.document.querySelector(selector));
-      });
+    const dom = new JSDOM(markup);
+    resolve(dom.window.document.querySelector(selector));
   });
 }
 
