@@ -6,10 +6,6 @@
   overflow: hidden;
 }
 
-$label-height: 21px;
-$label-padding: 5px;
-$line-height-baseline-correction: 2px;
-
 // overwrite some styles from leaflet
 .leaflet-bar {
   box-shadow: none;
@@ -50,14 +46,13 @@ $line-height-baseline-correction: 2px;
 }
 
 .q-map-marker__label {
-  height: 21px;
   font-family: Roboto, Arial, sans-serif;
   font-size: 14px;
-  line-height: $label-height;
+  line-height: 1.1;
   font-weight: bold;
-  padding: 0px 5px 0 5px;
   position: absolute;
   white-space: nowrap;
+  text-align: center;
 
   text-shadow: rgb(250, 250, 250) 2px 0px 0px, rgb(250, 250, 250) 1.75517px 0.958851px 0px, rgb(250, 250, 250) 1.0806px 1.68294px 0px, rgb(250, 250, 250) 0.141474px 1.99499px 0px, rgb(250, 250, 250) -0.832294px 1.81859px 0px, rgb(250, 250, 250) -1.60229px 1.19694px 0px, rgb(250, 250, 250) -1.97998px 0.28224px 0px, rgb(250, 250, 250) -1.87291px -0.701566px 0px, rgb(250, 250, 250) -1.30729px -1.5136px 0px, rgb(250, 250, 250) -0.421592px -1.95506px 0px, rgb(250, 250, 250) 0.567324px -1.91785px 0px, rgb(250, 250, 250) 1.41734px -1.41108px 0px, rgb(250, 250, 250) 1.92034px -0.558831px 0px;
 
@@ -70,36 +65,21 @@ $line-height-baseline-correction: 2px;
   }
 }
 
-.q-map-marker__label--light {
-  font-size: 12px;
-
-  &.q-map-marker__label--top {
-    top: -18px;
-  }
-
-  &.q-map-marker__label--bottom {
-    bottom: -18px;
-  }
+.q-map-marker__label--top {
+  bottom: 12px;
 }
 
-.q-map-marker__label--heavy {
+.q-map-marker__label--bottom {
+  top: 12px;
+}
 
-  &.q-map-marker__label--top {
-    top: -20px;
-  }
-
-  &.q-map-marker__label--bottom {
-    bottom: -20px;
-  }
+.q-map-marker__label--light {
+  font-size: 12px;
 }
 
 .q-map-marker__label--event {
-  @extend .q-map-marker__label--heavy;
-  
   &.q-map-marker__label--top {
 
-    top: -46px;
-  
     &::after {
       content: '\2193';
       font-family: Arial, sans;
@@ -115,8 +95,6 @@ $line-height-baseline-correction: 2px;
 
   &.q-map-marker__label--bottom {
 
-    bottom: -28px;
-
     &::before {
       content: '\2191';
       font-family: Arial, sans;
@@ -125,7 +103,7 @@ $line-height-baseline-correction: 2px;
       color: black;
       text-align: center;
       position: relative;
-      top: -5px;
+      top: -3px;
     }
   }
 }
