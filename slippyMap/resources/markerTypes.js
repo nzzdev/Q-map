@@ -4,7 +4,6 @@ export const markerTypes = {
   pointHeavyLabel: {
     label: 'Punkt mit Label',
     hasLabel: true,
-    hasLabelPositionVariants: true,
     getLeafletIcon: marker => {
       return Leaflet
         .divIcon({
@@ -17,7 +16,6 @@ export const markerTypes = {
   pointLightLabel: {
     label: 'Punkt mit Label (klein)',
     hasLabel: true,
-    hasLabelPositionVariants: true,
     isLegacy: false,
     getLeafletIcon: marker => {
       return Leaflet
@@ -31,7 +29,6 @@ export const markerTypes = {
   pointOnly: {
     label: 'Punkt ohne Label',
     hasLabel: false,
-    hasLabelPositionVariants: false,
     getLeafletIcon: marker => {
       return Leaflet
         .divIcon({
@@ -44,7 +41,6 @@ export const markerTypes = {
   label: {
     label: 'Gebiet',
     hasLabel: true,
-    hasLabelPositionVariants: false,
     getLeafletIcon: marker => {
       return Leaflet
         .divIcon({
@@ -57,7 +53,6 @@ export const markerTypes = {
   event: {
     label: 'Ereignis',
     hasLabel: true,
-    hasLabelPositionVariants: true,
     getLeafletIcon: marker => {
       return Leaflet
         .divIcon({
