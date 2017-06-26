@@ -111,7 +111,7 @@ export default {
             codePoint = 12977 + index;
           }
           if (codePoint) {
-            return String.fromCodePoint(codePoint) + ' ' + feature.properties.label;
+            return String.fromCodePoint(codePoint) + ' ' + feature.properties.label.replace(/<br>/g,' ');
           }
           return null;
         })
