@@ -7,7 +7,7 @@ import enableInteractionSvg from '../icons/enable-interaction.svg!text';
 import geoJsonOptions from './geoJsonOptions.js';
 
 Leaflet.Control.Button = L.Control.extend(LeafletControlButton);
-Leaflet.Icon.Default.imagePath = 'jspm_packages/npm/leaflet@1.0.3/dist/images';
+Leaflet.Icon.Default.imagePath = 'jspm_packages/npm/leaflet@1.1.0/dist/images';
 
 
 export default class LeafletMap {
@@ -293,6 +293,10 @@ export default class LeafletMap {
     this.map.scrollWheelZoom.disable();
     this.map.touchZoom.disable();
 
+    if (this.map.tap) {
+      this.map.tap.disable();
+    }
+
     this.zoomControl.remove();
 
     this.enableInteractionButton.addTo(this.map);
@@ -300,6 +304,7 @@ export default class LeafletMap {
     this.enableInteractionButton.getContainer().addEventListener('click', (event) => {
       this.enableInteraction();
     });
+    console.log('interactions disabled');
   }
 
   enableInteraction() {
@@ -309,12 +314,17 @@ export default class LeafletMap {
     this.map.scrollWheelZoom.enable();
     this.map.touchZoom.enable();
 
+    if (this.map.tap) {
+      this.map.tap.enable();
+    }
+
     this.enableInteractionButton.remove();
     this.zoomControl.addTo(this.map);
 
     this.resetInteractionTimeout();
     this.map.on('zoomstart', this.resetInteractionTimeout.bind(this));
     this.map.on('movestart', this.resetInteractionTimeout.bind(this));
+    console.log('interactions enabled');
   }
 
   resetInteractionTimeout() {

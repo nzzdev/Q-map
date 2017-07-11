@@ -1,4 +1,4 @@
-<div class="s-q-item">
+<div class="s-q-item q-map" style="opacity: 0">
   {{#if options.hideTitle !== true && hideTitle !== true }}
     <h3 class="s-q-item__title">{{title}}</h3>
   {{/if}}
@@ -11,7 +11,7 @@
       {{/each}}
     </div>
   {{/if}}
-  <div class="q-map-container" id="{{ mapContainerId }}"></div>
+  <div class="q-map-container" id="{{ mapContainerId }}" style="height: 250px;"></div>
   <div class="s-q-item__footer">
     {{#if options.labelsBelowMap === true}}
       <div class="q-map-footer__marker-labels">
