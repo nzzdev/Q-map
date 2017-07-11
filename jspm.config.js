@@ -100,7 +100,7 @@ SystemJS.config({
   map: {
     "leaflet-minimap": "npm:leaflet-minimap@3.4.0",
     "text": "github:systemjs/plugin-text@0.0.9",
-    "leaflet": "npm:leaflet@1.0.3",
+    "leaflet": "npm:leaflet@1.1.0",
     "assert": "npm:jspm-nodelibs-assert@0.2.0",
     "babel": "npm:babel-core@6.22.1",
     "buffer": "npm:jspm-nodelibs-buffer@0.2.1",
