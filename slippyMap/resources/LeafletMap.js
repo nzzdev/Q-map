@@ -96,6 +96,11 @@ export default class LeafletMap {
     if (this.map && this.map.getContainer() === element) {
       return;
     }
+
+    if (this.toolRuntimeConfig.baseLayer.logo && this.toolRuntimeConfig.baseLayer.logo.markup) {
+      element.insertAdjacentHTML('afterbegin', this.toolRuntimeConfig.baseLayer.logo.markup);
+    }
+
     this.map = Leaflet.map(element, {
       'zoomControl': false
     });
