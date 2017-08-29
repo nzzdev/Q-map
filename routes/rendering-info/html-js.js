@@ -100,16 +100,23 @@ module.exports = {
           });
       `;
 
+    let stylesheets = [
+      {
+        name: 'default'
+      }
+    ];
+
+    let baseLayer = request.payload.toolRuntimeConfig.baseLayer;
+    if (baseLayer.logo && baseLayer.logo.stylesheet) {
+      stylesheets.push(baseLayer.logo.stylesheet);
+    }
+
     let responseData = {
       loaderConfig: {
         polyfills: ['Promise', 'Object.assign'],
         loadSystemJs: 'full'
       },
-      stylesheets: [
-        {
-          name: 'default'
-        }
-      ],
+      stylesheets: stylesheets,
       scripts: [
         {
           content: systemConfigScript,

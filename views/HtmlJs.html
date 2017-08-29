@@ -20,7 +20,11 @@
       {{/each}}
       </div>
     {{/if}}
+    {{#if notes}}
+      <span>{{notes}}</span>
+    {{/if}}
     {{#if shouldHaveSources}}
+      {{#if notes}}&ndash;{{/if}}
       {{#if sources.length > 1}}
         Quellen:
       {{else}}
@@ -32,10 +36,6 @@
               See also: https://github.com/sveltejs/svelte/issues/189  -->
         {{#if source.text !== ''}}{{#if source.link && source.link.isValid}}<a href="{{source.link.url}}" target="blank" rel="noopener noreferrer">{{source.text}}</a>{{else}}{{source.text}}{{/if}}{{#if index !== sources.length - 1 && sources[index + 1] !== ''}}, {{/if}}{{/if}}
       {{/each}}
-      {{#if notes}}&ndash;{{/if}}
-    {{/if}}
-    {{#if notes}}
-      <span>{{notes}}</span>
     {{/if}}
   </div>
 </div>

@@ -12,7 +12,7 @@
   </head>
   <body>
     <div id="map"></div>
-    <script src="node_modules/systemjs/dist/system-production.js"></script>    
+    <script src="node_modules/systemjs/dist/system-production.js"></script>
     <script>
       let data = {
         title: 'Erste Karte',
@@ -135,7 +135,7 @@
           labelsBelowMap: true
         }
       }
-      
+
       function loadAllScripts(scripts, index, callback) {
         if (scripts[index] && scripts[index].url) {
           loadJS(scripts[index].url, () => {
