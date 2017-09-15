@@ -338,7 +338,7 @@ export default class LeafletMap {
     }
     this.interactionTimer = setTimeout(() => {
       this.setZoomAndPositionInitial(true);
-      this.disableInteractions();
+      /* this.disableInteractions(); */
     }, this.toolRuntimeConfig.interactionDisableTime);
   }
 
