@@ -309,7 +309,6 @@ export default class LeafletMap {
     this.enableInteractionButton.getContainer().addEventListener('click', (event) => {
       this.enableInteraction();
     });
-    console.log('interactions disabled');
   }
 
   enableInteraction() {
@@ -329,7 +328,6 @@ export default class LeafletMap {
     this.resetInteractionTimeout();
     this.map.on('zoomstart', this.resetInteractionTimeout.bind(this));
     this.map.on('movestart', this.resetInteractionTimeout.bind(this));
-    console.log('interactions enabled');
   }
 
   resetInteractionTimeout() {

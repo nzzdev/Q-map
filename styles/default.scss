@@ -212,3 +212,21 @@
 .q-map-container .leaflet-labels-pane img {
   max-width: none !important;
 }
+
+.q-map .q-map-container.leaflet-container .leaflet-control-container .leaflet-top.leaflet-left .leaflet-control-zoom {
+
+  & a.leaflet-control-zoom-in,
+  & a.leaflet-control-zoom-out {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+      background-color: #f4f4f4;
+    }
+
+    &:active,
+    &:focus {
+      background-color: #fff;
+    }
+  }
+}
