@@ -14,22 +14,19 @@
 .leaflet-bar {
   box-shadow: none;
   border-radius: 0;
-  border: 1px solid #8E8E8E;
+  border: 1px solid #92929e;
 }
 .leaflet-bar a:first-child, .leaflet-bar a:last-child {
   border-radius: 0;
 }
 
-.leaflet-container {
-  font-family: Roboto, Arial, sans-serif;
-}
 // end
 
 // overwrite some styles from leaflet Control.MiniMap
 .leaflet-control-minimap {
   border-radius: 0;
   box-shadow: none;
-  border: 1px solid #8E8E8E;
+  border: 1px solid #92929e;
 }
 // end
 
@@ -50,10 +47,7 @@
 }
 
 .q-map-marker__label {
-  font-family: Roboto, Arial, sans-serif;
-  font-size: 14px;
   line-height: 1.1;
-  font-weight: bold;
   position: absolute;
   white-space: nowrap;
   text-align: center;
@@ -164,7 +158,7 @@
   height: 35px;
   font-size: 10px;
   text-transform: uppercase;
-  border: 1px solid #8E8E8E;
+  border: 1px solid #92929e;
   background: white;
   padding: 5px 9px;
   svg {

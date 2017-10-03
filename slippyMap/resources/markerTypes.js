@@ -9,7 +9,7 @@ export const markerTypes = {
         .divIcon({
           className: 'q-map-marker s-color-gray-1',
           iconSize: [8, 8],
-          html: `<div class="q-map-marker__label s-color-gray-8 q-map-marker__label--${marker.labelPosition ? marker.labelPosition : 'top'} q-map-marker__label--heavy">${marker.label || ''}</div>`
+          html: `<div class="s-font-note s-font-note--strong q-map-marker__label q-map-marker__label--${marker.labelPosition ? marker.labelPosition : 'top'} q-map-marker__label--heavy">${marker.label || ''}</div>`
         });
     }
   },
@@ -22,7 +22,7 @@ export const markerTypes = {
         .divIcon({
           className: 'q-map-marker s-color-gray-1',
           iconSize: [8, 8],
-          html: `<div class="q-map-marker__label s-color-gray-8 q-map-marker__label--${marker.labelPosition ? marker.labelPosition : 'top'} q-map-marker__label--light">${marker.label || ''}</div>`
+          html: `<div class="s-font-note s-font-note--strong q-map-marker__label q-map-marker__label--${marker.labelPosition ? marker.labelPosition : 'top'} q-map-marker__label--light">${marker.label || ''}</div>`
         });
     }
   },
@@ -46,7 +46,7 @@ export const markerTypes = {
         .divIcon({
           className: 'q-map-marker q-map-marker--without-point',
           iconSize: [0, 0],
-          html: `<div class="q-map-marker__label s-color-gray-6 q-map-marker__label--without-point">${marker.label || ''}</div>`
+          html: `<div class="s-font-note s-font-note--strong s-font-note--light q-map-marker__label q-map-marker__label--without-point">${marker.label || ''}</div>`
         });
     }
   },
@@ -58,7 +58,7 @@ export const markerTypes = {
         .divIcon({
           className: 'q-map-marker s-color-gray-1',
           iconSize: [8, 8],
-          html: `<div class="q-map-marker__label s-color-gray-8 q-map-marker__label--${marker.labelPosition ? marker.labelPosition : 'top'} q-map-marker__label--event">${marker.label || ''}</div>`
+          html: `<div class="s-font-note s-font-note--strong q-map-marker__label q-map-marker__label--${marker.labelPosition ? marker.labelPosition : 'top'} q-map-marker__label--event">${marker.label || ''}</div>`
         });
     }
   }
