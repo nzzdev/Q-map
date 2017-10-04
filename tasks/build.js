@@ -1,8 +1,19 @@
 const fs = require('fs');
 const crypto = require('crypto');
-const Builder = require('systemjs-builder');
 
+const Builder = require('systemjs-builder');
 const builder = new Builder('', 'jspm.config.js');
+
+const sass = require('node-sass');
+const postcss = require('postcss');
+const postcssImport = require('postcss-import');
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+// const autoprefixerPlugin = autoprefixer({
+//   browsers: ['ie > 9', 'last 3 versions']
+// });
+
+const stylesDir = __dirname + '/../styles_src/';
 
 builder.config({
   map: {
@@ -10,32 +21,118 @@ builder.config({
   }
 });
 
-let hashMap = {};
+function writeHashmap(hashmapPath, files, fileext) {
+  const hashMap = {};
+  files
+    .map(file => {
+      const hash = crypto.createHash('md5');
+      hash.update(file.content, { encoding: 'utf8'} );
+      file.hash = hash.digest('hex');
+      return file;
+    })
+    .map(file => {
+      hashMap[file.name] = `${file.name}.${file.hash.substring(0, 8)}.${fileext}`;
+    });
 
-return builder
-  .bundle('q-map/map.js', { normalize: true, runtime: false, minify: false })
-  .then(bundle => {
-    const hash = crypto.createHash('md5');
-    hash.update(bundle.source);
-    const hashString = hash.digest('hex');
-    const fileName = 'slippy-map.js';
-    const hashedFileName = `slippy-map.${hashString.substring(0, 8)}.js`;
-    fs.writeFileSync(`scripts/${fileName}`, bundle.source);
-    hashMap[fileName] = hashedFileName;
-  })
-  .then(() => {
-    fs.writeFileSync('scripts/hashMap.json', JSON.stringify(hashMap));
-  })
-  .then(() => {
-    /* eslint-disable */
-    console.log('Build complete');
-    /* eslint-enable */
-    process.exit(0);
-  })
-  .catch((err) => {
-    /* eslint-disable */
-    console.log('Build error', err);
-    /* eslint-enable */
-    process.exit(1);
+  fs.writeFileSync(hashmapPath, JSON.stringify(hashMap));
+}
+
+async function buildScripts() {
+  return builder
+    .bundle('q-map/map.js', { normalize: true, runtime: false, minify: false })
+    .then(bundle => {
+      const fileName = 'slippy-map';
+      fs.writeFileSync(`scripts/${fileName}.js`, bundle.source);
+      return [{
+        name: fileName,
+        content: bundle.source
+      }];
+    })
+    .then((files) => {
+      writeHashmap('scripts/hashMap.json', files, 'js');
+    })
+    .then(() => {
+      /* eslint-disable */
+      console.log('Build complete');
+      /* eslint-enable */
+      process.exit(0);
+    })
+    .catch((err) => {
+      /* eslint-disable */
+      console.log('Build error', err);
+      /* eslint-enable */
+      process.exit(1);
+    });
+}
+
+async function compileStylesheet(name) {
+  return new Promise((resolve, reject) => {
+    const filePath = stylesDir + `${name}.scss`;
+    fs.exists(filePath, (exists) => {
+      if (!exists) {
+        reject(`stylesheet not found ${filePath}`);
+        process.exit(1);
+      }
+      sass.render(
+        {
+          file: filePath,
+          // includePaths: [__dirname + '/../jspm_packages/npm'],
+          outputStyle: 'compressed'
+        },
+        (err, sassResult) => {
+          if (err) {
+            reject(err);
+          } else {
+            postcss()
+              .use(postcssImport)
+              .use(autoprefixer)
+              .use(cssnano)
+              .process(sassResult.css, {
+                from: `${stylesDir}${name}.css`
+              })
+              .then(prefixedResult => {
+                if (prefixedResult.warnings().length > 0) {
+                  console.log(`failed to compile stylesheet ${name}`);
+                  process.exit(1);
+                }
+                resolve(prefixedResult.css);
+              });
+          }
+        }
+      );
+    });
+  });
+}
+
+async function buildStyles() {
+  // compile styles
+  const styleFiles = [
+    {
+      name: 'default',
+      content: await compileStylesheet('default')
+    },
+    {
+      name: 'mapbox',
+      content: await compileStylesheet('mapbox')
+    }
+  ];
+
+  styleFiles.map(file => {
+    fs.writeFileSync(`styles/${file.name}.css`, file.content);
   });
 
+  writeHashmap('styles/hashMap.json', styleFiles, 'css');
+}
+
+Promise.all(
+  [
+    buildScripts(),
+    buildStyles()
+  ])
+  .then(res => {
+    console.log('build complete');
+  })
+  .catch(err => {
+    console.log(err);
+    process.exit(1);
+  });
