@@ -9,9 +9,6 @@ const postcss = require('postcss');
 const postcssImport = require('postcss-import');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
-// const autoprefixerPlugin = autoprefixer({
-//   browsers: ['ie > 9', 'last 3 versions']
-// });
 
 const stylesDir = __dirname + '/../styles_src/';
 
@@ -76,7 +73,6 @@ async function compileStylesheet(name) {
       sass.render(
         {
           file: filePath,
-          // includePaths: [__dirname + '/../jspm_packages/npm'],
           outputStyle: 'compressed'
         },
         (err, sassResult) => {
