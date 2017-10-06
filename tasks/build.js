@@ -39,7 +39,7 @@ function writeHashmap(hashmapPath, files, fileext) {
 
 async function buildScripts() {
   return builder
-    .bundle('q-map/map.js', { normalize: true, runtime: false, minify: false })
+    .bundle('q-map/map.js', { normalize: true, runtime: false, minify: true, mangle: false })
     .then(bundle => {
       const fileName = 'slippy-map';
       fs.writeFileSync(`scripts/${fileName}.js`, bundle.source);
