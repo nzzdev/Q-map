@@ -7,9 +7,6 @@ module.exports = [
   {
     method: 'GET',
     path: '/schema.json',
-    config: {
-      cache: false
-    },
     handler: function(request, reply) {
       return reply(schemaString).type('application/json');
     }
@@ -17,9 +14,6 @@ module.exports = [
   {
     method: 'GET',
     path: '/display-options-schema.json',
-    config: {
-      cache: false
-    },
     handler: function(request, reply) {
       reply.file(resourcesDir + 'display-options-schema.json');
     }
