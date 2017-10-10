@@ -111,7 +111,7 @@ module.exports = {
 
     let baseLayer = request.payload.toolRuntimeConfig.baseLayer;
     if (baseLayer.logo && baseLayer.logo.stylesheet) {
-      stylesheets.push(styleHashMap[baseLayer.logo.stylesheet]);
+      stylesheets.push(styleHashMap[baseLayer.logo.stylesheet.name]);
     }
 
     let responseData = {
