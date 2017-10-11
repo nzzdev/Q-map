@@ -40,7 +40,7 @@
     "name": "q-map",
     "dependencies": {
       "babel": "npm:babel-core@^6.22.1",
-      "leaflet": "npm:leaflet@^1.1.0",
+      "leaflet": "npm:leaflet@1.2.0",
       "leaflet-minimap": "npm:leaflet-minimap@^3.4.0",
       "plugin-babel": "npm:systemjs-plugin-babel@^0.0.20",
       "text": "github:systemjs/plugin-text@^0.0.9"
@@ -86,7 +86,7 @@
           "test.js"
         ]
       },
-      "npm:leaflet@1.1.0": {
+      "npm:leaflet@1.2.0": {
         "jspmNodeConversion": false
       },
       "npm:lodash@4.17.4": {

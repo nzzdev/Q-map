@@ -7,7 +7,7 @@ import enableInteractionSvg from '../icons/enable-interaction.svg!text';
 import geoJsonOptions from './geoJsonOptions.js';
 
 Leaflet.Control.Button = L.Control.extend(LeafletControlButton);
-Leaflet.Icon.Default.imagePath = 'jspm_packages/npm/leaflet@1.1.0/dist/images';
+Leaflet.Icon.Default.imagePath = 'jspm_packages/npm/leaflet@1.2.0/dist/images';
 
 
 export default class LeafletMap {
