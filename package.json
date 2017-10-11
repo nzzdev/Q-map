@@ -1,6 +1,6 @@
 {
   "name": "@nzz/q-map",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Q map tool",
   "main": "index.js",
   "scripts": {
