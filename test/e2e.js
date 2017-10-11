@@ -22,16 +22,16 @@ describe('Q required API', () => {
     });
   });
 
-  it('should return 200 for /stylesheet/default', function(done) {
+  it('should return 200 for /stylesheet/default.123.css', function(done) {
     this.timeout(5000);
-    server.inject('/stylesheet/default', (res) => {
+    server.inject('/stylesheet/default.123.css', (res) => {
       expect(res.statusCode).to.be.equal(200);
       done();
     });
   });
 
   it('should return 404 for inexistent stylesheet', function(done) {
-    server.inject('/stylesheet/inexisting', (res) => {
+    server.inject('/stylesheet/inexisting.123.css', (res) => {
       expect(res.statusCode).to.be.equal(404);
       done();
     });

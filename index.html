@@ -5,10 +5,66 @@
     <title>Q Map</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://service.sophie.nzz.ch/bundle/sophie-q@^1.2.0,sophie-font@^1.2.0,sophie-color@^1.1.0,sophie-viz-color@^1.2.0[diverging-6].css">
+    <link rel="stylesheet" href="https://assets.static-nzz.ch/nzz-niobe/assets/content-42.2.10.css">
+    <link rel="stylesheet" href="https://service.sophie.nzz.ch/bundle/sophie-q@^1,sophie-font@^1,sophie-color@^1.css">
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=Promise,fetch,default"></script>
     <script src="https://gitcdn.xyz/repo/filamentgroup/loadCSS/master/src/loadCSS.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/loadjs/3.5.0/loadjs.min.js"></script>
+    <style>
+      @font-face {
+              font-weight: 100;
+              font-family: nzz-sans-serif;
+              font-display: swap;
+              src:
+                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/GT-America-Standard-Regular.woff2') format('woff2'),
+                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/GT-America-Standard-Regular.woff') format('woff');
+            }
+
+            @font-face {
+                font-weight: 500;
+                font-family: nzz-sans-serif;
+                font-display: swap;
+                src:
+                    url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/GT-America-Standard-Medium.woff2') format('woff2'),
+                    url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/GT-America-Standard-Medium.woff') format('woff');
+            }
+
+            @font-face {
+              font-weight: 300;
+              font-family: nzz-serif;
+              font-display: swap;
+              src:
+                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumpro-regular.woff2') format('woff2'),
+                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumpro-regular.woff') format('woff');
+            }
+
+            @font-face {
+              font-weight: 300;
+              font-style: italic;
+              font-family: nzz-serif;
+              font-display: swap;
+              src:
+                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumpro-regularitalic.woff2') format('woff2'),
+                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumpro-regularitalic.woff') format('woff');
+            }
+
+            @font-face {
+              font-weight: 500;
+              font-family: nzz-serif;
+              font-display: swap;
+              src:
+                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumpro-bold.woff2') format('woff2'),
+                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumpro-bold.woff') format('woff');
+            }
+
+            @font-face {
+              font-weight: 500;
+              font-family: nzz-serif-alt;
+              src:
+                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumdisplay-medium.woff2') format('woff2'),
+                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumdisplay-medium.woff') format('woff');
+            }
+      </style>
   </head>
   <body>
     <div id="map"></div>
@@ -52,7 +108,7 @@
               coordinates: [48.2, 16.36],
             },
             properties: {
-              label: 'aaaaaa',
+              label: 'aaaaaa<br>asdasdasd',
               type: 'event',
               labelPosition: 'bottom',
               useForInitialView: true
@@ -65,37 +121,37 @@
               coordinates: [47.2, 16.36],
             },
             properties: {
-              label: 'bbbbbb',
+              label: 'bbbbbb<br>asdasd',
               type: 'event',
               labelPosition: 'top',
               useForInitialView: true
             }
           },
-          {
-            type: "Feature",
-            geometry: {
-              type: "Point",
-              coordinates: [48.2, 17.36],
-            },
-            properties: {
-              label: '😇 cccccc',
-              type: 'pointHeavyLabel',
-              labelPosition: 'top',
-              useForInitialView: true
-            }
-          },
-          {
-            type: "Feature",
-            geometry: {
-              type: "Point",
-              coordinates: [48.4, 16.36],
-            },
-            properties: {
-              label: 'dddddd',
-              type: 'pointLightLabel',
-              labelPosition: 'bottom',
-            }
-          },
+          // {
+          //   type: "Feature",
+          //   geometry: {
+          //     type: "Point",
+          //     coordinates: [48.2, 17.36],
+          //   },
+          //   properties: {
+          //     label: '😇 cccccc',
+          //     type: 'pointHeavyLabel',
+          //     labelPosition: 'top',
+          //     useForInitialView: true
+          //   }
+          // },
+          // {
+          //   type: "Feature",
+          //   geometry: {
+          //     type: "Point",
+          //     coordinates: [48.4, 16.36],
+          //   },
+          //   properties: {
+          //     label: 'dddddd',
+          //     type: 'pointLightLabel',
+          //     labelPosition: 'bottom',
+          //   }
+          // },
           {
             "type": "Feature",
             "properties": {},
@@ -132,7 +188,7 @@
           initialZoomLevel: 4,
           baseLayer: 'toner',
           minimap: true,
-          labelsBelowMap: true
+          labelsBelowMap: false
         }
       }
 

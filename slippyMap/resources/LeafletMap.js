@@ -175,6 +175,8 @@ export default class LeafletMap {
           this.addTileLayer(layer.url.labels, labelsLayerConfig, layer.containerClass);
         }
       }
+      // set the sophie font class to the attribution control to not repeat it in css
+      this.map.getContainer().querySelector('.leaflet-control-attribution').classList.add('s-font-note-s');
     });
     if (layer.minimapLayerUrl) {
       this.tileLayerMiniMap =
