@@ -4,11 +4,13 @@ const fs = require('fs');
 
 const resourcesDir  = __dirname + '/../../resources/';
 const scriptsDir  = __dirname + '/../../scripts/';
+const stylesDir  = __dirname + '/../../styles/';
 const dynamicSchema = require(resourcesDir + 'dynamicSchema.js');
 const schema        = enjoi(dynamicSchema);
 const viewsDir      = __dirname + '/../../views/';
 
-const hashMap = require(`${scriptsDir}/hashMap.json`);
+const scriptHashMap = require(`${scriptsDir}/hashMap.json`);
+const styleHashMap = require(`${stylesDir}/hashMap.json`);
 
 const displayOptionsSchema = enjoi(JSON.parse(fs.readFileSync(resourcesDir + 'display-options-schema.json', {
   encoding: 'utf-8'
@@ -34,7 +36,8 @@ module.exports = {
         }
       }
     },
-    cors: true
+    cors: true,
+    cache: false // do not send cache control header to let it be added by Q Server
   },
   handler: function(request, reply) {
     if (!request.payload.toolRuntimeConfig.toolBaseUrl) {
@@ -85,7 +88,7 @@ module.exports = {
     let systemConfigScript = `
         System.config({
           map: {
-            "q-map/map.js": "${request.payload.toolRuntimeConfig.toolBaseUrl}/script/${hashMap['slippy-map.js']}"
+            "q-map/map.js": "${request.payload.toolRuntimeConfig.toolBaseUrl}/script/${scriptHashMap['slippy-map']}"
           }
         });
     `;
@@ -102,13 +105,13 @@ module.exports = {
 
     let stylesheets = [
       {
-        name: 'default'
+        name: styleHashMap.default
       }
     ];
 
     let baseLayer = request.payload.toolRuntimeConfig.baseLayer;
     if (baseLayer.logo && baseLayer.logo.stylesheet) {
-      stylesheets.push(baseLayer.logo.stylesheet);
+      stylesheets.push(styleHashMap[baseLayer.logo.stylesheet.name]);
     }
 
     let responseData = {

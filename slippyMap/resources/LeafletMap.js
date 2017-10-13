@@ -7,7 +7,7 @@ import enableInteractionSvg from '../icons/enable-interaction.svg!text';
 import geoJsonOptions from './geoJsonOptions.js';
 
 Leaflet.Control.Button = L.Control.extend(LeafletControlButton);
-Leaflet.Icon.Default.imagePath = 'jspm_packages/npm/leaflet@1.1.0/dist/images';
+Leaflet.Icon.Default.imagePath = 'jspm_packages/npm/leaflet@1.2.0/dist/images';
 
 
 export default class LeafletMap {
@@ -175,6 +175,8 @@ export default class LeafletMap {
           this.addTileLayer(layer.url.labels, labelsLayerConfig, layer.containerClass);
         }
       }
+      // set the sophie font class to the attribution control to not repeat it in css
+      this.map.getContainer().querySelector('.leaflet-control-attribution').classList.add('s-font-note-s');
     });
     if (layer.minimapLayerUrl) {
       this.tileLayerMiniMap =
@@ -255,7 +257,7 @@ export default class LeafletMap {
 
       let zoomLevel = this.getZoomLevelForCurrentAspectRatio();
       if (zoomLevel === -1 && this.featureGroup.getLayers().length > 1) {
-        this.map[moveFunctions.bounds](this.getBoundsWithMargin(featureGroupBounds));
+        this.map[moveFunctions.bounds](featureGroupBounds.pad(0.25));
       } else if (zoomLevel !== undefined) {
         // default zoom level when only one feature is 9
         if (zoomLevel === -1) {
@@ -271,24 +273,6 @@ export default class LeafletMap {
       this.map.setView([47.365, 8.547], 13);
     }
     this.setMaxMinZoom();
-  }
-
-  // thanks to https://github.com/WSJ/pinpoint/blob/master/src/js/pinpoint.js
-  getBoundsWithMargin(bounds) {
-    // add an extra 25% margin to bounds
-    const boundScaleFactor = 1 / 4;
-
-    const hori = Math.abs( bounds.getSouthWest().lng - bounds.getNorthEast().lng ) * boundScaleFactor;
-    const vert = Math.abs( bounds.getSouthWest().lat - bounds.getNorthEast().lat ) * boundScaleFactor;
-    const southWest = {
-      lat: bounds.getSouthWest().lat - vert,
-      lng: bounds.getSouthWest().lng - hori
-    };
-    const northEast = {
-      lat: bounds.getNorthEast().lat + vert,
-      lng: bounds.getNorthEast().lng + hori
-    };
-    return L.latLngBounds(southWest, northEast);
   }
 
   disableInteractions() {
