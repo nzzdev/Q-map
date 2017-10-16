@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="https://assets.static-nzz.ch/nzz-niobe/assets/content-42.2.10.css">
     <link rel="stylesheet" href="https://service.sophie.nzz.ch/bundle/sophie-q@^1,sophie-font@^1,sophie-color@^1.css">
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=Promise,fetch,default"></script>
-    <script src="https://gitcdn.xyz/repo/filamentgroup/loadCSS/master/src/loadCSS.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/loadjs/3.5.0/loadjs.min.js"></script>
+    <script src="https://cdn.rawgit.com/filamentgroup/loadCSS/6b637fe0/src/loadCSS.js"></script>
     <style>
       @font-face {
               font-weight: 100;
@@ -70,6 +69,32 @@
     <div id="map"></div>
     <script src="node_modules/systemjs/dist/system-production.js"></script>
     <script>
+      /*! loadJS: load a JS file asynchronously. [c]2014 @scottjehl, Filament Group, Inc. (Based on http://goo.gl/REQGQ by Paul Irish). Licensed MIT */
+      (function( w ){
+        var loadJS = function( src, cb ){
+          "use strict";
+          var ref = w.document.getElementsByTagName( "script" )[ 0 ];
+          var script = w.document.createElement( "script" );
+          script.src = src;
+          script.async = true;
+          ref.parentNode.insertBefore( script, ref );
+          if (cb && typeof(cb) === "function") {
+            script.onload = cb;
+          }
+          return script;
+        };
+        // commonjs
+        if( typeof module !== "undefined" ){
+          module.exports = loadJS;
+        }
+        else {
+          w.loadJS = loadJS;
+        }
+      }( typeof global !== "undefined" ? global : this ));
+      window.digitalData = {
+        component: {},
+        event: {}
+      };
       let data = {
         title: 'Erste Karte',
         notes: 'Anmerkung',
@@ -192,10 +217,14 @@
         }
       }
 
-      function loadAllScripts(scripts, index, callback) {
+      function loadAllScripts(scripts, callback, index) {
+        if (!index) {
+          index = 0;
+        }
+        
         if (scripts[index] && scripts[index].url) {
-          loadJS(scripts[index].url, () => {
-            loadAllScripts(scripts, index + 1, callback)
+          loadJS(scripts[index].url, function() {
+            loadAllScripts(scripts, callback, index + 1)
           })
         } else {
           callback();
@@ -237,13 +266,17 @@
               return script;
             })
 
+          data.scripts.push({
+            url: "http://storytelling.nzz.ch/track-manager/v0/track-np.js"
+          })
+
           let urlScripts = data.scripts
             .filter(script => script.url)
 
           let contentScripts = data.scripts
             .filter(script => script.content)
 
-          loadAllScripts(urlScripts, 0, () => {
+          loadAllScripts(urlScripts, () => {
             contentScripts.forEach(script => {
               let scriptElement = document.createElement('script');
               scriptElement.innerHTML = script.content;

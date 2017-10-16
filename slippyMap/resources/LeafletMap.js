@@ -20,6 +20,8 @@ export default class LeafletMap {
   }
 
   render(item, element) {
+    this.item = item;
+    this.element = element;
     return new Promise((resolve, reject) => {
       if (!this.map) {
         this.init(item, element);
@@ -65,7 +67,6 @@ export default class LeafletMap {
       }
 
       this.invalidateSize();
-
       resolve(this.map);
     });
   }
@@ -292,6 +293,10 @@ export default class LeafletMap {
 
     this.enableInteractionButton.getContainer().addEventListener('click', (event) => {
       this.enableInteraction();
+      let enableInteractionEvent = new CustomEvent('q-map-enableInteraction', {
+        bubbles: true
+      });
+      this.element.parentNode.dispatchEvent(enableInteractionEvent);
     });
   }
 
