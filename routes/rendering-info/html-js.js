@@ -44,7 +44,7 @@ module.exports = {
       return reply(Boom.badRequest('toolBaseUrl is missing in toolRuntimeConfig'));
     }
 
-    let id = request.payload.item._id || (Math.random() * 10000).toFixed();
+    let id = request.query._id || (Math.random() * 10000).toFixed();
 
     let data = Object.assign({
       id: id,
@@ -116,7 +116,7 @@ module.exports = {
 
     let responseData = {
       loaderConfig: {
-        polyfills: ['Promise', 'Object.assign'],
+        polyfills: ['Promise', 'CustomEvent', 'Object.assign'],
         loadSystemJs: 'full'
       },
       stylesheets: stylesheets,
