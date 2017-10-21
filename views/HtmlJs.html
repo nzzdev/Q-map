@@ -12,6 +12,7 @@
     </div>
   {{/if}}
   <div class="q-map-container s-font-sans" id="{{ mapContainerId }}" style="height: 250px;"></div>
+  {{#if shouldHaveFooter}}
   <div class="s-q-item__footer">
     {{#if options.labelsBelowMap === true}}
       <div class="q-map-footer__marker-labels">
@@ -38,12 +39,16 @@
       {{/each}}
     {{/if}}
   </div>
+  {{/if}}
 </div>
 <script>
 export default {
   computed: {
     hideTitle: (toolRuntimeConfig) => {
       return toolRuntimeConfig.displayOptions && toolRuntimeConfig.displayOptions.hideTitle;
+    },
+    shouldHaveFooter: (options, notes, sources) => {
+      return options.labelsBelowMap || notes || (sources && sources.length > 0);
     },
     shouldHaveSources: (sources) => {
       return sources !== undefined && sources.length > 0;
