@@ -92,6 +92,10 @@ export default class LeafletMap {
     }
   }
 
+  shouldAllowInteraction() {
+    return this.toolRuntimeConfig.displayOptions && this.toolRuntimeConfig.displayOptions.allowInteraction === true;
+  }
+
   // initialises the map, this is only run once
   init(item, element) {
     if (this.map && this.map.getContainer() === element) {
@@ -120,11 +124,13 @@ export default class LeafletMap {
       imperial: false
     }).addTo(this.map);
 
-    this.enableInteractionButton = new Leaflet.Control.Button({
-      position: 'topleft',
-      className: 'q-enable-leaflet-interaction-button',
-      html: `${enableInteractionSvg}`
-    });
+    if (this.shouldAllowInteraction()) {
+      this.enableInteractionButton = new Leaflet.Control.Button({
+        position: 'topleft',
+        className: 'q-enable-leaflet-interaction-button',
+        html: `${enableInteractionSvg}`
+      });
+    }
 
     this.zoomControl = Leaflet.control.zoom({
       position: 'topleft'
@@ -149,6 +155,9 @@ export default class LeafletMap {
   }
 
   addTileLayer(url, config, containerClass) {
+    if (!url) {
+      throw new Error('no tile layer url given');
+    }
     this.baseLayer = Leaflet.tileLayer(url, config)
       .addTo(this.map);
     this.map.getContainer().classList.add(containerClass);
@@ -289,15 +298,17 @@ export default class LeafletMap {
 
     this.zoomControl.remove();
 
-    this.enableInteractionButton.addTo(this.map);
+    if (this.shouldAllowInteraction()) {
+      this.enableInteractionButton.addTo(this.map);
 
-    this.enableInteractionButton.getContainer().addEventListener('click', (event) => {
-      this.enableInteraction();
-      let enableInteractionEvent = new CustomEvent('q-map-enableInteraction', {
-        bubbles: true
+      this.enableInteractionButton.getContainer().addEventListener('click', (event) => {
+        this.enableInteraction();
+        let enableInteractionEvent = new CustomEvent('q-map-enableInteraction', {
+          bubbles: true
+        });
+        this.element.parentNode.dispatchEvent(enableInteractionEvent);
       });
-      this.element.parentNode.dispatchEvent(enableInteractionEvent);
-    });
+    }
   }
 
   enableInteraction() {
