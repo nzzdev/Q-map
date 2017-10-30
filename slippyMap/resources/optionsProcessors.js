@@ -30,13 +30,13 @@ const optionsProcessors = {
         .map((feature, index) => {
           if (index < 20) {
             let htmlEntityNr = 9312 + index;
-            feature.properties.label = '&#' + htmlEntityNr;
+            feature.properties.label = '<span class="q-map-code-point";>&#' + htmlEntityNr + '</span>';
           } else if (index >= 20 && index < 36) {
             let htmlEntityNr = 12881 + index;
-            feature.properties.label = '&#' + htmlEntityNr;
+            feature.properties.label = '<span class="q-map-code-point";>&#' + htmlEntityNr + '</span>';
           } else if (index >= 36 && index < 50) {
             let htmlEntityNr = 12977 + index;
-            feature.properties.label = '&#' + htmlEntityNr;
+            feature.properties.label = '<span class="q-map-code-point";>&#' + htmlEntityNr + '</span>';
           }
         });
     }

@@ -15,9 +15,9 @@
   {{#if shouldHaveFooter}}
   <div class="s-q-item__footer">
     {{#if options.labelsBelowMap === true}}
-      <div class="q-map-footer__marker-labels">
+      <div class="q-map-footer__marker-labels {{options.labelsBelowMapOneRow === true ? 'q-map-footer__marker-labels--one-row' : ''}}">
       {{#each numberedLabels as label}}
-        <div class="q-map-footer__marker-labels__label s-font-note">{{label}}</div>
+        <div class="q-map-footer__marker-labels__label s-font-note"><span class="q-map-code-point">{{label.codePoint}}</span>{{label.text}}</div>
       {{/each}}
       </div>
     {{/if}}
@@ -116,7 +116,10 @@ export default {
             codePoint = 12977 + index;
           }
           if (codePoint) {
-            return String.fromCodePoint(codePoint) + ' ' + feature.properties.label.replace(/<br>/g,' ');
+            return {
+              codePoint: String.fromCodePoint(codePoint),
+              text: feature.properties.label.replace(/<br>/g,' ')
+            };
           }
           return null;
         })

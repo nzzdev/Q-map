@@ -59,6 +59,10 @@
   line-height: 1.1;
 }
 
+.q-map-code-point {
+  font-family: sans-serif;
+}
+
 .q-map-marker__label--top {
   bottom: 1.1em;
 }
@@ -113,6 +117,10 @@
 
 .q-map-footer__marker-labels__label {
   margin-bottom: 3px;
+
+  .q-map-code-point {
+    padding-right: 4px;
+  }
 }
 
 .q-map-legend {
