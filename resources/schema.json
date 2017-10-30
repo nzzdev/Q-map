@@ -89,6 +89,20 @@
           "type": "boolean",
           "default": false
         },
+        "labelsBelowMapOneRow": {
+          "title": "Labels unter Karte auf einer Zeile anzeigen",
+          "type": "boolean",
+          "default": false,
+          "Q:options": {
+            "availabilityChecks": [
+              {
+                "type": "ToolEndpoint",
+                "withData": true,
+                "endpoint": "option-availability/labelsBelowMapOneRow"
+              }
+            ]
+          }
+        },
         "showLegend": {
           "title": "Legende anzeigen",
           "type": "boolean",

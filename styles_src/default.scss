@@ -123,6 +123,18 @@
   }
 }
 
+.q-map-footer__marker-labels--one-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -10px;
+  align-content: center;
+
+  .q-map-footer__marker-labels__label {
+    white-space: nowrap;
+    padding-left: 10px;
+  }
+}
+
 .q-map-legend {
   display: flex;
   flex-wrap: wrap;
