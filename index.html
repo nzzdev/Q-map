@@ -5,7 +5,7 @@
     <title>Q Map</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://assets.static-nzz.ch/nzz-niobe/assets/content-42.2.10.css">
+    <link rel="stylesheet" href="https://context-service.st.nzz.ch/stylesheet/all/nzz.ch.css">
     <link rel="stylesheet" href="https://service.sophie.nzz.ch/bundle/sophie-q@^1,sophie-font@^1,sophie-color@^1.css">
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=Promise,fetch,default"></script>
     <script src="https://cdn.rawgit.com/filamentgroup/loadCSS/6b637fe0/src/loadCSS.js"></script>
@@ -211,7 +211,7 @@
         ],
         options: {
           initialZoomLevel: 4,
-          baseLayer: 'toner',
+          baseLayer: 'streets',
           minimap: true,
           labelsBelowMap: false
         }
@@ -235,6 +235,10 @@
         item: data,
         toolRuntimeConfig: {
           toolBaseUrl: `http://${window.location.hostname}:3000`,
+          displayOptions: {
+            // hideTitle: true,
+            // allowInteraction: true
+          }
         }
       }
 
