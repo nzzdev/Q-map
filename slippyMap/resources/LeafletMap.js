@@ -192,7 +192,6 @@ export default class LeafletMap {
       this.tileLayerMiniMap =
         Leaflet.tileLayer(layer.minimapLayerUrl, {
           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-          maxZoom: 8
         });
     }
   }
@@ -207,10 +206,21 @@ export default class LeafletMap {
         this.miniMap.remove();
       }
       if (visible) {
+        let zoomOffset = -5;
+        if (this.item.options.hasOwnProperty('minimapZoomOffset') && this.item.options.minimapZoomOffset !== 0) {
+          zoomOffset = this.item.options.minimapZoomOffset;
+        }
+
+        let maxZoom = 8;
+        if (this.item.options.hasOwnProperty('minimapMaxZoom') && this.item.options.minimapMaxZoom !== 0) {
+          maxZoom = this.item.options.minimapMaxZoom;
+        }
+
         this.miniMap = new MiniMap(this.tileLayerMiniMap, {
           width: 100,
           height: 100,
           toggleDisplay: false,
+          zoomLevelOffset: zoomOffset,
           aimingRectOptions: {
             color: '#d28b00',
             weight: 1,
@@ -220,6 +230,9 @@ export default class LeafletMap {
             color: 'transparent',
             weight: 1,
             interactive: false
+          },
+          mapOptions: {
+            maxZoom: maxZoom
           }
         });
         this.miniMap.addTo(this.map);
