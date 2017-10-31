@@ -113,7 +113,7 @@
           "default": false
         },
         "labelsBelowMapOneRow": {
-          "title": "Labels unter Karte auf einer Zeile anzeigen",
+          "title": "Labels unter der Karte nebeneinander anzeigen",
           "type": "boolean",
           "default": false,
           "Q:options": {
