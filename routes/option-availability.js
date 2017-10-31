@@ -25,7 +25,7 @@ module.exports = {
       }).type('application/json');
     }
 
-    if (request.params.optionName === 'minimapOffset') {
+    if (request.params.optionName === 'minimapInitialZoomOffset') {
       return reply({
         available: hasMinimap(request.payload)
       }).type('application/json');
