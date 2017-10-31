@@ -9,61 +9,6 @@
     <link rel="stylesheet" href="https://service.sophie.nzz.ch/bundle/sophie-q@^1,sophie-font@^1,sophie-color@^1.css">
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=Promise,fetch,default"></script>
     <script src="https://cdn.rawgit.com/filamentgroup/loadCSS/6b637fe0/src/loadCSS.js"></script>
-    <style>
-      @font-face {
-              font-weight: 100;
-              font-family: nzz-sans-serif;
-              font-display: swap;
-              src:
-                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/GT-America-Standard-Regular.woff2') format('woff2'),
-                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/GT-America-Standard-Regular.woff') format('woff');
-            }
-
-            @font-face {
-                font-weight: 500;
-                font-family: nzz-sans-serif;
-                font-display: swap;
-                src:
-                    url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/GT-America-Standard-Medium.woff2') format('woff2'),
-                    url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/GT-America-Standard-Medium.woff') format('woff');
-            }
-
-            @font-face {
-              font-weight: 300;
-              font-family: nzz-serif;
-              font-display: swap;
-              src:
-                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumpro-regular.woff2') format('woff2'),
-                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumpro-regular.woff') format('woff');
-            }
-
-            @font-face {
-              font-weight: 300;
-              font-style: italic;
-              font-family: nzz-serif;
-              font-display: swap;
-              src:
-                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumpro-regularitalic.woff2') format('woff2'),
-                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumpro-regularitalic.woff') format('woff');
-            }
-
-            @font-face {
-              font-weight: 500;
-              font-family: nzz-serif;
-              font-display: swap;
-              src:
-                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumpro-bold.woff2') format('woff2'),
-                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumpro-bold.woff') format('woff');
-            }
-
-            @font-face {
-              font-weight: 500;
-              font-family: nzz-serif-alt;
-              src:
-                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumdisplay-medium.woff2') format('woff2'),
-                  url('//assets.static-nzz.ch/nzz-niobe/assets/fonts/pensumdisplay-medium.woff') format('woff');
-            }
-      </style>
   </head>
   <body>
     <div id="map"></div>
@@ -119,11 +64,12 @@
             type: "Feature",
             geometry: {
               type: "LineString",
-              coordinates: [[-180, 0], [180, 0]]
+              coordinates: [[-180, 50], [180, 50]]
             },
             properties: {
-              color: 'purple',
-              interactive: false,
+              label: 'LineString'
+              // color: 'purple',
+              // interactive: false,
             }
           },
           {
@@ -133,7 +79,7 @@
               coordinates: [48.2, 16.36],
             },
             properties: {
-              label: 'aaaaaa<br>asdasdasd',
+              label: 'aaaaaa<br>asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd asdasdasd',
               type: 'event',
               labelPosition: 'bottom',
               useForInitialView: true
@@ -179,7 +125,9 @@
           },
           {
             "type": "Feature",
-            "properties": {},
+            "properties": {
+              label: 'Polygon'
+            },
             "geometry": {
               "type": "Polygon",
               "coordinates": [
@@ -213,7 +161,10 @@
           initialZoomLevel: 4,
           baseLayer: 'streets',
           minimap: true,
-          labelsBelowMap: false
+          showLegend: true,
+          labelsBelowMap: true,
+          labelsBelowMapOneRow: true
+
         }
       }
 
@@ -237,7 +188,7 @@
           toolBaseUrl: `http://${window.location.hostname}:3000`,
           displayOptions: {
             // hideTitle: true,
-            // allowInteraction: true
+            allowInteraction: true
           }
         }
       }
