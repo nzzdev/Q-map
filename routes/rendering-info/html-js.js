@@ -71,8 +71,7 @@ module.exports = {
           }
           // we do not want any interactive properties
           geojsonFeature.properties.interactive = false;
-
-          geojsonFeature.properties = simplestyleToLeafletStyle(geojsonFeature.properties);
+          geojsonFeature.properties = simplestyleToLeafletStyle(geojsonFeature.properties, geojsonFeature.geometry.type);
         }
       } else {
         if (!geojson.hasOwnProperty('properties')) {
@@ -80,8 +79,7 @@ module.exports = {
         }
         // we do not want any interactive properties
         geojson.properties.interactive = false;
-
-        geojson.properties = simplestyleToLeafletStyle(geojson.properties);
+        geojson.properties = simplestyleToLeafletStyle(geojson.properties, geojson.geometry.type);
       }
     }
 

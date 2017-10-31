@@ -5,8 +5,8 @@
   {{#if options.showLegend === true }}
     <div class="q-map-legend">
       {{#each legendItems as legendItem}}
-        <div class="q-map-legend__item" style="color: {{ legendItem.color }};">
-          <span class="s-font-note">{{ legendItem.label }}</span>
+        <div class="q-map-legend__item">
+          <div class="q-map-legend__item__color" style="color: {{ legendItem.color }}; opacity: {{ legendItem.opacity }};"></div><div class="q-map-legend__item__text s-font-note">{{ legendItem.label }}</div>
         </div>
       {{/each}}
     </div>
@@ -67,7 +67,7 @@ export default {
           return a.concat(b);
         })
         .filter(item => item.geometry && item.geometry.type !== "Point") // remove points
-        .filter(item => item.properties && item.properties.color) // only keep if color is defined
+        .filter(item => item.properties && (item.properties.color || item.properties.fillColor)) // only keep if color is defined
         .filter(item => item.properties && item.properties.label) // only keep if label is defined
         .filter((currentItem, index, self) => {
           return self.findIndex(item => {
@@ -75,8 +75,27 @@ export default {
           }) === index;
         })
         .map(item => {
+          let opacity = 1;
+          let color;
+          if (item.geometry.type === 'LineString' || item.geometry.type === 'MultiLineString') {
+            if (item.properties.opacity) {
+              opacity = item.properties.opacity;
+            }
+            if (item.properties.color) {
+              color = item.properties.color;
+            }
+          }
+          if (item.geometry.type === 'Polygon' || item.geometry.type === 'MultiPolygon') {
+            if (item.properties.fillOpacity) {
+              opacity = item.properties.fillOpacity;
+            }
+            if (item.properties.fillColor) {
+              color = item.properties.fillColor;
+            }
+          }
           return {
-            color: item.properties.color,
+            color: color,
+            opacity: opacity,
             label: item.properties.label
           }
         })

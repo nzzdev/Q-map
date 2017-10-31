@@ -146,18 +146,19 @@
   justify-content: center;
   align-items: center;
   margin-right: 10px;
-  span {
-    white-space: nowrap;
-  }
-  &::before {
-    content: "";
-    display: block;
-    width: 12px;
-    height: 12px;
-    background-color: currentColor;
-    margin-right: 3px;
-    flex-shrink: 0;
-  }
+}
+
+.q-map-legend__item__color {
+  display: block;
+  width: 12px;
+  height: 12px;
+  background-color: currentColor;
+  margin-right: 3px;
+  flex-shrink: 0;
+}
+
+.q-map-legend__item__text {
+  white-space: nowrap;
 }
 
 .leaflet-control-button {
