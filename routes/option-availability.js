@@ -5,6 +5,10 @@ function hasLabelsBelowMap(item) {
   return (item.options.labelsBelowMap === true);
 }
 
+function hasMoreThanOneLabel(item) {
+  return Array.isArray(item.geojsonList) && item.geojsonList.length > 1;
+}
+
 function hasMinimap(item) {
   return (item.options.minimap === true);
 }
@@ -21,7 +25,7 @@ module.exports = {
   handler: function(request, reply) {
     if (request.params.optionName === 'labelsBelowMapOneRow') {
       return reply({
-        available: hasLabelsBelowMap(request.payload)
+        available: hasLabelsBelowMap(request.payload) && hasMoreThanOneLabel(request.payload)
       }).type('application/json');
     }
 
