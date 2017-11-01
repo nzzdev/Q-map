@@ -92,6 +92,10 @@ export default class LeafletMap {
     }
   }
 
+  shouldAllowInteraction() {
+    return this.toolRuntimeConfig.displayOptions && this.toolRuntimeConfig.displayOptions.allowInteraction === true;
+  }
+
   // initialises the map, this is only run once
   init(item, element) {
     if (this.map && this.map.getContainer() === element) {
@@ -120,11 +124,13 @@ export default class LeafletMap {
       imperial: false
     }).addTo(this.map);
 
-    this.enableInteractionButton = new Leaflet.Control.Button({
-      position: 'topleft',
-      className: 'q-enable-leaflet-interaction-button',
-      html: `${enableInteractionSvg}`
-    });
+    if (this.shouldAllowInteraction()) {
+      this.enableInteractionButton = new Leaflet.Control.Button({
+        position: 'topleft',
+        className: 'q-enable-leaflet-interaction-button',
+        html: `${enableInteractionSvg}`
+      });
+    }
 
     this.zoomControl = Leaflet.control.zoom({
       position: 'topleft'
@@ -149,6 +155,9 @@ export default class LeafletMap {
   }
 
   addTileLayer(url, config, containerClass) {
+    if (!url) {
+      throw new Error('no tile layer url given');
+    }
     this.baseLayer = Leaflet.tileLayer(url, config)
       .addTo(this.map);
     this.map.getContainer().classList.add(containerClass);
@@ -183,7 +192,6 @@ export default class LeafletMap {
       this.tileLayerMiniMap =
         Leaflet.tileLayer(layer.minimapLayerUrl, {
           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-          maxZoom: 8
         });
     }
   }
@@ -198,10 +206,20 @@ export default class LeafletMap {
         this.miniMap.remove();
       }
       if (visible) {
+        let zoomOffset = -5;
+        if (this.item.options.hasOwnProperty('minimapInitialZoomOffset') && this.item.options.minimapInitialZoomOffset !== 0) {
+          zoomOffset = this.item.options.minimapInitialZoomOffset;
+        }
+
+        if (this.minimapZoomLevelFixed === undefined) {
+          this.minimapZoomLevelFixed = this.map.getZoom() + zoomOffset;
+        }
+
         this.miniMap = new MiniMap(this.tileLayerMiniMap, {
           width: 100,
           height: 100,
           toggleDisplay: false,
+          zoomLevelFixed: this.minimapZoomLevelFixed,
           aimingRectOptions: {
             color: '#d28b00',
             weight: 1,
@@ -289,15 +307,17 @@ export default class LeafletMap {
 
     this.zoomControl.remove();
 
-    this.enableInteractionButton.addTo(this.map);
+    if (this.shouldAllowInteraction()) {
+      this.enableInteractionButton.addTo(this.map);
 
-    this.enableInteractionButton.getContainer().addEventListener('click', (event) => {
-      this.enableInteraction();
-      let enableInteractionEvent = new CustomEvent('q-map-enableInteraction', {
-        bubbles: true
+      this.enableInteractionButton.getContainer().addEventListener('click', (event) => {
+        this.enableInteraction();
+        let enableInteractionEvent = new CustomEvent('q-map-enableInteraction', {
+          bubbles: true
+        });
+        this.element.parentNode.dispatchEvent(enableInteractionEvent);
       });
-      this.element.parentNode.dispatchEvent(enableInteractionEvent);
-    });
+    }
   }
 
   enableInteraction() {

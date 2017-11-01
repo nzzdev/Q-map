@@ -6,6 +6,10 @@
     "hideTitle": {
       "type": "boolean",
       "title": "Titel ausblenden"
+    },
+    "allowInteraction": {
+      "type": "boolean",
+      "title": "Interaktion ermöglichen"
     }
   }
 }

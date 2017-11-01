@@ -84,10 +84,43 @@
           "type": "boolean",
           "default": true
         },
+        "minimapInitialZoomOffset": {
+          "title": "Minimap zoom offset",
+          "type": "number",
+          "default": 0,
+          "Q:options": {
+            "dynamicEnum": {
+              "type": "ToolEndpoint",
+              "withData": true,
+              "endpoint": "dynamic-enum/minimapInitialZoomOffset"
+            },
+            "availabilityChecks": [
+              {
+                "type": "ToolEndpoint",
+                "withData": true,
+                "endpoint": "option-availability/minimapInitialZoomOffset"
+              }
+            ]
+          }
+        },
         "labelsBelowMap": {
           "title": "Labels unter Karte anzeigen",
           "type": "boolean",
           "default": false
+        },
+        "labelsBelowMapOneRow": {
+          "title": "Labels unter der Karte nebeneinander anzeigen",
+          "type": "boolean",
+          "default": false,
+          "Q:options": {
+            "availabilityChecks": [
+              {
+                "type": "ToolEndpoint",
+                "withData": true,
+                "endpoint": "option-availability/labelsBelowMapOneRow"
+              }
+            ]
+          }
         },
         "showLegend": {
           "title": "Legende anzeigen",
