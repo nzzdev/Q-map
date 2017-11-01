@@ -99,10 +99,6 @@
                 "type": "ToolEndpoint",
                 "withData": true,
                 "endpoint": "option-availability/minimapInitialZoomOffset"
-              },
-              {
-                "type": "UserHasRole",
-                "role": "expert-map"
               }
             ]
           }
