@@ -11,12 +11,13 @@
       "title": "Elemente auf der Karte",
       "type": "array",
       "items": {
-        "oneOf": [
+        "anyOf": [
           { "$ref": "#/definitions/geojson-point" },
           { "$ref": "#/definitions/geojson-feature" },
           { "$ref": "#/definitions/geojson-featureCollection" }
         ]
       },
+      "minItems": 1,
       "Q:options": {
         "compact": true,
         "expandable": {
