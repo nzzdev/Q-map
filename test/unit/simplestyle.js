@@ -6,7 +6,6 @@ const properties = {
 };
 
 let style = simplestyleToLeafletStyle(properties, 'Polygon');
-console.log(style);
 
 describe('simplestyle to leaflet path style transformation', function() {
   it('should translate all properties correctly', function() {
