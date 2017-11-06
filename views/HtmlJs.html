@@ -54,6 +54,9 @@ export default {
       return sources !== undefined && sources.length > 0;
     },
     legendItems: (geojsonList) => {
+      if (!Array.isArray(geojsonList)) {
+        return null;
+      }
       const legend = geojsonList
         .map(item => { // return arrays of features
           if (item.type === "Feature") {
@@ -65,7 +68,7 @@ export default {
         })
         .reduce((a, b) => { // flat the features
           return a.concat(b);
-        })
+        }, [])
         .filter(item => item.geometry && item.geometry.type !== "Point") // remove points
         .filter(item => item.properties && (item.properties.color || item.properties.fillColor)) // only keep if color is defined
         .filter(item => item.properties && item.properties.label) // only keep if label is defined
@@ -102,6 +105,9 @@ export default {
       return legend;
     },
     numberedLabels: (geojsonList) => {
+      if (!Array.isArray(geojsonList)) {
+        return null;
+      }
       return geojsonList
         .map(item => {
           if (!item.hasOwnProperty('type')) {
