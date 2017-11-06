@@ -17,6 +17,7 @@
           { "$ref": "#/definitions/geojson-featureCollection" }
         ]
       },
+      "minItems": 1,
       "Q:options": {
         "compact": true,
         "expandable": {
