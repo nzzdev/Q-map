@@ -75,9 +75,49 @@
           "title": "Zoom Level",
           "type": "number",
           "default": -1,
-          "enum": [-1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+          "enum": [
+            -1,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18
+          ],
           "Q:options": {
-            "enum_titles": ["automatisch","1 - Welt",2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,"18 - Haus"]
+            "enum_titles": [
+              "automatisch",
+              "1 - Welt",
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              "18 - Haus"
+            ]
           }
         },
         "minimap": {
@@ -148,9 +188,7 @@
       "required": ["baseLayer", "initialZoomLevel", "minimap", "labelsBelowMap"]
     }
   },
-  "required": [
-    "title"
-  ],
+  "required": ["title"],
   "definitions": {
     "geojson-point": {
       "type": "object",
@@ -182,7 +220,7 @@
         },
         "properties": {
           "type": "object",
-          "required": ["label", "type", "labelPosition"],
+          "required": ["type", "labelPosition"],
           "default": {
             "label": "",
             "type": "pointHeavyLabel",
@@ -196,9 +234,23 @@
             "type": {
               "title": "Markertyp",
               "type": "string",
-              "enum": ["pointHeavyLabel", "pointLightLabel", "pointOnly", "label", "event"],
+              "enum": [
+                "pointHeavyLabel",
+                "pointLightLabel",
+                "pointOnly",
+                "label",
+                "event",
+                "epicenter"
+              ],
               "Q:options": {
-                "enum_titles": ["Punkt mit Label", "Punkt mit Label (klein)", "Punkt ohne Label", "Gebiet", "Ereignis"]
+                "enum_titles": [
+                  "Punkt mit Label",
+                  "Punkt mit Label (klein)",
+                  "Punkt ohne Label",
+                  "Gebiet",
+                  "Ereignis",
+                  "Epizentrum"
+                ]
               }
             },
             "labelPosition": {
@@ -225,17 +277,17 @@
       "type": "object",
       "Q:type": "json",
       "title": "GeoJSON FeatureCollection",
-      "required": [ "features" ],
+      "required": ["features"],
       "properties": {
-          "type": {
-            "type": "string",
-            "default": "FeatureCollection",
-            "enum": [ "FeatureCollection" ]
-          },
-          "features": {
-            "type": "array",
-            "items": { "$ref": "#/definitions/geojson-feature" }
-          }
+        "type": {
+          "type": "string",
+          "default": "FeatureCollection",
+          "enum": ["FeatureCollection"]
+        },
+        "features": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/geojson-feature" }
+        }
       },
       "Q:options": {
         "availabilityChecks": [
@@ -262,7 +314,7 @@
         "type": {
           "type": "string",
           "default": "Feature",
-          "enum": [ "Feature" ]
+          "enum": ["Feature"]
         },
         "geometry": {
           "title": "geometry",
@@ -273,7 +325,7 @@
               "title": "Point",
               "type": "object",
               "properties": {
-                "type": { "enum": [ "Point" ] },
+                "type": { "enum": ["Point"] },
                 "coordinates": { "$ref": "#/definitions/position" }
               }
             },
@@ -281,7 +333,7 @@
               "title": "MultiPoint",
               "type": "object",
               "properties": {
-                "type": { "enum": [ "MultiPoint" ] },
+                "type": { "enum": ["MultiPoint"] },
                 "coordinates": { "$ref": "#/definitions/positionArray" }
               }
             },
@@ -289,7 +341,7 @@
               "title": "LineString",
               "type": "object",
               "properties": {
-                "type": { "enum": [ "LineString" ] },
+                "type": { "enum": ["LineString"] },
                 "coordinates": { "$ref": "#/definitions/lineString" }
               }
             },
@@ -297,7 +349,7 @@
               "title": "MultiLineString",
               "type": "object",
               "properties": {
-                "type": { "enum": [ "MultiLineString" ] },
+                "type": { "enum": ["MultiLineString"] },
                 "coordinates": {
                   "type": "array",
                   "items": { "$ref": "#/definitions/lineString" }
@@ -308,7 +360,7 @@
               "title": "Polygon",
               "type": "object",
               "properties": {
-                "type": { "enum": [ "Polygon" ] },
+                "type": { "enum": ["Polygon"] },
                 "coordinates": { "$ref": "#/definitions/polygon" }
               }
             },
@@ -316,7 +368,7 @@
               "title": "MultiPolygon",
               "type": "object",
               "properties": {
-                "type": { "enum": [ "MultiPolygon" ] },
+                "type": { "enum": ["MultiPolygon"] },
                 "coordinates": {
                   "type": "array",
                   "items": { "$ref": "#/definitions/polygon" }
@@ -334,7 +386,7 @@
       "description": "A single position",
       "type": "array",
       "minItems": 2,
-      "items": [ { "type": "number" }, { "type": "number" } ],
+      "items": [{ "type": "number" }, { "type": "number" }],
       "additionalItems": false
     },
     "positionArray": {
@@ -344,17 +396,12 @@
     },
     "lineString": {
       "description": "An array of two or more positions",
-      "allOf": [
-        { "$ref": "#/definitions/positionArray" },
-        { "minItems": 2 }
-      ]
+      "allOf": [{ "$ref": "#/definitions/positionArray" }, { "minItems": 2 }]
     },
     "linearRing": {
-      "description": "An array of four positions where the first equals the last",
-      "allOf": [
-        { "$ref": "#/definitions/positionArray" },
-        { "minItems": 4 }
-      ]
+      "description":
+        "An array of four positions where the first equals the last",
+      "allOf": [{ "$ref": "#/definitions/positionArray" }, { "minItems": 4 }]
     },
     "polygon": {
       "description": "An array of linear rings",
