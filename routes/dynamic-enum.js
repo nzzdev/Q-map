@@ -29,20 +29,20 @@ function getMinimapInitialZoomOffsetEnum(item) {
 module.exports = {
   method: "POST",
   path: "/dynamic-enum/{optionName}",
-  config: {
+  options: {
     validate: {
       payload: Joi.object()
     },
     cors: true
   },
-  handler: function(request, reply) {
+  handler: function(request, h) {
     if (request.params.optionName === "minimapInitialZoomOffset") {
       const minimapInitialZoomOffsetEnum = getMinimapInitialZoomOffsetEnum(
         request.payload
       );
-      return reply(minimapInitialZoomOffsetEnum).type("application/json");
+      return minimapInitialZoomOffsetEnum;
     }
 
-    return reply(Boom.badRequest());
+    return Boom.badRequest();
   }
 };

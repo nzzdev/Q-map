@@ -16,27 +16,27 @@ function hasMinimap(item) {
 module.exports = {
   method: "POST",
   path: "/option-availability/{optionName}",
-  config: {
+  options: {
     validate: {
       payload: Joi.object()
     },
     cors: true
   },
-  handler: function(request, reply) {
+  handler: function(request, h) {
     if (request.params.optionName === "labelsBelowMapOneRow") {
-      return reply({
+      return {
         available:
           hasLabelsBelowMap(request.payload) &&
           hasMoreThanOneLabel(request.payload)
-      }).type("application/json");
+      };
     }
 
     if (request.params.optionName === "minimapInitialZoomOffset") {
-      return reply({
+      return {
         available: hasMinimap(request.payload)
-      }).type("application/json");
+      };
     }
 
-    return reply(Boom.badRequest());
+    return Boom.badRequest();
   }
 };

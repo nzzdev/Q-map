@@ -29,7 +29,7 @@ const simplestyleToLeafletStyle = require(__dirname +
 module.exports = {
   method: "POST",
   path: "/rendering-info/html-js",
-  config: {
+  options: {
     validate: {
       options: {
         allowUnknown: true
@@ -44,11 +44,9 @@ module.exports = {
     cors: true,
     cache: false // do not send cache control header to let it be added by Q Server
   },
-  handler: function(request, reply) {
+  handler: function(request, h) {
     if (!request.payload.toolRuntimeConfig.toolBaseUrl) {
-      return reply(
-        Boom.badRequest("toolBaseUrl is missing in toolRuntimeConfig")
-      );
+      return Boom.badRequest("toolBaseUrl is missing in toolRuntimeConfig");
     }
 
     let id = request.query._id || (Math.random() * 10000).toFixed();
@@ -158,6 +156,6 @@ module.exports = {
       markup: staticTpl.render(data)
     };
 
-    return reply(responseData);
+    return responseData;
   }
 };
