@@ -1,1 +1,1 @@
-require('./unit/simplestyle.js');
+require("./unit/simplestyle.js");

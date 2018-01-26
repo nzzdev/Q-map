@@ -1,5 +1,5 @@
-@import '../jspm_packages/npm/leaflet@1.2.0/dist/leaflet.css';
-@import '../jspm_packages/npm/leaflet-minimap@3.4.0/dist/Control.MiniMap.min.css';
+@import "../jspm_packages/npm/leaflet@1.2.0/dist/leaflet.css";
+@import "../jspm_packages/npm/leaflet-minimap@3.4.0/dist/Control.MiniMap.min.css";
 
 .q-map {
   opacity: 1 !important;
@@ -16,7 +16,8 @@
   border-radius: 0;
   border: 1px solid #92929e;
 }
-.leaflet-bar a:first-child, .leaflet-bar a:last-child {
+.leaflet-bar a:first-child,
+.leaflet-bar a:last-child {
   border-radius: 0;
 }
 
@@ -51,11 +52,23 @@
   white-space: nowrap;
   text-align: center;
 
-  text-shadow: rgb(250, 250, 250) 2px 0px 0px, rgb(250, 250, 250) 1.75517px 0.958851px 0px, rgb(250, 250, 250) 1.0806px 1.68294px 0px, rgb(250, 250, 250) 0.141474px 1.99499px 0px, rgb(250, 250, 250) -0.832294px 1.81859px 0px, rgb(250, 250, 250) -1.60229px 1.19694px 0px, rgb(250, 250, 250) -1.97998px 0.28224px 0px, rgb(250, 250, 250) -1.87291px -0.701566px 0px, rgb(250, 250, 250) -1.30729px -1.5136px 0px, rgb(250, 250, 250) -0.421592px -1.95506px 0px, rgb(250, 250, 250) 0.567324px -1.91785px 0px, rgb(250, 250, 250) 1.41734px -1.41108px 0px, rgb(250, 250, 250) 1.92034px -0.558831px 0px;
+  text-shadow: rgb(250, 250, 250) 2px 0px 0px,
+    rgb(250, 250, 250) 1.75517px 0.958851px 0px,
+    rgb(250, 250, 250) 1.0806px 1.68294px 0px,
+    rgb(250, 250, 250) 0.141474px 1.99499px 0px,
+    rgb(250, 250, 250) -0.832294px 1.81859px 0px,
+    rgb(250, 250, 250) -1.60229px 1.19694px 0px,
+    rgb(250, 250, 250) -1.97998px 0.28224px 0px,
+    rgb(250, 250, 250) -1.87291px -0.701566px 0px,
+    rgb(250, 250, 250) -1.30729px -1.5136px 0px,
+    rgb(250, 250, 250) -0.421592px -1.95506px 0px,
+    rgb(250, 250, 250) 0.567324px -1.91785px 0px,
+    rgb(250, 250, 250) 1.41734px -1.41108px 0px,
+    rgb(250, 250, 250) 1.92034px -0.558831px 0px;
 
   left: 4px;
   transform: translateX(-50%);
-  
+
   line-height: 1.1;
 }
 
@@ -73,9 +86,8 @@
 
 .q-map-marker__label--event {
   &.q-map-marker__label--top {
-
     &::after {
-      content: '\2193';
+      content: "\2193";
       font-family: Arial, sans;
       font-size: 25px;
       display: block;
@@ -84,13 +96,11 @@
       position: relative;
       top: -0.1em;
     }
-
   }
 
   &.q-map-marker__label--bottom {
-
     &::before {
-      content: '\2191';
+      content: "\2191";
       font-family: Arial, sans;
       font-size: 25px;
       display: block;
@@ -189,7 +199,7 @@
 }
 
 .with-base-layer-aerial .leaflet-control-scale {
-  background: rgba(255,255,255,0.7);
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .leaflet-control-scale-line {
@@ -199,8 +209,9 @@
   overflow: visible;
   text-align: center;
   position: relative;
-  &::before, &::after {
-    content: '';
+  &::before,
+  &::after {
+    content: "";
     display: block;
     width: 1px;
     height: 6px;
@@ -219,8 +230,11 @@
   max-width: none !important;
 }
 
-.q-map .q-map-container.leaflet-container .leaflet-control-container .leaflet-top.leaflet-left .leaflet-control-zoom {
-
+.q-map
+  .q-map-container.leaflet-container
+  .leaflet-control-container
+  .leaflet-top.leaflet-left
+  .leaflet-control-zoom {
   & a.leaflet-control-zoom-in,
   & a.leaflet-control-zoom-out {
     text-decoration: none;

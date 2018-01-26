@@ -1,5 +1,5 @@
-const Boom = require('boom');
-const Joi = require('joi');
+const Boom = require("boom");
+const Joi = require("joi");
 
 const maxMinimapInitialZoomOffset = -9;
 
@@ -12,7 +12,7 @@ function getMinimapInitialZoomOffsetEnum(item) {
   }
 
   const choices = [0];
-  const titles = ['automatisch'];
+  const titles = ["automatisch"];
   let i = -1;
   while (Math.abs(i) < initialZoomLevel && i >= maxMinimapInitialZoomOffset) {
     choices.push(i);
@@ -27,8 +27,8 @@ function getMinimapInitialZoomOffsetEnum(item) {
 }
 
 module.exports = {
-  method: 'POST',
-  path: '/dynamic-enum/{optionName}',
+  method: "POST",
+  path: "/dynamic-enum/{optionName}",
   config: {
     validate: {
       payload: Joi.object()
@@ -36,9 +36,11 @@ module.exports = {
     cors: true
   },
   handler: function(request, reply) {
-    if (request.params.optionName === 'minimapInitialZoomOffset') {
-      const minimapInitialZoomOffsetEnum = getMinimapInitialZoomOffsetEnum(request.payload);
-      return reply(minimapInitialZoomOffsetEnum).type('application/json');
+    if (request.params.optionName === "minimapInitialZoomOffset") {
+      const minimapInitialZoomOffsetEnum = getMinimapInitialZoomOffsetEnum(
+        request.payload
+      );
+      return reply(minimapInitialZoomOffsetEnum).type("application/json");
     }
 
     return reply(Boom.badRequest());
