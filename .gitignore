@@ -4,3 +4,4 @@ scripts
 styles
 .DS_STORE
 .vscode
+resources/fixtures

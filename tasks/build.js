@@ -10,6 +10,8 @@ const postcssImport = require("postcss-import");
 const autoprefixer = require("autoprefixer");
 const cssnano = require("cssnano");
 
+const createFixtureData = require("./createFixtureData.js");
+
 const stylesDir = __dirname + "/../styles_src/";
 
 builder.config({
@@ -131,7 +133,52 @@ async function buildStyles() {
   writeHashmap("styles/hashMap.json", styleFiles, "css");
 }
 
-Promise.all([buildScripts(), buildStyles()])
+// create fixture data
+// if new fixture data is added here, they have to be added in fixture data route as well
+function buildFixtures() {
+  fs.writeFileSync(
+    "resources/fixtures/data/basicPoint.json",
+    JSON.stringify(createFixtureData.mapPoint())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/basicFeature.json",
+    JSON.stringify(createFixtureData.mapFeature())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/basicFeatureCollection.json",
+    JSON.stringify(createFixtureData.mapFeatureCollection())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/basicPoints.json",
+    JSON.stringify(createFixtureData.mapPoints())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/basicFeatures.json",
+    JSON.stringify(createFixtureData.mapFeatures())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/basicFeatureCollections.json",
+    JSON.stringify(createFixtureData.mapFeatureCollections())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/pointsLabelsBelow.json",
+    JSON.stringify(createFixtureData.mapPointsLabelsBelow())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/pointsLabelsBelowOneRow.json",
+    JSON.stringify(createFixtureData.mapPointsLabelsBelowOneRow())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/pointsNoMinimap.json",
+    JSON.stringify(createFixtureData.mapPointsNoMinimap())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/featuresManualMinimap.json",
+    JSON.stringify(createFixtureData.mapFeaturesManualMinimap())
+  );
+}
+
+Promise.all([buildScripts(), buildStyles(), buildFixtures()])
   .then(res => {
     console.log("build complete");
   })
