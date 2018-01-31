@@ -9,7 +9,7 @@ The tool structure follows the general structure of each Q tool. Further informa
 
 `LAYER_CONFIGS` must be specified as an environment parameter when starting the tool. Please see the test script command in `package.json` or `dev-config/server-config.js` for examples on what this environment parameter should look like.
 
-If you work with Q-cli there is a config file `dev-config/server-config.js` for starting Q dev server. Add an env.json file in repository root with the following content and adjust mapbox tokens, map ids and target names (here: `nzz_ch` and `nzzas`) accordingly:
+If you work with [Q-cli](https://github.com/nzzdev/Q-cli) there is a config file `dev-config/server-config.js` for starting Q dev server. Add an env.json file in repository root with the following content and adjust mapbox tokens, map ids and target names (here: `nzz_ch` and `nzzas`) accordingly:
 
 ```json
 {
