@@ -9,6 +9,65 @@ The tool structure follows the general structure of each Q tool. Further informa
 
 `LAYER_CONFIGS` must be specified as an environment parameter when starting the tool. Please see the test script command in `package.json` or `dev-config/server-config.js` for examples on what this environment parameter should look like.
 
+If you work with Q-cli there is a config file `dev-config/server-config.js` for starting Q dev server. Add an env.json file in repository root with the following content and adjust mapbox tokens, map ids and target names (here: `nzz_ch` and `nzzas`) accordingly:
+
+```json
+{
+  "mapboxTokens": {
+    "nzz_ch": "token 1",
+    "nzzas": "token 2"
+  },
+  "mapIds": {
+    "nzz_ch": {
+      "standard": {
+        "full": "map id",
+        "background": "map id",
+        "labels": "map id"
+      },
+      "lessLabels": {
+        "full": "map id",
+        "background": "map id",
+        "labels": "map id"
+      },
+      "terrain": {
+        "full": "map id",
+        "background": "map id",
+        "labels": "map id"
+      },
+      "reduced": {
+        "full": "map id",
+        "background": "map id",
+        "labels": "map id"
+      }
+    },
+    "nzzas": {
+      "standard": {
+        "full": "map id",
+        "background": "map id",
+        "labels": "map id"
+      },
+      "lessLabels": {
+        "full": "map id",
+        "background": "map id",
+        "labels": "map id"
+      },
+      "terrain": {
+        "full": "map id",
+        "background": "map id",
+        "labels": "map id"
+      },
+      "reduced": {
+        "full": "map id",
+        "background": "map id",
+        "labels": "map id"
+      }
+    }
+  }
+}
+```
+
+Of course with another mapbox configuration you have to adjust the LAYER_CONFIGS defintion as well so that it fits your needs.
+
 ## License
 
 Copyright (c) 2017 Neue Zürcher Zeitung. All rights reserved.
