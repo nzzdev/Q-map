@@ -1,157 +1,150 @@
 <div class="s-q-item q-map" data-track-id="q-map" data-track-component-id="{{ id }}" style="opacity: 0">
   {{#if options.hideTitle !== true && hideTitle !== true }}
-    <h3 class="s-q-item__title">{{title}}</h3>
-  {{/if}}
-  {{#if options.showLegend === true }}
-    <div class="q-map-legend">
-      {{#each legendItems as legendItem}}
-        <div class="q-map-legend__item">
-          <div class="q-map-legend__item__color" style="color: {{ legendItem.color }}; opacity: {{ legendItem.opacity }};"></div><div class="q-map-legend__item__text s-font-note">{{ legendItem.label }}</div>
-        </div>
-      {{/each}}
+  <h3 class="s-q-item__title">{{title}}</h3>
+  {{/if}} {{#if options.showLegend === true }}
+  <div class="q-map-legend">
+    {{#each legendItems as legendItem}}
+    <div class="q-map-legend__item">
+      <div class="q-map-legend__item__color" style="color: {{ legendItem.color }}; opacity: {{ legendItem.opacity }};"></div>
+      <div class="q-map-legend__item__text s-font-note">{{ legendItem.label }}</div>
     </div>
+    {{/each}}
+  </div>
   {{/if}}
   <div class="q-map-container s-font-sans" id="{{ mapContainerId }}" style="height: 250px;"></div>
   {{#if shouldHaveFooter}}
   <div class="s-q-item__footer">
     {{#if options.labelsBelowMap === true}}
-      <div class="q-map-footer__marker-labels {{options.labelsBelowMapOneRow === true ? 'q-map-footer__marker-labels--one-row' : ''}}">
+    <div class="q-map-footer__marker-labels {{options.labelsBelowMapOneRow === true ? 'q-map-footer__marker-labels--one-row' : ''}}">
       {{#each numberedLabels as label}}
-        <div class="q-map-footer__marker-labels__label s-font-note"><span class="q-map-code-point">{{label.codePoint}}</span>{{label.text}}</div>
+      <div class="q-map-footer__marker-labels__label s-font-note">
+        <span class="q-map-code-point">{{label.codePoint}}</span>{{label.text}}</div>
       {{/each}}
-      </div>
-    {{/if}}
-    {{#if notes}}
-      <span>{{notes}}</span>
-    {{/if}}
-    {{#if shouldHaveSources}}
-      {{#if notes}}&ndash;{{/if}}
-      {{#if sources.length > 1}}
-        Quellen:
-      {{else}}
-        Quelle:
-      {{/if}}
-      {{#each sources as source, index}}
-        <!-- 	If you separate DOM siblings with newlines whitespaces cannot be removed by svelte renderer
+    </div>
+    {{/if}} {{#if notes}}
+    <span>{{notes}}</span>
+    {{/if}} {{#if shouldHaveSources}} {{#if notes}}&ndash;{{/if}} {{#if sources.length > 1}} Quellen: {{else}} Quelle: {{/if}}
+    {{#each sources as source, index}}
+    <!-- 	If you separate DOM siblings with newlines whitespaces cannot be removed by svelte renderer
               To avoid unwanted whitespaces around commas separating each source, we keep render infos for sources at one line here.
               See also: https://github.com/sveltejs/svelte/issues/189  -->
-        {{#if source.text !== ''}}{{#if source.link && source.link.isValid}}<a href="{{source.link.url}}" target="blank" rel="noopener noreferrer">{{source.text}}</a>{{else}}{{source.text}}{{/if}}{{#if index !== sources.length - 1 && sources[index + 1] !== ''}}, {{/if}}{{/if}}
-      {{/each}}
-    {{/if}}
+    {{#if source.text !== ''}}{{#if source.link && source.link.isValid}}
+    <a href="{{source.link.url}}" target="blank" rel="noopener noreferrer">{{source.text}}</a>{{else}}{{source.text}}{{/if}}{{#if index !== sources.length - 1 && sources[index + 1] !== ''}}, {{/if}}{{/if}}
+    {{/each}} {{/if}}
   </div>
   {{/if}}
 </div>
 <script>
-export default {
-  computed: {
-    hideTitle: (toolRuntimeConfig) => {
-      return toolRuntimeConfig.displayOptions && toolRuntimeConfig.displayOptions.hideTitle;
-    },
-    shouldHaveFooter: (options, notes, sources) => {
-      return options.labelsBelowMap || notes || (sources && sources.length > 0);
-    },
-    shouldHaveSources: (sources) => {
-      return sources !== undefined && sources.length > 0;
-    },
-    legendItems: (geojsonList) => {
-      if (!Array.isArray(geojsonList)) {
-        return null;
-      }
-      const legend = geojsonList
-        .map(item => { // return arrays of features
-          if (item.type === "Feature") {
-            return [item];
-          }
-          if (item.type === "FeatureCollection") {
-            return item.features;
-          }
-        })
-        .reduce((a, b) => { // flat the features
-          return a.concat(b);
-        }, [])
-        .filter(item => item.geometry && item.geometry.type !== "Point") // remove points
-        .filter(item => item.properties && (item.properties.color || item.properties.fillColor)) // only keep if color is defined
-        .filter(item => item.properties && item.properties.label) // only keep if label is defined
-        .filter((currentItem, index, self) => {
-          return self.findIndex(item => {
-            return item.properties.label === currentItem.properties.label && item.properties.color === currentItem.properties.color;
-          }) === index;
-        })
-        .map(item => {
-          let opacity = 1;
-          let color;
-          if (item.geometry.type === 'LineString' || item.geometry.type === 'MultiLineString') {
-            if (item.properties.opacity) {
-              opacity = item.properties.opacity;
-            }
-            if (item.properties.color) {
-              color = item.properties.color;
-            }
-          }
-          if (item.geometry.type === 'Polygon' || item.geometry.type === 'MultiPolygon') {
-            if (item.properties.fillOpacity) {
-              opacity = item.properties.fillOpacity;
-            }
-            if (item.properties.fillColor) {
-              color = item.properties.fillColor;
-            }
-          }
-          return {
-            color: color,
-            opacity: opacity,
-            label: item.properties.label
-          }
-        })
-      return legend;
-    },
-    numberedLabels: (geojsonList) => {
-      if (!Array.isArray(geojsonList)) {
-        return null;
-      }
-      return geojsonList
-        .map(item => {
-          if (!item.hasOwnProperty('type')) {
-            return undefined;
-          }
-          if (item.type === 'FeatureCollection') {
-            return item.features;
-          }
-          if (item.type === 'Feature') {
-            return item;
-          }
-        })
-        .reduce((features, value) => {
-          if (Array.isArray(value)) {
-            features.concat(value);
-          } else if (value !== undefined) {
-            features.push(value);
-          }
-          return features;
-        }, [])
-        .filter(feature => {
-          return feature.hasOwnProperty('geometry') && feature.geometry.type === 'Point' && feature.properties.hasOwnProperty('label')
-        })
-        .map((feature, index) => {
-          let codePoint = null;
-          if (index < 20) {
-            codePoint = 9312 + index;
-          } else if (index >= 20 && index < 36) {
-            codePoint = 12881 + index;
-          } else if (index >= 36 && index < 50) {
-            codePoint = 12977 + index;
-          }
-          if (codePoint) {
-            return {
-              codePoint: String.fromCodePoint(codePoint),
-              text: feature.properties.label.replace(/<br>/g,' ')
-            };
-          }
+  export default {
+    computed: {
+      hideTitle: (toolRuntimeConfig) => {
+        return toolRuntimeConfig.displayOptions && toolRuntimeConfig.displayOptions.hideTitle;
+      },
+      shouldHaveFooter: (options, notes, sources) => {
+        return options.labelsBelowMap || notes || (sources && sources.length > 0);
+      },
+      shouldHaveSources: (sources) => {
+        return sources !== undefined && sources.length > 0;
+      },
+      legendItems: (geojsonList) => {
+        if (!Array.isArray(geojsonList)) {
           return null;
-        })
-        .filter(label => {
-          return label !== null;
-        });
+        }
+        const legend = geojsonList
+          .map(item => { // return arrays of features
+            if (item.type === "Feature") {
+              return [item];
+            }
+            if (item.type === "FeatureCollection") {
+              return item.features;
+            }
+          })
+          .reduce((a, b) => { // flat the features
+            return a.concat(b);
+          }, [])
+          .filter(item => item.geometry && item.geometry.type !== "Point") // remove points
+          .filter(item => item.properties && (item.properties.color || item.properties.fillColor)) // only keep if color is defined
+          .filter(item => item.properties && item.properties.label) // only keep if label is defined
+          .filter((currentItem, index, self) => {
+            return self.findIndex(item => {
+              return item.properties.label === currentItem.properties.label && item.properties.color === currentItem.properties.color;
+            }) === index;
+          })
+          .map(item => {
+            let opacity = 1;
+            let color;
+            if (item.geometry.type === 'LineString' || item.geometry.type === 'MultiLineString') {
+              if (item.properties.opacity) {
+                opacity = item.properties.opacity;
+              }
+              if (item.properties.color) {
+                color = item.properties.color;
+              }
+            }
+            if (item.geometry.type === 'Polygon' || item.geometry.type === 'MultiPolygon') {
+              if (item.properties.fillOpacity) {
+                opacity = item.properties.fillOpacity;
+              }
+              if (item.properties.fillColor) {
+                color = item.properties.fillColor;
+              }
+            }
+            return {
+              color: color,
+              opacity: opacity,
+              label: item.properties.label
+            }
+          })
+        return legend;
+      },
+      numberedLabels: (geojsonList) => {
+        if (!Array.isArray(geojsonList)) {
+          return null;
+        }
+        return geojsonList
+          .map(item => {
+            if (!item.hasOwnProperty('type')) {
+              return undefined;
+            }
+            if (item.type === 'FeatureCollection') {
+              return item.features;
+            }
+            if (item.type === 'Feature') {
+              return item;
+            }
+          })
+          .reduce((features, value) => {
+            if (Array.isArray(value)) {
+              features.concat(value);
+            } else if (value !== undefined) {
+              features.push(value);
+            }
+            return features;
+          }, [])
+          .filter(feature => {
+            return feature.hasOwnProperty('geometry') && feature.geometry.type === 'Point' && feature.properties.hasOwnProperty('label')
+          })
+          .map((feature, index) => {
+            let codePoint = null;
+            if (index < 20) {
+              codePoint = 9312 + index;
+            } else if (index >= 20 && index < 36) {
+              codePoint = 12881 + index;
+            } else if (index >= 36 && index < 50) {
+              codePoint = 12977 + index;
+            }
+            if (codePoint) {
+              return {
+                codePoint: String.fromCodePoint(codePoint),
+                text: feature.properties.label.replace(/<br>/g, ' ')
+              };
+            }
+            return null;
+          })
+          .filter(label => {
+            return label !== null;
+          });
+      }
     }
   }
-}
 </script>

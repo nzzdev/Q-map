@@ -4,7 +4,7 @@ services:
 - docker
 language: node_js
 node_js:
-- '8.6'
+- '9.4'
 install:
 - npm install -g jspm
 - npm install
@@ -13,7 +13,6 @@ before_script:
 - DOCKER_IMAGE_NAME="q-map"
 - DOCKER_TAG=$TRAVIS_BRANCH
 script:
-- npm run lint
 - npm run build
 - npm run test
 - docker build -t $DOCKER_IMAGE_NAME:$DOCKER_TAG .

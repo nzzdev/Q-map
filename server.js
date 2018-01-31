@@ -1,8 +1,7 @@
-const Hapi = require('hapi');
+const Hapi = require("hapi");
 
-const server = new Hapi.Server();
-server.connection({
+const hapiOptions = {
   port: process.env.PORT || 3000
-});
+};
 
-module.exports = server;
+module.exports = new Hapi.Server(hapiOptions);
