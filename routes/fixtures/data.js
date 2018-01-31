@@ -12,7 +12,11 @@ const fixtureData = [
   require(`${fixtureDataDirectory}/pointsLabelsBelow.json`),
   require(`${fixtureDataDirectory}/pointsLabelsBelowOneRow.json`),
   require(`${fixtureDataDirectory}/pointsNoMinimap.json`),
-  require(`${fixtureDataDirectory}/featuresManualMinimap.json`)
+  require(`${fixtureDataDirectory}/featuresManualMinimap.json`),
+  require(`${fixtureDataDirectory}/baseLayerStreetFewLabels.json`),
+  require(`${fixtureDataDirectory}/baseLayerStreetNoLabels.json`),
+  require(`${fixtureDataDirectory}/baseLayerTerrain.json`),
+  require(`${fixtureDataDirectory}/baseLayerAerial.json`)
 ];
 
 module.exports = {

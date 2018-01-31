@@ -176,6 +176,22 @@ function buildFixtures() {
     "resources/fixtures/data/featuresManualMinimap.json",
     JSON.stringify(createFixtureData.mapFeaturesManualMinimap())
   );
+  fs.writeFileSync(
+    "resources/fixtures/data/baseLayerStreetFewLabels.json",
+    JSON.stringify(createFixtureData.mapLayerStreetFew())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/baseLayerStreetNoLabels.json",
+    JSON.stringify(createFixtureData.mapLayerStreetNo())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/baseLayerTerrain.json",
+    JSON.stringify(createFixtureData.mapLayerTerrain())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/baseLayerAerial.json",
+    JSON.stringify(createFixtureData.mapLayerAerial())
+  );
 }
 
 Promise.all([buildScripts(), buildStyles(), buildFixtures()])

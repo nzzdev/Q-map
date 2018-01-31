@@ -167,6 +167,34 @@ function createMapFeaturesMinimapManual() {
   return item;
 }
 
+function createMapLayerStreetsFew() {
+  const item = createMapPoint(); // change as it fits your needs to other feature(s)
+  item.title = "FIXTURE: map with base layer streets with few labels";
+  item.options.baseLayer = "streetsFewLabels";
+  return item;
+}
+
+function createMapLayerStreetsNo() {
+  const item = createMapPoint(); // change as it fits your needs to other feature(s)
+  item.title = "FIXTURE: map with base layer streets without labels";
+  item.options.baseLayer = "streetsNoLabels";
+  return item;
+}
+
+function createMapLayerTerrain() {
+  const item = createMapPoint(); // change as it fits your needs to other feature(s)
+  item.title = "FIXTURE: map with base layer terrain";
+  item.options.baseLayer = "terrain";
+  return item;
+}
+
+function createMapLayerAerial() {
+  const item = createMapPoint(); // change as it fits your needs to other feature(s)
+  item.title = "FIXTURE: map with base layer aerial";
+  item.options.baseLayer = "aerial";
+  return item;
+}
+
 module.exports = {
   mapPoint: createMapPoint,
   mapFeature: createMapFeature,
@@ -177,5 +205,9 @@ module.exports = {
   mapPointsLabelsBelow: createMapPointsLabelsBelow,
   mapPointsLabelsBelowOneRow: createMapPointsLabelsBelowOneRow,
   mapPointsNoMinimap: createMapPointsNoMinimap,
-  mapFeaturesManualMinimap: createMapFeaturesMinimapManual
+  mapFeaturesManualMinimap: createMapFeaturesMinimapManual,
+  mapLayerStreetFew: createMapLayerStreetsFew,
+  mapLayerStreetNo: createMapLayerStreetsNo,
+  mapLayerTerrain: createMapLayerTerrain,
+  mapLayerAerial: createMapLayerAerial
 };
