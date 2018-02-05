@@ -1,8 +1,8 @@
-const Boom = require('boom');
-const Joi = require('joi');
+const Boom = require("boom");
+const Joi = require("joi");
 
 function hasLabelsBelowMap(item) {
-  return (item.options.labelsBelowMap === true);
+  return item.options.labelsBelowMap === true;
 }
 
 function hasMoreThanOneLabel(item) {
@@ -10,31 +10,33 @@ function hasMoreThanOneLabel(item) {
 }
 
 function hasMinimap(item) {
-  return (item.options.minimap === true);
+  return item.options.minimap === true;
 }
 
 module.exports = {
-  method: 'POST',
-  path: '/option-availability/{optionName}',
-  config: {
+  method: "POST",
+  path: "/option-availability/{optionName}",
+  options: {
     validate: {
       payload: Joi.object()
     },
     cors: true
   },
-  handler: function(request, reply) {
-    if (request.params.optionName === 'labelsBelowMapOneRow') {
-      return reply({
-        available: hasLabelsBelowMap(request.payload) && hasMoreThanOneLabel(request.payload)
-      }).type('application/json');
+  handler: function(request, h) {
+    if (request.params.optionName === "labelsBelowMapOneRow") {
+      return {
+        available:
+          hasLabelsBelowMap(request.payload) &&
+          hasMoreThanOneLabel(request.payload)
+      };
     }
 
-    if (request.params.optionName === 'minimapInitialZoomOffset') {
-      return reply({
+    if (request.params.optionName === "minimapInitialZoomOffset") {
+      return {
         available: hasMinimap(request.payload)
-      }).type('application/json');
+      };
     }
 
-    return reply(Boom.badRequest());
+    return Boom.badRequest();
   }
 };

@@ -1,14 +1,13 @@
-import Leaflet from 'leaflet';
-import LeafletControlButton from './LeafletControlButton.js';
-import MiniMap from 'leaflet-minimap';
+import Leaflet from "leaflet";
+import LeafletControlButton from "./LeafletControlButton.js";
+import MiniMap from "leaflet-minimap";
 
-import enableInteractionSvg from '../icons/enable-interaction.svg!text';
+import enableInteractionSvg from "../icons/enable-interaction.svg!text";
 
-import geoJsonOptions from './geoJsonOptions.js';
+import geoJsonOptions from "./geoJsonOptions.js";
 
 Leaflet.Control.Button = L.Control.extend(LeafletControlButton);
-Leaflet.Icon.Default.imagePath = 'jspm_packages/npm/leaflet@1.2.0/dist/images';
-
+Leaflet.Icon.Default.imagePath = "jspm_packages/npm/leaflet@1.2.0/dist/images";
 
 export default class LeafletMap {
   map;
@@ -35,15 +34,14 @@ export default class LeafletMap {
         }
       });
       try {
-        item.geojsonList
-          .forEach(geojson => {
-            L.geoJSON(geojson, geoJsonOptionsForInitialView)
-              .addTo(this.map)
-              .getLayers()
-              .forEach(layer => {
-                this.featureGroup.addLayer(layer);
-              });
-          });
+        item.geojsonList.forEach(geojson => {
+          L.geoJSON(geojson, geoJsonOptionsForInitialView)
+            .addTo(this.map)
+            .getLayers()
+            .forEach(layer => {
+              this.featureGroup.addLayer(layer);
+            });
+        });
       } catch (e) {
         // nevermind and just don't show them features
       }
@@ -57,11 +55,9 @@ export default class LeafletMap {
       });
 
       try {
-        item.geojsonList
-          .forEach(geojson => {
-            L.geoJSON(geojson, geoJsonOptionsOthers)
-              .addTo(this.map);
-          });
+        item.geojsonList.forEach(geojson => {
+          L.geoJSON(geojson, geoJsonOptionsOthers).addTo(this.map);
+        });
       } catch (e) {
         // nevermind and just don't show them features
       }
@@ -72,28 +68,32 @@ export default class LeafletMap {
   }
 
   hasPolygonsOrLineStrings(item) {
-    const types = ['Polygon', 'MultiPolygon', 'LineString', 'MultiLineString'];
+    const types = ["Polygon", "MultiPolygon", "LineString", "MultiLineString"];
     try {
-      return item.geojsonList
-        .reduce((features, geojson) => {
-          if (geojson.type === 'FeatureCollection') {
-            features = features.concat(geojson.features);
-          } else {
-            features.concat(geojson);
-          }
-          return features;
-        }, [])
-        .filter(geojson => {
-          return types.indexOf(geojson.geometry.type) > -1;
-        })
-        .length > 0;
+      return (
+        item.geojsonList
+          .reduce((features, geojson) => {
+            if (geojson.type === "FeatureCollection") {
+              features = features.concat(geojson.features);
+            } else {
+              features.concat(geojson);
+            }
+            return features;
+          }, [])
+          .filter(geojson => {
+            return types.indexOf(geojson.geometry.type) > -1;
+          }).length > 0
+      );
     } catch (e) {
       return false;
     }
   }
 
   shouldAllowInteraction() {
-    return this.toolRuntimeConfig.displayOptions && this.toolRuntimeConfig.displayOptions.allowInteraction === true;
+    return (
+      this.toolRuntimeConfig.displayOptions &&
+      this.toolRuntimeConfig.displayOptions.allowInteraction === true
+    );
   }
 
   // initialises the map, this is only run once
@@ -102,38 +102,46 @@ export default class LeafletMap {
       return;
     }
 
-    if (this.toolRuntimeConfig.baseLayer.logo && this.toolRuntimeConfig.baseLayer.logo.markup) {
-      element.insertAdjacentHTML('afterbegin', this.toolRuntimeConfig.baseLayer.logo.markup);
+    if (
+      this.toolRuntimeConfig.baseLayer.logo &&
+      this.toolRuntimeConfig.baseLayer.logo.markup
+    ) {
+      element.insertAdjacentHTML(
+        "afterbegin",
+        this.toolRuntimeConfig.baseLayer.logo.markup
+      );
     }
 
     this.map = Leaflet.map(element, {
-      'zoomControl': false
+      zoomControl: false
     });
 
-    let layerMode = 'default';
+    let layerMode = "default";
     if (this.hasPolygonsOrLineStrings(item)) {
-      layerMode = 'withSeparateLabelsLayer';
+      layerMode = "withSeparateLabelsLayer";
     }
 
     this.setLayers(this.toolRuntimeConfig.baseLayer, layerMode);
     this.setMaxMinZoom();
 
-    this.map.attributionControl.setPrefix('');
+    this.map.attributionControl.setPrefix("");
 
-    Leaflet.control.scale({
-      imperial: false
-    }).addTo(this.map);
+    Leaflet.control
+      .scale({
+        imperial: false
+      })
+      .addTo(this.map);
 
     if (this.shouldAllowInteraction()) {
       this.enableInteractionButton = new Leaflet.Control.Button({
-        position: 'topleft',
-        className: 'q-enable-leaflet-interaction-button',
+        position: "topleft",
+        className: "q-enable-leaflet-interaction-button",
         html: `${enableInteractionSvg}`
       });
     }
 
     this.zoomControl = Leaflet.control.zoom({
-      position: 'topleft'
+      position: "topleft"
     });
 
     let w = 1;
@@ -156,43 +164,53 @@ export default class LeafletMap {
 
   addTileLayer(url, config, containerClass) {
     if (!url) {
-      throw new Error('no tile layer url given');
+      throw new Error("no tile layer url given");
     }
-    this.baseLayer = Leaflet.tileLayer(url, config)
-      .addTo(this.map);
+    this.baseLayer = Leaflet.tileLayer(url, config).addTo(this.map);
     this.map.getContainer().classList.add(containerClass);
   }
 
-  setLayers(layer, mode = 'default') {
+  setLayers(layer, mode = "default") {
     this.map.whenReady(() => {
-      if (mode === 'default') {
+      if (mode === "default") {
         let url;
-        if (typeof layer.url === 'object') {
+        if (typeof layer.url === "object") {
           url = layer.url.full;
         } else {
           url = layer.url;
         }
         this.addTileLayer(url, layer.config, layer.containerClass);
-      } else if (mode === 'withSeparateLabelsLayer') {
-        this.map.createPane('labels');
-        if (typeof layer.url === 'string') {
+      } else if (mode === "withSeparateLabelsLayer") {
+        this.map.createPane("labels");
+        if (typeof layer.url === "string") {
           this.addTileLayer(layer.url, layer.config, layer.containerClass);
-        } else if (typeof layer.url === 'object') {
-          this.addTileLayer(layer.url.background, layer.config, layer.containerClass);
+        } else if (typeof layer.url === "object") {
+          this.addTileLayer(
+            layer.url.background,
+            layer.config,
+            layer.containerClass
+          );
 
           let labelsLayerConfig = JSON.parse(JSON.stringify(layer.config));
-          labelsLayerConfig.pane = 'labels';
-          this.addTileLayer(layer.url.labels, labelsLayerConfig, layer.containerClass);
+          labelsLayerConfig.pane = "labels";
+          this.addTileLayer(
+            layer.url.labels,
+            labelsLayerConfig,
+            layer.containerClass
+          );
         }
       }
       // set the sophie font class to the attribution control to not repeat it in css
-      this.map.getContainer().querySelector('.leaflet-control-attribution').classList.add('s-font-note-s');
+      this.map
+        .getContainer()
+        .querySelector(".leaflet-control-attribution")
+        .classList.add("s-font-note-s");
     });
     if (layer.minimapLayerUrl) {
-      this.tileLayerMiniMap =
-        Leaflet.tileLayer(layer.minimapLayerUrl, {
-          attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        });
+      this.tileLayerMiniMap = Leaflet.tileLayer(layer.minimapLayerUrl, {
+        attribution:
+          '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      });
     }
   }
 
@@ -207,7 +225,10 @@ export default class LeafletMap {
       }
       if (visible) {
         let zoomOffset = -5;
-        if (this.item.options.hasOwnProperty('minimapInitialZoomOffset') && this.item.options.minimapInitialZoomOffset !== 0) {
+        if (
+          this.item.options.hasOwnProperty("minimapInitialZoomOffset") &&
+          this.item.options.minimapInitialZoomOffset !== 0
+        ) {
           zoomOffset = this.item.options.minimapInitialZoomOffset;
         }
 
@@ -221,12 +242,12 @@ export default class LeafletMap {
           toggleDisplay: false,
           zoomLevelFixed: this.minimapZoomLevelFixed,
           aimingRectOptions: {
-            color: '#d28b00',
+            color: "#d28b00",
             weight: 1,
             interactive: false
           },
           shadowRectOptions: {
-            color: 'transparent',
+            color: "transparent",
             weight: 1,
             interactive: false
           }
@@ -241,7 +262,10 @@ export default class LeafletMap {
     if (this.getZoomLevelForCurrentAspectRatio() !== -1) {
       maxZoom = this.map.getZoom() + 3;
     }
-    if (!maxZoom || maxZoom > (this.toolRuntimeConfig.baseLayer.maxZoom || 18)) {
+    if (
+      !maxZoom ||
+      maxZoom > (this.toolRuntimeConfig.baseLayer.maxZoom || 18)
+    ) {
       maxZoom = this.toolRuntimeConfig.baseLayer.maxZoom || 18;
     }
     this.map.options.maxZoom = maxZoom;
@@ -250,15 +274,18 @@ export default class LeafletMap {
 
   // this function sets the zoom and position of the map based on a bounding box around all the features in featureGroup
   // if only one feature is available, the zoomLevel is set to the default of 9 if it's not overwritten by options
-  setZoomAndPositionInitial(animate = false, setDefaultPositionAndZoomIfNoMarkers = false) {
+  setZoomAndPositionInitial(
+    animate = false,
+    setDefaultPositionAndZoomIfNoMarkers = false
+  ) {
     let moveFunctions = {
-      bounds: 'fitBounds',
-      center: 'setView'
+      bounds: "fitBounds",
+      center: "setView"
     };
     if (animate) {
       moveFunctions = {
-        bounds: 'flyToBounds',
-        center: 'flyTo'
+        bounds: "flyToBounds",
+        center: "flyTo"
       };
     }
     const featureGroupBounds = this.featureGroup.getBounds();
@@ -310,13 +337,18 @@ export default class LeafletMap {
     if (this.shouldAllowInteraction()) {
       this.enableInteractionButton.addTo(this.map);
 
-      this.enableInteractionButton.getContainer().addEventListener('click', (event) => {
-        this.enableInteraction();
-        let enableInteractionEvent = new CustomEvent('q-map-enableInteraction', {
-          bubbles: true
+      this.enableInteractionButton
+        .getContainer()
+        .addEventListener("click", event => {
+          this.enableInteraction();
+          let enableInteractionEvent = new CustomEvent(
+            "q-map-enableInteraction",
+            {
+              bubbles: true
+            }
+          );
+          this.element.parentNode.dispatchEvent(enableInteractionEvent);
         });
-        this.element.parentNode.dispatchEvent(enableInteractionEvent);
-      });
     }
   }
 
@@ -335,8 +367,8 @@ export default class LeafletMap {
     this.zoomControl.addTo(this.map);
 
     this.resetInteractionTimeout();
-    this.map.on('zoomstart', this.resetInteractionTimeout.bind(this));
-    this.map.on('movestart', this.resetInteractionTimeout.bind(this));
+    this.map.on("zoomstart", this.resetInteractionTimeout.bind(this));
+    this.map.on("movestart", this.resetInteractionTimeout.bind(this));
   }
 
   resetInteractionTimeout() {
@@ -351,7 +383,7 @@ export default class LeafletMap {
 
   setAspectRatio(w, h) {
     let container = this.map.getContainer();
-    container.style.height = container.offsetWidth * (h / w) + 'px';
+    container.style.height = container.offsetWidth * (h / w) + "px";
 
     if (this.aspectRatio !== w / h) {
       this.aspectRatio = w / h;
@@ -360,7 +392,11 @@ export default class LeafletMap {
 
   getZoomLevelForCurrentAspectRatio() {
     // if zoomLevel is not -1, we want to show zoomLevel - 1 for maps that have an aspectRatio smaller than 16:9 (the default for large maps)
-    if (this.zoomLevel !== -1 && this.aspectRatio < (16 / 9) && this.zoomLevel > 1) {
+    if (
+      this.zoomLevel !== -1 &&
+      this.aspectRatio < 16 / 9 &&
+      this.zoomLevel > 1
+    ) {
       return this.zoomLevel - 1;
     }
     return this.zoomLevel;

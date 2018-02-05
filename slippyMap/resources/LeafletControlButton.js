@@ -1,11 +1,14 @@
-import Leaflet from 'leaflet';
+import Leaflet from "leaflet";
 
 export default {
   options: {
-    position: 'topleft'
+    position: "topleft"
   },
   onAdd: function(map) {
-    let container = Leaflet.DomUtil.create('div', `leaflet-control-button ${this.options.className}`);
+    let container = Leaflet.DomUtil.create(
+      "div",
+      `leaflet-control-button ${this.options.className}`
+    );
     container.innerHTML = this.options.html;
     return container;
   }

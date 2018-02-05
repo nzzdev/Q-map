@@ -4,3 +4,6 @@ scripts
 styles
 .DS_STORE
 .vscode
+resources/fixtures
+dev-config/env.json
+dev.js

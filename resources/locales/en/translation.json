@@ -12,7 +12,8 @@
   "Beschriftung": "label",
   "Markertyp": "type of marker",
   "Position des Labels": "label position",
-  "Für die Berechnung der initialen Ansicht einbeziehen": "use for calculation of initial view",
+  "Für die Berechnung der initialen Ansicht einbeziehen":
+    "use for calculation of initial view",
   "Quellen": "sources",
   "Quelle": "source",
   "Text": "text",

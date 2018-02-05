@@ -4,15 +4,19 @@ const optionsProcessors = {
       if (value !== true) {
         return;
       }
-      if (!item.geojsonList || !item.geojsonList.length || item.geojsonList.length === 0) {
+      if (
+        !item.geojsonList ||
+        !item.geojsonList.length ||
+        item.geojsonList.length === 0
+      ) {
         return;
       }
       item.geojsonList
         .map(geojsonItem => {
-          if (geojsonItem.type === 'FeatureCollection') {
+          if (geojsonItem.type === "FeatureCollection") {
             return geojsonItem.features;
           }
-          if (geojsonItem.type === 'Feature') {
+          if (geojsonItem.type === "Feature") {
             return geojsonItem;
           }
         })
@@ -25,7 +29,11 @@ const optionsProcessors = {
           return features;
         }, [])
         .filter(feature => {
-          return feature.hasOwnProperty('geometry') && feature.geometry.type === 'Point' && feature.properties.hasOwnProperty('label');
+          return (
+            feature.hasOwnProperty("geometry") &&
+            feature.geometry.type === "Point" &&
+            feature.properties.hasOwnProperty("label")
+          );
         })
         .map((feature, index) => {
           // this replaces the labels with unicode numbers in circles code blocks
@@ -36,13 +44,16 @@ const optionsProcessors = {
           // we do have to solve the problem of the number size in different fonts though, as we do not know the size of the font within this tool
           if (index < 20) {
             let htmlEntityNr = 9312 + index;
-            feature.properties.label = '<span class="q-map-code-point";>&#' + htmlEntityNr + '</span>';
+            feature.properties.label =
+              '<span class="q-map-code-point";>&#' + htmlEntityNr + "</span>";
           } else if (index >= 20 && index < 36) {
             let htmlEntityNr = 12881 + index;
-            feature.properties.label = '<span class="q-map-code-point";>&#' + htmlEntityNr + '</span>';
+            feature.properties.label =
+              '<span class="q-map-code-point";>&#' + htmlEntityNr + "</span>";
           } else if (index >= 36 && index < 50) {
             let htmlEntityNr = 12977 + index;
-            feature.properties.label = '<span class="q-map-code-point";>&#' + htmlEntityNr + '</span>';
+            feature.properties.label =
+              '<span class="q-map-code-point";>&#' + htmlEntityNr + "</span>";
           }
         });
     }

@@ -1,13 +1,11 @@
 {
   "name": "@nzz/q-map",
-  "version": "1.7.2",
+  "version": "1.8.0",
   "description": "Q map tool",
   "main": "index.js",
   "scripts": {
-    "test": "LAYER_CONFIGS='{\"terrain\":{\"label\":\"Terrain\",\"url\":\"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png\",\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18},\"toner\":{\"label\":\"Toner\",\"url\":{\"full\":\"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\"background\":\"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png\",\"labels\":\"https://stamen-tiles.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png\"},\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18},\"toner-background\":{\"label\":\"Toner (background)\",\"url\":\"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png\",\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18}}' ./node_modules/mocha/bin/mocha",
-    "build": "rm -rf scripts && mkdir scripts && rm -rf styles && mkdir styles && node tasks/build.js",
-    "lint": "./node_modules/eslint/bin/eslint.js '**/*.js'",
-    "start:dev": "LAYER_CONFIGS='{\"streets\":{\"label\":\"Toner\",\"url\":{\"full\":\"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\"background\":\"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png\",\"labels\":\"https://stamen-tiles.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png\"},\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18}}' node index.js"
+    "test": "LAYER_CONFIGS='{\"terrain\":{\"label\":\"Terrain\",\"url\":\"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png\",\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18},\"toner\":{\"label\":\"Toner\",\"url\":{\"full\":\"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\"background\":\"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png\",\"labels\":\"https://stamen-tiles.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png\"},\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18},\"toner-background\":{\"label\":\"Toner (background)\",\"url\":\"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png\",\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18}}' lab -a code -t 85 -P tests -m 3000 --verbose --leaks",
+    "build": "rm -rf scripts && mkdir scripts && rm -rf styles && mkdir styles && rm -rf resources/fixtures && mkdir -p resources/fixtures/data && node tasks/build.js"
   },
   "repository": {
     "type": "git",
@@ -20,21 +18,19 @@
   },
   "homepage": "https://github.com/nzzdev/Q-map#readme",
   "dependencies": {
-    "autoprefixer": "^7.1.1",
-    "babel-plugin-import": "^1.1.0",
+    "autoprefixer": "^7.2.5",
+    "babel-plugin-import": "^1.6.3",
     "cssnano": "^3.10.0",
-    "enjoi": "^2.1.0",
+    "enjoi": "^3.2.2",
     "fs": "0.0.1-security",
-    "hapi": "^16.1.0",
-    "hoek": "^4.1.0",
-    "inert": "^4.1.0",
-    "json-schema-faker": "^0.5.0-rc6",
+    "hapi": "^17.2.0",
+    "inert": "^5.1.0",
     "jspm": "^0.17.0-beta.41",
-    "node-sass": "^4.3.0",
-    "postcss-import": "^10.0.0",
+    "node-sass": "^4.7.2",
+    "postcss-import": "^11.0.0",
     "svelte": "1.22.5",
-    "systemjs": "0.20.14",
-    "systemjs-builder": "^0.16.4"
+    "systemjs": "0.20.19",
+    "systemjs-builder": "^0.16.12"
   },
   "jspm": {
     "name": "q-map",
@@ -102,13 +98,10 @@
     }
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.1",
-    "chai": "^4.0.2",
-    "es-module-loader": "^2.0.0",
+    "code": "^5.1.2",
     "escape-json-node": "^1.0.8",
-    "eslint": "^4.0.0",
     "jsdom": "^11.0.0",
     "jspm": "^0.17.0-beta.41",
-    "mocha": "^3.2.0"
+    "lab": "^15.2.0"
   }
 }
