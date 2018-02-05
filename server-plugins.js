@@ -1,3 +1,1 @@
-module.exports = [
-  require('inert')
-];
+module.exports = [require("inert")];

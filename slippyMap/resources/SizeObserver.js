@@ -52,12 +52,12 @@ export default class SizeObserver {
   }
 
   setupResizeListener() {
-    window.addEventListener('resize', this.resizeHandler);
+    window.addEventListener("resize", this.resizeHandler);
     this.resizeListenerInstalled = true;
   }
 
   cancelResizeListener() {
-    window.removeEventListener('resize', this.resizeHandler);
+    window.removeEventListener("resize", this.resizeHandler);
     this.resizeListenerInstalled = false;
   }
 
