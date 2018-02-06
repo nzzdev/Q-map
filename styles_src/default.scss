@@ -11,6 +11,9 @@
 }
 
 // overwrite some styles from leaflet
+.leaflet-container {
+  background-color: transparent;
+}
 .leaflet-bar {
   box-shadow: none;
   border-radius: 0;

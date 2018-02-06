@@ -60,6 +60,11 @@ module.exports = {
       request.payload.item
     );
 
+    // uncomment this line if you develop and want to have map interactions available
+    // request.payload.toolRuntimeConfig.displayOptions = {
+    //   allowInteraction: true
+    // };
+
     let layerConfigs = JSON.parse(process.env.LAYER_CONFIGS);
     // if there is layerConfigs passed in toolRuntimeConfig, we apply it to the layerConfigs and delete it afterwards to not pass it again in the dynamic js code
     if (request.payload.toolRuntimeConfig.hasOwnProperty("layerConfigs")) {

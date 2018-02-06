@@ -15,7 +15,7 @@ module.exports = [
     method: "GET",
     path: "/display-options-schema.json",
     handler: function(request, h) {
-      h.file(resourcesDir + "display-options-schema.json");
+      return h.file(resourcesDir + "display-options-schema.json");
     }
   }
 ];
