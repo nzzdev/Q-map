@@ -166,6 +166,9 @@ export default class LeafletMap {
     if (!url) {
       throw new Error("no tile layer url given");
     }
+    // do not copy the world, see http://leafletjs.com/reference-1.3.0.html#gridlayer-nowrap
+    config.noWrap = true;
+    config.bounds = [[90, -180], [-90, 180]];
     this.baseLayer = Leaflet.tileLayer(url, config).addTo(this.map);
     this.map.getContainer().classList.add(containerClass);
   }
