@@ -220,7 +220,7 @@
         },
         "properties": {
           "type": "object",
-          "required": ["label", "type", "labelPosition"],
+          "required": ["type", "labelPosition"],
           "default": {
             "label": "",
             "type": "pointHeavyLabel",
@@ -239,7 +239,8 @@
                 "pointLightLabel",
                 "pointOnly",
                 "label",
-                "event"
+                "event",
+                "epicenter"
               ],
               "Q:options": {
                 "enum_titles": [
@@ -247,7 +248,8 @@
                   "Punkt mit Label (klein)",
                   "Punkt ohne Label",
                   "Gebiet",
-                  "Ereignis"
+                  "Ereignis",
+                  "Epizentrum"
                 ]
               }
             },
