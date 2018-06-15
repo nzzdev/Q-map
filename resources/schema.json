@@ -178,7 +178,7 @@
         },
         "hideTitle": {
           "type": "boolean",
-          "default": false,
+          "default": true,
           "Q:deprecated": true,
           "Q:options": {
             "hideInEditor": true
