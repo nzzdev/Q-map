@@ -26,23 +26,26 @@
       }
     },
     "sources": {
-      "title": "Quellen",
+      "title": "Quelle(n)",
       "type": "array",
       "items": {
         "type": "object",
         "title": "Quelle",
         "properties": {
           "text": {
-            "title": "Text",
+            "title": "Quelle",
             "type": "string"
           },
           "link": {
             "Q:type": "link",
             "title": "Link",
             "type": "object",
+            "Q:options": {
+              "placeholder": "Direktlink zur Quelle, http://..."
+            },
             "properties": {
               "url": {
-                "title": "Url",
+                "title": "Link",
                 "type": "string"
               },
               "isValid": {
@@ -72,7 +75,7 @@
           }
         },
         "initialZoomLevel": {
-          "title": "Zoom Level",
+          "title": "Zoomlevel",
           "type": "number",
           "default": -1,
           "enum": [
@@ -126,7 +129,7 @@
           "default": true
         },
         "minimapInitialZoomOffset": {
-          "title": "Minimap zoom offset",
+          "title": "Minimap-Zoomlevel (Differenz zur Hauptkarte)",
           "type": "number",
           "default": 0,
           "Q:options": {
@@ -145,12 +148,12 @@
           }
         },
         "labelsBelowMap": {
-          "title": "Labels unter Karte anzeigen",
+          "title": "Beschriftungen unter der Karte anzeigen",
           "type": "boolean",
           "default": false
         },
         "labelsBelowMapOneRow": {
-          "title": "Labels unter der Karte nebeneinander anzeigen",
+          "title": "Beschriftungen unter der Karte ohne Zeilenumbruch",
           "type": "boolean",
           "default": false,
           "Q:options": {
@@ -228,7 +231,7 @@
           },
           "properties": {
             "label": {
-              "title": "Beschriftung",
+              "title": "Beschriftung des Punkts",
               "type": "string"
             },
             "type": {
@@ -244,9 +247,9 @@
               ],
               "Q:options": {
                 "enum_titles": [
-                  "Punkt mit Label",
-                  "Punkt mit Label (klein)",
-                  "Punkt ohne Label",
+                  "Punkt mit Beschriftung",
+                  "Punkt mit Beschriftung (klein)",
+                  "Punkt ohne Beschriftung",
                   "Gebiet",
                   "Ereignis",
                   "Epizentrum"
@@ -254,7 +257,7 @@
               }
             },
             "labelPosition": {
-              "title": "Position des Labels",
+              "title": "Position des Beschriftung",
               "type": "string",
               "enum": ["top", "bottom"],
               "Q:options": {
