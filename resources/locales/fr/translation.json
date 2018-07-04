@@ -1,0 +1,40 @@
+{
+  "Karte": "Carte",
+  "Titel": "Titre",
+  "Untertitel": "Sous-Titre",
+  "Elemente auf der Karte": "Éléments sur la carte",
+  "Quelle(n)": "Sources",
+  "Quelle": "Source",
+  "Link": "Link",
+  "Direktlink zur Quelle, http://...": "Lien direct vers la source, http://...",
+  "Anmerkungen": "Remarques",
+  "Kartenoptionen": "Options de la carte",
+  "Basiskarte": "Basemap",
+  "Strassenkarte": "Route carte",
+  "Zoomlevel": "Niveau de zoom",
+  "automatisch": "auto",
+  "1 - Welt": "1 - Monde",
+  "18 - Haus": "18 - Maison",
+  "Minimap anzeigen": "Afficher la minicarte",
+  "Minimap-Zoomlevel (Differenz zur Hauptkarte)":
+    "Niveau de zoom minimum (différence par rapport à la carte principale)",
+  "Beschriftungen unter der Karte anzeigen":
+    "Afficher les étiquettes sous la carte",
+  "Beschriftungen unter der Karte ohne Zeilenumbruch":
+    "Etiquettes sous la carte sans saut de ligne",
+  "Legende anzeigen": "Afficher la légende",
+  "Punkt": "Dot",
+  "Beschriftung des Punkts": "Lettrage du point",
+  "Markertyp": "Type de marqueur",
+  "Punkt mit Beschriftung": "Dot avec légende",
+  "Punkt mit Beschriftung (klein)": "Dot avec légende (petite)",
+  "Punkt ohne Beschriftung": "Dot sans légende",
+  "Gebiet": "Zone",
+  "Ereignis": "Événement",
+  "Epizentrum": "Épicentre",
+  "Position der Beschriftung": "Position de l'étiquette",
+  "oben": "Au-dessus",
+  "unten": "Dessous",
+  "Für die Berechnung der initialen Ansicht einbeziehen":
+    "Inclure pour le calcul de la vue initiale"
+}
