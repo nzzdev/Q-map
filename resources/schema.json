@@ -257,7 +257,7 @@
               }
             },
             "labelPosition": {
-              "title": "Position des Beschriftung",
+              "title": "Position der Beschriftung",
               "type": "string",
               "enum": ["top", "bottom"],
               "Q:options": {
