@@ -5,6 +5,7 @@ function createMapPoint() {
   const item = {
     title:
       "FIXTURE: basic map with one point (top/heavyLabel) and default options",
+    subtitle: "subtitle",
     sources: [],
     notes: "Standardfall: Karte mit einem Punkt",
     geojsonList: [points.bucharestHeavyTop],
@@ -24,6 +25,7 @@ function createMapFeature() {
   const item = {
     title:
       "FIXTURE: basic map with one feature (line string two points) and default options",
+    subtitle: "subtitle",
     sources: [],
     notes: "Eine Linie verbindet zwei Punkte",
     geojsonList: [features.lineSofiaBucharest],
@@ -43,6 +45,7 @@ function createMapFeatureCollection() {
   const item = {
     title:
       "FIXTURE: basic map with one feature collection (two polygons) and default options",
+    subtitle: "subtitle",
     sources: [],
     notes: "Zwei Polygone stehen im Raum",
     geojsonList: [
@@ -67,6 +70,7 @@ function createMapPoints() {
   const item = {
     title:
       "FIXTURE: basic map with 10 points (all label options) and default options",
+    subtitle: "subtitle",
     sources: [],
     notes: "Karte mit mehreren Punkten",
     geojsonList: [],
@@ -89,6 +93,7 @@ function createMapPointsLabelsBelow() {
   const item = createMapPoints();
   item.title =
     "FIXTURE: map labels below map with 10 points (all label options)";
+  item.subtitle = "subtitle";
   item.options.labelsBelowMap = true;
   return item;
 }
@@ -97,6 +102,7 @@ function createMapPointsLabelsBelowOneRow() {
   const item = createMapPoints();
   item.title =
     "FIXTURE: map labels below map in one row with 10 points (all label options)";
+  item.subtitle = "subtitle";
   item.options.labelsBelowMap = true;
   item.options.labelsBelowMapOneRow = true;
   return item;
@@ -105,6 +111,7 @@ function createMapPointsLabelsBelowOneRow() {
 function createMapFeatures() {
   const item = {
     title: "FIXTURE: basic map with several features and default options",
+    subtitle: "subtitle",
     sources: [],
     notes: "Linien und Polygone",
     geojsonList: [],
@@ -127,6 +134,7 @@ function createMapFeatureCollections() {
   const item = {
     title:
       "FIXTURE: basic map with two feature collections and default options",
+    subtitle: "subtitle",
     sources: [],
     notes: "Zwei Polygone stehen im Raum und zwei Linien dazu",
     geojsonList: [
@@ -154,6 +162,7 @@ function createMapFeatureCollections() {
 function createMapPointsNoMinimap() {
   const item = createMapPoints();
   item.title = "FIXTURE: map with 10 points and no minimap";
+  item.subtitle = "subtitle";
   item.options.minimap = false;
   return item;
 }
@@ -162,6 +171,7 @@ function createMapFeaturesMinimapManual() {
   const item = createMapFeatures();
   item.title =
     "FIXTURE: map with several features and manuel zoom level and zoom offset minimap";
+  item.subtitle = "subtitle";
   item.options.initialZoomLevel = 6;
   item.options.minimapInitialZoomOffset = -5;
   return item;
@@ -170,6 +180,7 @@ function createMapFeaturesMinimapManual() {
 function createMapLayerStreetsFew() {
   const item = createMapPoint(); // change as it fits your needs to other feature(s)
   item.title = "FIXTURE: map with base layer streets with few labels";
+  item.subtitle = "subtitle";
   item.options.baseLayer = "streetsFewLabels";
   return item;
 }
@@ -177,6 +188,7 @@ function createMapLayerStreetsFew() {
 function createMapLayerStreetsNo() {
   const item = createMapPoint(); // change as it fits your needs to other feature(s)
   item.title = "FIXTURE: map with base layer streets without labels";
+  item.subtitle = "subtitle";
   item.options.baseLayer = "streetsNoLabels";
   return item;
 }
@@ -184,6 +196,7 @@ function createMapLayerStreetsNo() {
 function createMapLayerTerrain() {
   const item = createMapPoint(); // change as it fits your needs to other feature(s)
   item.title = "FIXTURE: map with base layer terrain";
+  item.subtitle = "subtitle";
   item.options.baseLayer = "terrain";
   return item;
 }
@@ -191,6 +204,7 @@ function createMapLayerTerrain() {
 function createMapLayerAerial() {
   const item = createMapPoint(); // change as it fits your needs to other feature(s)
   item.title = "FIXTURE: map with base layer aerial";
+  item.subtitle = "subtitle";
   item.options.baseLayer = "aerial";
   return item;
 }

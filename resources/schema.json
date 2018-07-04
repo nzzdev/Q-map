@@ -7,6 +7,10 @@
       "type": "string",
       "title": "Titel"
     },
+    "subtitle": {
+      "type": "string",
+      "title": "Untertitel"
+    },
     "geojsonList": {
       "title": "Elemente auf der Karte",
       "type": "array",

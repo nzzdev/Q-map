@@ -1,6 +1,8 @@
 <div class="s-q-item q-map" data-track-id="q-map" data-track-component-id="{{ id }}" style="opacity: 0">
   {{#if options.hideTitle !== true && hideTitle !== true }}
   <h3 class="s-q-item__title">{{title}}</h3>
+  {{/if}} {{#if (subtitle && subtitle !== '') || (subtitleSuffix && subtitleSuffix !== '') }}
+  <div class="s-q-item__subtitle s-font-note">{{ subtitle }}{{#if subtitleSuffix }}{{ subtitleSuffix }}{{/if}}</div>
   {{/if}} {{#if options.showLegend === true }}
   <div class="q-map-legend">
     {{#each legendItems as legendItem}}
