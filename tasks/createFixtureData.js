@@ -8,6 +8,7 @@ function createMapPoint() {
     subtitle: "subtitle",
     sources: [],
     notes: "Standardfall: Karte mit einem Punkt",
+    acronym: "abc",
     geojsonList: [points.bucharestHeavyTop],
     options: {
       baseLayer: "streets",
@@ -28,6 +29,7 @@ function createMapFeature() {
     subtitle: "subtitle",
     sources: [],
     notes: "Eine Linie verbindet zwei Punkte",
+    acronym: "abc",
     geojsonList: [features.lineSofiaBucharest],
     options: {
       baseLayer: "streets",
@@ -48,6 +50,7 @@ function createMapFeatureCollection() {
     subtitle: "subtitle",
     sources: [],
     notes: "Zwei Polygone stehen im Raum",
+    acronym: "abc",
     geojsonList: [
       {
         type: "FeatureCollection",
@@ -73,6 +76,7 @@ function createMapPoints() {
     subtitle: "subtitle",
     sources: [],
     notes: "Karte mit mehreren Punkten",
+    acronym: "abc",
     geojsonList: [],
     options: {
       baseLayer: "streets",
@@ -114,6 +118,7 @@ function createMapFeatures() {
     subtitle: "subtitle",
     sources: [],
     notes: "Linien und Polygone",
+    acronym: "abc",
     geojsonList: [],
     options: {
       baseLayer: "streets",
@@ -137,6 +142,7 @@ function createMapFeatureCollections() {
     subtitle: "subtitle",
     sources: [],
     notes: "Zwei Polygone stehen im Raum und zwei Linien dazu",
+    acronym: "abc",
     geojsonList: [
       {
         type: "FeatureCollection",
@@ -209,6 +215,53 @@ function createMapLayerAerial() {
   return item;
 }
 
+function showAcronym() {
+  const item = {
+    title:
+      "FIXTURE: show acronym if one of sources, notes, and geojson feature or a feature collection is present",
+    subtitle: "subtitle",
+    sources: [],
+    notes: "",
+    acronym: "abc",
+    geojsonList: [
+      {
+        type: "FeatureCollection",
+        features: [features.orangePolygon, features.greenPolygon]
+      }
+    ],
+    options: {
+      baseLayer: "streets",
+      initialZoomLevel: -1,
+      minimapInitialZoomOffset: 0,
+      minimap: true,
+      labelsBelowMap: false,
+      showLegend: true
+    }
+  };
+  return item;
+}
+
+function dontShowAcronym() {
+  const item = {
+    title:
+      "FIXTURE: don't show acronym if sources, notes are not defined or only point features are present",
+    subtitle: "subtitle",
+    sources: [],
+    notes: "",
+    acronym: "abc",
+    geojsonList: [points.bucharestHeavyTop],
+    options: {
+      baseLayer: "streets",
+      initialZoomLevel: -1,
+      minimapInitialZoomOffset: 0,
+      minimap: true,
+      labelsBelowMap: false,
+      showLegend: true
+    }
+  };
+  return item;
+}
+
 module.exports = {
   mapPoint: createMapPoint,
   mapFeature: createMapFeature,
@@ -223,5 +276,7 @@ module.exports = {
   mapLayerStreetFew: createMapLayerStreetsFew,
   mapLayerStreetNo: createMapLayerStreetsNo,
   mapLayerTerrain: createMapLayerTerrain,
-  mapLayerAerial: createMapLayerAerial
+  mapLayerAerial: createMapLayerAerial,
+  showAcronym: showAcronym,
+  dontShowAcronym: dontShowAcronym
 };

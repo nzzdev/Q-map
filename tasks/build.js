@@ -192,6 +192,14 @@ function buildFixtures() {
     "resources/fixtures/data/baseLayerAerial.json",
     JSON.stringify(createFixtureData.mapLayerAerial())
   );
+  fs.writeFileSync(
+    "resources/fixtures/data/showAcronym.json",
+    JSON.stringify(createFixtureData.showAcronym())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/dontShowAcronym.json",
+    JSON.stringify(createFixtureData.dontShowAcronym())
+  );
 }
 
 Promise.all([buildScripts(), buildStyles(), buildFixtures()])
