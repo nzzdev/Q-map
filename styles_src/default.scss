@@ -140,28 +140,27 @@
   @extend %q-map-marker__label--right;
 }
 
+%q-map-marker__label--arrow {
+  font-family: Arial, sans;
+  font-size: 25px;
+  display: block;
+  color: black;
+  text-align: center;
+  position: relative;
+}
+
 .q-map-marker__label--event {
   &.q-map-marker__label--top {
     &::after {
       content: "\2193";
-      font-family: Arial, sans;
-      font-size: 25px;
-      display: block;
-      color: black;
-      text-align: center;
-      position: relative;
+      @extend %q-map-marker__label--arrow;
     }
   }
 
   &.q-map-marker__label--bottom {
     &::before {
       content: "\2191";
-      font-family: Arial, sans;
-      font-size: 25px;
-      display: block;
-      color: black;
-      text-align: center;
-      position: relative;
+      @extend %q-map-marker__label--arrow;
       top: -0.2em;
     }
   }
@@ -171,12 +170,7 @@
     right: 20px;
     &::after {
       content: "\2192";
-      font-family: Arial, sans;
-      font-size: 25px;
-      display: block;
-      color: black;
-      text-align: center;
-      position: relative;
+      @extend %q-map-marker__label--arrow;
       margin-left: 10px;
       top: -0.2em;
     }
@@ -187,14 +181,60 @@
     left: 20px;
     &::before {
       content: "\2190";
-      font-family: Arial, sans;
-      font-size: 25px;
-      display: block;
-      color: black;
-      text-align: center;
-      position: relative;
+      @extend %q-map-marker__label--arrow;
       margin-right: 10px;
       top: -0.2em;
+    }
+  }
+
+  &.q-map-marker__label--topleft {
+    top: -45px;
+    right: 34px;
+    &::after {
+      content: "\2198";
+      @extend %q-map-marker__label--arrow;
+      display: flex;
+      justify-content: flex-end;
+      left: 1em;
+    }
+  }
+
+  &.q-map-marker__label--topright {
+    top: -65px;
+    left: 40px;
+    &::before {
+      content: "\2199";
+      @extend %q-map-marker__label--arrow;
+      display: flex;
+      justify-content: flex-start;
+      top: 1.5em;
+      left: -1em;
+    }
+  }
+
+  &.q-map-marker__label--bottomleft {
+    top: 30px;
+    right: 34px;
+    &::after {
+      content: "\2197";
+      @extend %q-map-marker__label--arrow;
+      display: flex;
+      justify-content: flex-end;
+      top: -35px;
+      left: 1em;
+    }
+  }
+
+  &.q-map-marker__label--bottomright {
+    top: 0;
+    left: 40px;
+    &::before {
+      content: "\2196";
+      @extend %q-map-marker__label--arrow;
+      display: flex;
+      justify-content: flex-start;
+      top: 0.4em;
+      left: -1.2em;
     }
   }
 }
