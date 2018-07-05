@@ -73,28 +73,71 @@
   font-family: sans-serif;
 }
 
-.q-map-marker__label--top {
-  bottom: 1.1em;
+%q-map-marker__label--vertical {
   left: 4px;
-  line-height: 1.1;
   transform: translateX(-50%);
+}
+
+%q-map-marker__label--horizontal {
+  line-height: 0.6;
+}
+
+%q-map-marker__label--top {
+  bottom: 1.1em;
+  line-height: 1.1;
+}
+
+%q-map-marker__label--bottom {
+  top: 1.1em;
+  line-height: 1.1;
+}
+
+%q-map-marker__label--left {
+  right: 18px;
+}
+
+%q-map-marker__label--right {
+  left: 18px;
+}
+
+.q-map-marker__label--top {
+  @extend %q-map-marker__label--vertical;
+  @extend %q-map-marker__label--top;
 }
 
 .q-map-marker__label--bottom {
-  top: 1.1em;
-  left: 4px;
-  line-height: 1.1;
-  transform: translateX(-50%);
+  @extend %q-map-marker__label--vertical;
+  @extend %q-map-marker__label--bottom;
 }
 
 .q-map-marker__label--left {
-  right: 18px;
-  line-height: 0.6;
+  @extend %q-map-marker__label--horizontal;
+  @extend %q-map-marker__label--left;
 }
 
 .q-map-marker__label--right {
-  left: 18px;
-  line-height: 0.6;
+  @extend %q-map-marker__label--horizontal;
+  @extend %q-map-marker__label--right;
+}
+
+.q-map-marker__label--topleft {
+  @extend %q-map-marker__label--top;
+  @extend %q-map-marker__label--left;
+}
+
+.q-map-marker__label--topright {
+  @extend %q-map-marker__label--top;
+  @extend %q-map-marker__label--right;
+}
+
+.q-map-marker__label--bottomleft {
+  @extend %q-map-marker__label--bottom;
+  @extend %q-map-marker__label--left;
+}
+
+.q-map-marker__label--bottomright {
+  @extend %q-map-marker__label--bottom;
+  @extend %q-map-marker__label--right;
 }
 
 .q-map-marker__label--event {
