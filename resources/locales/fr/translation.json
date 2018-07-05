@@ -33,8 +33,14 @@
   "Ereignis": "Événement",
   "Epizentrum": "Épicentre",
   "Position der Beschriftung": "Position de l'étiquette",
-  "oben": "Au-dessus",
-  "unten": "Dessous",
+  "oben": "au-dessus",
+  "unten": "dessous",
+  "links": "gauche",
+  "rechts": "droit",
+  "oben links": "en haut à gauche",
+  "oben rechts": "en haut à droite",
+  "unten links": "en bas à gauche",
+  "unten rechts": "en bas à droite",
   "Für die Berechnung der initialen Ansicht einbeziehen":
     "Inclure pour le calcul de la vue initiale"
 }
