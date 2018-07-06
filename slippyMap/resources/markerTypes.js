@@ -1,5 +1,27 @@
 import Leaflet from "leaflet";
 
+function getAlignLabelClasses(labelPosition) {
+  const labelClasses = `q-map-marker__label--${0} q-map-marker__label--${1}`;
+  if (labelPosition === "top") {
+    return labelClasses("vertical", "top");
+  } else if (labelPosition === "bottom") {
+    return labelClasses("vertical", "bottom");
+  } else if (labelPosition === "left") {
+    return labelClasses("horizontal", "left");
+  } else if (labelPosition === "right") {
+    return labelClasses("horizontal", "right");
+  } else if (labelPosition === "topleft") {
+    return labelClasses("top", "left");
+  } else if (labelPosition === "topright") {
+    return labelClasses("top", "right");
+  } else if (labelPosition === "bottomleft") {
+    return labelClasses("bottom", "left");
+  } else if (labelPosition === "bottomright") {
+    return labelClasses("bottom", "right");
+  }
+  return labelClasses("vertical", "top");
+}
+
 export const markerTypes = {
   pointHeavyLabel: {
     label: "Punkt mit Label",
@@ -8,9 +30,9 @@ export const markerTypes = {
       return Leaflet.divIcon({
         className: "q-map-marker s-color-gray-1",
         iconSize: [8, 8],
-        html: `<div class="s-font-note s-font-note--strong q-map-marker__label q-map-marker__label--${
-          marker.labelPosition ? marker.labelPosition : "top"
-        }">${marker.label || ""}</div>`
+        html: `<div class="s-font-note s-font-note--strong q-map-marker__label ${getAlignLabelClasses(
+          marker.labelPosition
+        )}">${marker.label || ""}</div>`
       });
     }
   },
@@ -22,9 +44,9 @@ export const markerTypes = {
       return Leaflet.divIcon({
         className: "q-map-marker s-color-gray-1",
         iconSize: [7, 7],
-        html: `<div class="s-font-note-s s-font-note--strong q-map-marker__label q-map-marker__label--${
-          marker.labelPosition ? marker.labelPosition : "top"
-        }">${marker.label || ""}</div>`
+        html: `<div class="s-font-note-s s-font-note--strong q-map-marker__label ${getAlignLabelClasses(
+          marker.labelPosition
+        )}">${marker.label || ""}</div>`
       });
     }
   },
@@ -58,9 +80,9 @@ export const markerTypes = {
       return Leaflet.divIcon({
         className: "q-map-marker s-color-gray-1",
         iconSize: [8, 8],
-        html: `<div class="s-font-note s-font-note--strong q-map-marker__label q-map-marker__label--${
-          marker.labelPosition ? marker.labelPosition : "top"
-        } q-map-marker__label--event">${marker.label || ""}</div>`
+        html: `<div class="s-font-note s-font-note--strong q-map-marker__label ${getAlignLabelClasses(
+          marker.labelPosition
+        )} q-map-marker__label--event">${marker.label || ""}</div>`
       });
     }
   },
