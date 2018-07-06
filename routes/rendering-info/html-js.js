@@ -12,14 +12,6 @@ const viewsDir = __dirname + "/../../views/";
 const scriptHashMap = require(`${scriptsDir}/hashMap.json`);
 const styleHashMap = require(`${stylesDir}/hashMap.json`);
 
-const displayOptionsSchema = enjoi(
-  JSON.parse(
-    fs.readFileSync(resourcesDir + "display-options-schema.json", {
-      encoding: "utf-8"
-    })
-  )
-);
-
 require("svelte/ssr/register");
 const staticTpl = require(`${viewsDir}/HtmlJs.html`);
 
@@ -35,10 +27,7 @@ module.exports = {
         allowUnknown: true
       },
       payload: {
-        item: schema,
-        toolRuntimeConfig: {
-          displayOptions: displayOptionsSchema
-        }
+        item: schema
       }
     },
     cors: true,
