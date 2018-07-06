@@ -19,19 +19,18 @@
   },
   "homepage": "https://github.com/nzzdev/Q-map#readme",
   "dependencies": {
-    "autoprefixer": "^7.2.5",
-    "babel-plugin-import": "^1.6.3",
+    "autoprefixer": "^7.2.6",
+    "babel-plugin-import": "^1.8.0",
     "cssnano": "^3.10.0",
-    "enjoi": "^3.2.2",
+    "enjoi": "^3.2.4",
     "fs": "0.0.1-security",
-    "hapi": "^17.2.0",
+    "hapi": "^17.5.2",
     "inert": "^5.1.0",
-    "jspm": "^0.17.0-beta.41",
-    "node-sass": "^4.7.2",
-    "postcss-import": "^11.0.0",
+    "node-sass": "^4.9.1",
+    "postcss-import": "^11.1.0",
     "svelte": "1.22.5",
     "systemjs": "0.20.19",
-    "systemjs-builder": "^0.16.12"
+    "systemjs-builder": "^0.16.13"
   },
   "jspm": {
     "name": "q-map",
@@ -99,10 +98,10 @@
     }
   },
   "devDependencies": {
-    "code": "^5.1.2",
+    "code": "^5.2.0",
     "escape-json-node": "^1.0.8",
-    "jsdom": "^11.0.0",
-    "jspm": "^0.17.0-beta.41",
-    "lab": "^15.2.0"
+    "jsdom": "^11.11.0",
+    "jspm": "^0.17.0-beta.48",
+    "lab": "^15.5.0"
   }
 }
