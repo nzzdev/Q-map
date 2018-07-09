@@ -33,7 +33,7 @@
   border: 1px solid #92929e;
 }
 
-.leaflet-overlay-pane svg g:first-child {
+.leaflet-overlay-pane svg g path {
   fill: black !important;
   stroke: black !important;
   stroke-width: 0.5 !important;
