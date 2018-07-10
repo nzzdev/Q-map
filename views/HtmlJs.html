@@ -32,7 +32,7 @@
               See also: https://github.com/sveltejs/svelte/issues/189  -->
     {{#if source.text !== ''}}{{#if source.link && source.link.isValid}}
     <a href="{{source.link.url}}" target="blank" rel="noopener noreferrer">{{source.text}}</a>{{else}}{{source.text}}{{/if}}{{#if index !== sources.length - 1 && sources[index + 1] !== ''}}, {{/if}}{{/if}}
-    {{/each}} {{/if}}
+    {{/each}} {{/if}} {{#if shouldHaveAcronym }}{{#if notes || shouldHaveSources }}&ndash;{{/if}} Grafik: {{ acronym }}{{/if}}
   </div>
   {{/if}}
 </div>
@@ -42,11 +42,24 @@
       hideTitle: (toolRuntimeConfig) => {
         return toolRuntimeConfig.displayOptions && toolRuntimeConfig.displayOptions.hideTitle;
       },
-      shouldHaveFooter: (options, notes, sources) => {
-        return options.labelsBelowMap || notes || (sources && sources.length > 0);
+      shouldHaveFooter: (options, notes, sources, acronym) => {
+        return options.labelsBelowMap || notes || (sources && sources.length > 0) || acronym !== '';
       },
       shouldHaveSources: (sources) => {
         return sources !== undefined && sources.length > 0;
+      },
+      shouldHaveAcronym: (acronym, sources, notes, geojsonList) => {
+        const hasAcronym = acronym !== undefined && acronym !== '';
+        const hasSource = sources !== undefined && sources.length > 0;
+        const hasNote = notes !== undefined && notes !== '';
+        const geoJSONFeatureOtherThanPoint = geojsonList.filter(geojson => {
+          if (geojson.type === "Feature") {
+            return geojson.geometry.type !== "Point";
+          }
+          return true;
+        });
+        const hasGeoJSONFeatureOtherThanPoint = geoJSONFeatureOtherThanPoint.length > 0;
+        return hasAcronym && (hasSource || hasNote || hasGeoJSONFeatureOtherThanPoint);
       },
       legendItems: (geojsonList) => {
         if (!Array.isArray(geojsonList)) {
