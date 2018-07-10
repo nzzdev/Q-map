@@ -34,6 +34,12 @@
   "Position der Beschriftung": "Position of the label",
   "oben": "top",
   "unten": "bottom",
+  "links": "left",
+  "rechts": "right",
+  "oben links": "top left",
+  "oben rechts": "top right",
+  "unten links": "bottom left",
+  "unten rechts": "bottom right",
   "Für die Berechnung der initialen Ansicht einbeziehen":
     "Use for calculation of initial view"
 }

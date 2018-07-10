@@ -263,9 +263,27 @@
             "labelPosition": {
               "title": "Position der Beschriftung",
               "type": "string",
-              "enum": ["top", "bottom"],
+              "enum": [
+                "top",
+                "bottom",
+                "left",
+                "right",
+                "topleft",
+                "topright",
+                "bottomleft",
+                "bottomright"
+              ],
               "Q:options": {
-                "enum_titles": ["oben", "unten"]
+                "enum_titles": [
+                  "oben",
+                  "unten",
+                  "links",
+                  "rechts",
+                  "oben links",
+                  "oben rechts",
+                  "unten links",
+                  "unten rechts"
+                ]
               }
             },
             "useForInitialView": {
