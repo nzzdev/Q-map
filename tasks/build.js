@@ -45,7 +45,7 @@ async function buildScripts() {
     .bundle("q-map/map.js", {
       normalize: true,
       runtime: false,
-      minify: true,
+      minify: false,
       mangle: false
     })
     .then(bundle => {
