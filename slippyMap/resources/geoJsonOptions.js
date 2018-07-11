@@ -22,6 +22,6 @@ export default {
   coordsToLatLng: coords => {
     const lng = Leaflet.Util.wrapNum(coords[0], [0, 360], true);
     const lat = coords[1];
-    return Leaflet.latlng(lat, lng);
+    return Leaflet.latLng(lat, lng);
   }
 };
