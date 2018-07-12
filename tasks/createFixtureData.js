@@ -262,6 +262,27 @@ function dontShowAcronym() {
   return item;
 }
 
+function antimeridian() {
+  const item = {
+    title:
+      "FIXTURE: show pacific view if one of the features is within the pacific area",
+    subtitle: "subtitle",
+    sources: [],
+    notes: "",
+    acronym: "abc",
+    geojsonList: [points.honoluluHeavyTop, points.tokioHeavyTop],
+    options: {
+      baseLayer: "streets",
+      initialZoomLevel: -1,
+      minimapInitialZoomOffset: 0,
+      minimap: true,
+      labelsBelowMap: false,
+      showLegend: true
+    }
+  };
+  return item;
+}
+
 module.exports = {
   mapPoint: createMapPoint,
   mapFeature: createMapFeature,
@@ -278,5 +299,6 @@ module.exports = {
   mapLayerTerrain: createMapLayerTerrain,
   mapLayerAerial: createMapLayerAerial,
   showAcronym: showAcronym,
-  dontShowAcronym: dontShowAcronym
+  dontShowAcronym: dontShowAcronym,
+  antimeridian: antimeridian
 };

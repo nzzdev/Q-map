@@ -23,6 +23,30 @@ const points = {
       labelPosition: "bottom"
     }
   },
+  honoluluHeavyTop: {
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      coordinates: [-157.8556764, 21.304547]
+    },
+    properties: {
+      label: "Honolulu",
+      type: "pointHeavyLabel",
+      labelPosition: "top"
+    }
+  },
+  tokioHeavyTop: {
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      coordinates: [139.4049033, 34.6968642]
+    },
+    properties: {
+      label: "Tokio",
+      type: "pointHeavyLabel",
+      labelPosition: "top"
+    }
+  },
   tiranaLightTop: {
     type: "Feature",
     geometry: {
