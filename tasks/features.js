@@ -8,7 +8,8 @@ const points = {
     properties: {
       label: "Bukarest",
       type: "pointHeavyLabel",
-      labelPosition: "top"
+      labelPosition: "top",
+      useForInitialView: true
     }
   },
   sofiaHeavyBottom: {
@@ -20,7 +21,8 @@ const points = {
     properties: {
       label: "Sofia",
       type: "pointHeavyLabel",
-      labelPosition: "bottom"
+      labelPosition: "bottom",
+      useForInitialView: true
     }
   },
   honoluluHeavyTop: {
@@ -32,7 +34,8 @@ const points = {
     properties: {
       label: "Honolulu",
       type: "pointHeavyLabel",
-      labelPosition: "top"
+      labelPosition: "top",
+      useForInitialView: true
     }
   },
   tokioHeavyTop: {
@@ -44,7 +47,8 @@ const points = {
     properties: {
       label: "Tokio",
       type: "pointHeavyLabel",
-      labelPosition: "top"
+      labelPosition: "top",
+      useForInitialView: true
     }
   },
   tiranaLightTop: {
@@ -56,7 +60,8 @@ const points = {
     properties: {
       label: "Tirana",
       type: "pointLightLabel",
-      labelPosition: "top"
+      labelPosition: "top",
+      useForInitialView: true
     }
   },
   yerevanLightBottom: {
@@ -68,7 +73,8 @@ const points = {
     properties: {
       label: "Jerewan",
       type: "pointLightLabel",
-      labelPosition: "bottom"
+      labelPosition: "bottom",
+      useForInitialView: true
     }
   },
   sarajevoOnlyTop: {
@@ -80,7 +86,8 @@ const points = {
     properties: {
       label: "Sarajevo",
       type: "pointOnly",
-      labelPosition: "top"
+      labelPosition: "top",
+      useForInitialView: true
     }
   },
   zagrebOnlyBottom: {
@@ -92,7 +99,8 @@ const points = {
     properties: {
       label: "Zagreb",
       type: "pointOnly",
-      labelPosition: "bottom"
+      labelPosition: "bottom",
+      useForInitialView: true
     }
   },
   pragueLabelTop: {
@@ -104,7 +112,8 @@ const points = {
     properties: {
       label: "Prag",
       type: "label",
-      labelPosition: "top"
+      labelPosition: "top",
+      useForInitialView: true
     }
   },
   tiflisLabelBottom: {
@@ -116,7 +125,8 @@ const points = {
     properties: {
       label: "Tiflis",
       type: "label",
-      labelPosition: "bottom"
+      labelPosition: "bottom",
+      useForInitialView: true
     }
   },
   athensEventTop: {
@@ -128,7 +138,8 @@ const points = {
     properties: {
       label: "Athen",
       type: "event",
-      labelPosition: "top"
+      labelPosition: "top",
+      useForInitialView: true
     }
   },
   budapestEventBottom: {
@@ -140,7 +151,8 @@ const points = {
     properties: {
       label: "Budapest",
       type: "event",
-      labelPosition: "bottom"
+      labelPosition: "bottom",
+      useForInitialView: true
     }
   }
 };

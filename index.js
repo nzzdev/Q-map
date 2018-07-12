@@ -8,7 +8,7 @@ const start = async function() {
   server.route(routes);
 
   await server.start();
-  console.log("Server running at: " + server.info.uri);
+  console.log(`Server running at: ${server.info.uri}`);
 };
 
 start();
