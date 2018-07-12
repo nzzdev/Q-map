@@ -20,8 +20,14 @@ export default {
     return feature.properties;
   },
   coordsToLatLng: coords => {
-    const lng = Leaflet.Util.wrapNum(coords[0], [0, 360], true);
     const lat = coords[1];
+    let lng = coords[0];
+    const pacificBounds = Leaflet.latLngBounds([[-180, -90], [-125, 90]]);
+
+    if (lng < 0 && pacificBounds.contains(coords)) {
+      lng = Leaflet.Util.wrapNum(lng, [0, 360], true);
+    }
+
     return Leaflet.latLng(lat, lng);
   }
 };
