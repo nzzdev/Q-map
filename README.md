@@ -1,5 +1,7 @@
 # Q Map
 
+**Maintainer**: [manuelroth](https://github.com/manuelroth)
+
 Q map is one tool of the Q toolbox to produce simple pointer maps.
 Test it in the demo: https://q-demo.st.nzz.ch/
 
@@ -70,8 +72,30 @@ If you work with [Q-cli](https://github.com/nzzdev/Q-cli) there is a config file
 
 Of course with another mapbox configuration you have to adjust the LAYER_CONFIGS defintion as well so that it fits your needs.
 
-## License
+## Installation
 
-Copyright (c) 2017 Neue Zürcher Zeitung. All rights reserved.
+```bash
+$ npm install
+$ npm run build
+```
+
+## Development
+
+Install the [Q cli](https://github.com/nzzdev/Q-cli) and start the Q dev server:
+
+```
+$ Q server
+```
+
+Run the Q tool:
+```
+$ npm run dev
+```
+
+## Implementation details
+The tool structure follows the general structure of each Q tool. Further information can be found in [Q server documentation - Developing tools](https://nzzdev.github.io/Q-server/developing-tools.html).
+
+## License
+Copyright (c) 2018 Neue Zürcher Zeitung. All rights reserved.
 
 This software is published under the MIT license.
