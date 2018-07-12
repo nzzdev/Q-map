@@ -1,12 +1,9 @@
-const enjoi = require("enjoi");
 const Boom = require("boom");
-const fs = require("fs");
 
 const resourcesDir = __dirname + "/../../resources/";
 const scriptsDir = __dirname + "/../../scripts/";
 const stylesDir = __dirname + "/../../styles/";
 const dynamicSchema = require(resourcesDir + "dynamicSchema.js");
-const schema = enjoi(dynamicSchema);
 const viewsDir = __dirname + "/../../views/";
 
 const scriptHashMap = require(`${scriptsDir}/hashMap.json`);
@@ -18,6 +15,34 @@ const staticTpl = require(`${viewsDir}/HtmlJs.html`);
 const simplestyleToLeafletStyle = require(__dirname +
   "/../../helpers/simplestyleToLeafletStyle.js");
 
+const Ajv = require("ajv");
+const ajv = new Ajv();
+
+// add draft-04 support explicit
+ajv.addMetaSchema(require("ajv/lib/refs/json-schema-draft-04.json"));
+
+const validate = ajv.compile(dynamicSchema);
+function validateAgainstSchema(item, options) {
+  if (validate(item)) {
+    return item;
+  } else {
+    throw Boom.badRequest(JSON.stringify(validate.errors));
+  }
+}
+
+async function validatePayload(payload, options, next) {
+  if (typeof payload !== "object") {
+    return next(Boom.badRequest(), payload);
+  }
+  if (typeof payload.item !== "object") {
+    return next(Boom.badRequest(), payload);
+  }
+  if (typeof payload.toolRuntimeConfig !== "object") {
+    return next(Boom.badRequest(), payload);
+  }
+  await validateAgainstSchema(payload.item, options);
+}
+
 module.exports = {
   method: "POST",
   path: "/rendering-info/html-js",
@@ -26,9 +51,7 @@ module.exports = {
       options: {
         allowUnknown: true
       },
-      payload: {
-        item: schema
-      }
+      payload: validatePayload
     },
     cors: true,
     cache: false // do not send cache control header to let it be added by Q Server
