@@ -242,7 +242,8 @@ export default class LeafletMap {
           toggleDisplay: false,
           zoomLevelFixed: this.minimapZoomLevelFixed,
           aimingRectOptions: {
-            color: "#d28b00",
+            color: "#000000",
+            fillOpacity: 0,
             weight: 1,
             interactive: false
           },
