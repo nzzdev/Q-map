@@ -4,7 +4,7 @@ async function getConfig() {
   let env;
   try {
     // needs a json file 'env' defining map ids and mapbox tokens per target.
-    env = JSON.parse(fs.readFileSync(__dirname + "/env.json"));
+    env = JSON.parse(fs.readFileSync(`${__dirname}/env.json`));
   } catch (err) {
     console.log(err);
     // nevermind

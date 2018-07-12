@@ -12,7 +12,7 @@ const cssnano = require("cssnano");
 
 const createFixtureData = require("./createFixtureData.js");
 
-const stylesDir = __dirname + "/../styles_src/";
+const stylesDir = `${__dirname}/../styles_src/`;
 
 builder.config({
   map: {

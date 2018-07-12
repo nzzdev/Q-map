@@ -383,7 +383,7 @@ export default class LeafletMap {
 
   setAspectRatio(w, h) {
     let container = this.map.getContainer();
-    container.style.height = container.offsetWidth * (h / w) + "px";
+    container.style.height = `${container.offsetWidth * (h / w)}px`;
 
     if (this.aspectRatio !== w / h) {
       this.aspectRatio = w / h;

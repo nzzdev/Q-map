@@ -1,10 +1,10 @@
 const Boom = require("boom");
 
-const resourcesDir = __dirname + "/../../resources/";
-const scriptsDir = __dirname + "/../../scripts/";
-const stylesDir = __dirname + "/../../styles/";
-const dynamicSchema = require(resourcesDir + "dynamicSchema.js");
-const viewsDir = __dirname + "/../../views/";
+const resourcesDir = `${__dirname}/../../resources/`;
+const scriptsDir = `${__dirname}/../../scripts/`;
+const stylesDir = `${__dirname}/../../styles/`;
+const dynamicSchema = require(`${resourcesDir}dynamicSchema.js`);
+const viewsDir = `${__dirname}/../../views/`;
 
 const scriptHashMap = require(`${scriptsDir}/hashMap.json`);
 const styleHashMap = require(`${stylesDir}/hashMap.json`);
@@ -12,8 +12,7 @@ const styleHashMap = require(`${stylesDir}/hashMap.json`);
 require("svelte/ssr/register");
 const staticTpl = require(`${viewsDir}/HtmlJs.html`);
 
-const simplestyleToLeafletStyle = require(__dirname +
-  "/../../helpers/simplestyleToLeafletStyle.js");
+const simplestyleToLeafletStyle = require(`${__dirname}/../../helpers/simplestyleToLeafletStyle.js`);
 
 const Ajv = require("ajv");
 const ajv = new Ajv();
