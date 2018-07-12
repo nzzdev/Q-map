@@ -200,6 +200,10 @@ function buildFixtures() {
     "resources/fixtures/data/dontShowAcronym.json",
     JSON.stringify(createFixtureData.dontShowAcronym())
   );
+  fs.writeFileSync(
+    "resources/fixtures/data/antimeridian.json",
+    JSON.stringify(createFixtureData.antimeridian())
+  );
 }
 
 Promise.all([buildScripts(), buildStyles(), buildFixtures()])

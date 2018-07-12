@@ -18,7 +18,8 @@ const fixtureData = [
   require(`${fixtureDataDirectory}/baseLayerTerrain.json`),
   require(`${fixtureDataDirectory}/baseLayerAerial.json`),
   require(`${fixtureDataDirectory}/showAcronym.json`),
-  require(`${fixtureDataDirectory}/dontShowAcronym.json`)
+  require(`${fixtureDataDirectory}/dontShowAcronym.json`),
+  require(`${fixtureDataDirectory}/antimeridian.json`)
 ];
 
 module.exports = {
