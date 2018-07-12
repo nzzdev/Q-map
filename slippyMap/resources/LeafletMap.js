@@ -247,7 +247,7 @@ export default class LeafletMap {
           aimingRectOptions: {
             color: "#000000",
             fillOpacity: 0,
-            weight: 0.5,
+            weight: 1,
             interactive: false
           },
           shadowRectOptions: {
