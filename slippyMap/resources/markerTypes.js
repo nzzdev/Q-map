@@ -1,7 +1,10 @@
 import Leaflet from "leaflet";
 
+function labelClasses(first, sencond) {
+  return `q-map-marker__label--${first} q-map-marker__label--${sencond}`;
+}
+
 function getAlignLabelClasses(labelPosition) {
-  const labelClasses = `q-map-marker__label--${0} q-map-marker__label--${1}`;
   if (labelPosition === "top") {
     return labelClasses("vertical", "top");
   } else if (labelPosition === "bottom") {
