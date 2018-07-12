@@ -3,7 +3,7 @@ import Leaflet from "leaflet";
 
 export default {
   pointToLayer: (feature, latlng) => {
-    let markerType = feature.properties.type || "pointLightLabel";
+    let markerType = feature.properties.type || "pointHeavyLabel";
     if (markerTypes.hasOwnProperty(markerType)) {
       let markerIcon = markerTypes[markerType].getLeafletIcon(
         feature.properties
