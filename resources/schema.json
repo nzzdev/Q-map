@@ -228,19 +228,16 @@
         "properties": {
           "type": "object",
           "required": ["type", "labelPosition"],
-          "default": {
-            "label": "",
-            "type": "pointHeavyLabel",
-            "labelPosition": "top"
-          },
           "properties": {
             "label": {
               "title": "Beschriftung des Punkts",
-              "type": "string"
+              "type": "string",
+              "default": ""
             },
             "type": {
               "title": "Markertyp",
               "type": "string",
+              "default": "pointHeavyLabel",
               "enum": [
                 "pointHeavyLabel",
                 "pointLightLabel",
@@ -263,6 +260,7 @@
             "labelPosition": {
               "title": "Position der Beschriftung",
               "type": "string",
+              "default": "top",
               "enum": [
                 "top",
                 "bottom",
