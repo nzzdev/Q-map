@@ -4,11 +4,11 @@
   {{/if}} {{#if subtitle && subtitle !== ''}}
   <div class="s-q-item__subtitle s-font-note">{{ subtitle }}</div>
   {{/if}} {{#if options.showLegend === true }}
-  <div class="q-map-legend">
+  <div class="s-legend-icon-label">
     {{#each legendItems as legendItem}}
-    <div class="q-map-legend__item">
-      <div class="q-map-legend__item__color" style="color: {{ legendItem.color }}; opacity: {{ legendItem.opacity }};"></div>
-      <div class="q-map-legend__item__text s-font-note">{{ legendItem.label }}</div>
+    <div class="s-legend-item-label__item">
+      <div class="s-legend-item-label__item__icon s-legend-item-label__item__icon--default" style="color: {{ legendItem.color }}; opacity: {{ legendItem.opacity }};"></div>
+      <div class="s-legend-item-label__item__label">{{ legendItem.label }}</div>
     </div>
     {{/each}}
   </div>

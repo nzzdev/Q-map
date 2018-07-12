@@ -17,7 +17,7 @@ async function getConfig() {
         stylesheets: [
           {
             url:
-              "https://service.sophie.nzz.ch/bundle/sophie-q@1,sophie-font@1,sophie-color@1,sophie-viz-color@1,sophie-input@1.css"
+              "https://sophieservicestage-2cac.kxcdn.com/bundle/sophie-q@1,sophie-font@1,sophie-color@1,sophie-viz-color@1,sophie-input@1,sophie-legend%23master.css"
           }
         ]
       },
@@ -39,7 +39,7 @@ async function getConfig() {
         stylesheets: [
           {
             url:
-              "https://service.sophie.nzz.ch/bundle/sophie-nzzas-q@1,sophie-nzzas-font@1,sophie-nzzas-color@1,sophie-nzzas-viz-color@1,sophie-nzzas-input@1.css"
+              "https://sophieservicestage-2cac.kxcdn.com/bundle/sophie-nzzas-q@1,sophie-nzzas-font@1,sophie-nzzas-color@1,sophie-nzzas-viz-color@1,sophie-nzzas-input@1,sophie-legend%23master.css"
           }
         ]
       },
