@@ -1,6 +1,6 @@
 {
   "name": "@nzz/q-map",
-  "version": "1.9.1",
+  "version": "1.10.0",
   "description": "Q map tool",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,7 @@
     "cssnano": "^3.10.0",
     "hapi": "^17.5.2",
     "inert": "^5.1.0",
-    "node-sass": "^4.9.1",
+    "node-sass": "^4.9.2",
     "postcss-import": "^11.1.0",
     "svelte": "1.22.5",
     "systemjs": "0.20.19",
