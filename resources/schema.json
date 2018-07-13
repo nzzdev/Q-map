@@ -9,7 +9,10 @@
     },
     "subtitle": {
       "type": "string",
-      "title": "Untertitel"
+      "title": "Untertitel",
+      "Q:options": {
+        "placeholder": "Wird nur bei komplexeren Karten benötigt."
+       }
     },
     "geojsonList": {
       "title": "Elemente auf der Karte",
