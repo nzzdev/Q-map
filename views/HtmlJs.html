@@ -7,7 +7,7 @@
   <div class="s-legend-icon-label">
     {{#each legendItems as legendItem}}
     <div class="s-legend-item-label__item">
-      <div class="s-legend-item-label__item__icon s-legend-item-label__item__icon--default" style="color: {{ legendItem.color }}; opacity: {{ legendItem.opacity }};"></div>
+      <div class="s-legend-item-label__item__icon s-legend-item-label__item__icon--{{ legendItem.type }}" style="color: {{ legendItem.color }}; opacity: {{ legendItem.opacity }};"></div>
       <div class="s-legend-item-label__item__label">{{ legendItem.label }}</div>
     </div>
     {{/each}}
@@ -88,6 +88,7 @@
           .map(item => {
             let opacity = 1;
             let color;
+            let type = "default";
             if (item.geometry.type === 'LineString' || item.geometry.type === 'MultiLineString') {
               if (item.properties.opacity) {
                 opacity = item.properties.opacity;
@@ -95,6 +96,7 @@
               if (item.properties.color) {
                 color = item.properties.color;
               }
+              type = "line";
             }
             if (item.geometry.type === 'Polygon' || item.geometry.type === 'MultiPolygon') {
               if (item.properties.fillOpacity) {
@@ -107,7 +109,8 @@
             return {
               color: color,
               opacity: opacity,
-              label: item.properties.label
+              label: item.properties.label,
+              type: type
             }
           })
         return legend;
