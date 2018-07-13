@@ -305,7 +305,7 @@ function labelPlacementTypePointHeavyLabel() {
       baseLayer: "streets",
       initialZoomLevel: -1,
       minimapInitialZoomOffset: 0,
-      minimap: true,
+      minimap: false,
       labelsBelowMap: false,
       showLegend: true
     }
@@ -338,7 +338,7 @@ function labelPlacementTypePointLightLabel() {
       baseLayer: "streets",
       initialZoomLevel: -1,
       minimapInitialZoomOffset: 0,
-      minimap: true,
+      minimap: false,
       labelsBelowMap: false,
       showLegend: true
     }
@@ -370,7 +370,7 @@ function labelPlacementTypeEvent() {
       baseLayer: "streets",
       initialZoomLevel: -1,
       minimapInitialZoomOffset: 0,
-      minimap: true,
+      minimap: false,
       labelsBelowMap: false,
       showLegend: true
     }
