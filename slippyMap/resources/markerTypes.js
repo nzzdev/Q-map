@@ -1,31 +1,6 @@
 import Leaflet from "leaflet";
 
-function labelClasses(first, sencond) {
-  return `q-map-marker__label--${first} q-map-marker__label--${sencond}`;
-}
-
 function getAlignLabelClasses(labelPosition) {
-  if (labelPosition === "top") {
-    return labelClasses("vertical", "top");
-  } else if (labelPosition === "bottom") {
-    return labelClasses("vertical", "bottom");
-  } else if (labelPosition === "left") {
-    return labelClasses("horizontal", "left");
-  } else if (labelPosition === "right") {
-    return labelClasses("horizontal", "right");
-  } else if (labelPosition === "topleft") {
-    return labelClasses("top", "left");
-  } else if (labelPosition === "topright") {
-    return labelClasses("top", "right");
-  } else if (labelPosition === "bottomleft") {
-    return labelClasses("bottom", "left");
-  } else if (labelPosition === "bottomright") {
-    return labelClasses("bottom", "right");
-  }
-  return labelClasses("vertical", "top");
-}
-
-function getAlignLabelClassesEvent(labelPosition) {
   if (labelPosition) {
     return `q-map-marker__label--${labelPosition}`;
   }
@@ -90,7 +65,7 @@ export const markerTypes = {
       return Leaflet.divIcon({
         className: "q-map-marker s-color-gray-1",
         iconSize: [8, 8],
-        html: `<div class="s-font-note s-font-note--strong q-map-marker__label ${getAlignLabelClassesEvent(
+        html: `<div class="s-font-note s-font-note--strong q-map-marker__label ${getAlignLabelClasses(
           marker.labelPosition
         )} q-map-marker__label--event">${marker.label || ""}</div>`
       });
