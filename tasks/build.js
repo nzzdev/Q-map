@@ -204,6 +204,18 @@ function buildFixtures() {
     "resources/fixtures/data/antimeridian.json",
     JSON.stringify(createFixtureData.antimeridian())
   );
+  fs.writeFileSync(
+    "resources/fixtures/data/labelPlacementTypePointHeavyLabel.json",
+    JSON.stringify(createFixtureData.labelPlacementTypePointHeavyLabel())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/labelPlacementTypePointLightLabel.json",
+    JSON.stringify(createFixtureData.labelPlacementTypePointLightLabel())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/labelPlacementTypeEvent.json",
+    JSON.stringify(createFixtureData.labelPlacementTypeEvent())
+  );
 }
 
 Promise.all([buildScripts(), buildStyles(), buildFixtures()])

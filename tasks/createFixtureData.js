@@ -283,6 +283,101 @@ function antimeridian() {
   return item;
 }
 
+function labelPlacementTypePointHeavyLabel() {
+  const item = {
+    title:
+      "FIXTURE: all label placement options using marker type pointHeavyLabel",
+    subtitle: "subtitle",
+    sources: [],
+    notes: "",
+    acronym: "abc",
+    geojsonList: [
+      points.zurichHeavyTop,
+      points.zurichHeavyBottom,
+      points.zurichHeavyLeft,
+      points.zurichHeavyRight,
+      points.zurichHeavyTopLeft,
+      points.zurichHeavyTopRight,
+      points.zurichHeavyBottomLeft,
+      points.zurichHeavyBottomRight
+    ],
+    options: {
+      baseLayer: "streets",
+      initialZoomLevel: -1,
+      minimapInitialZoomOffset: 0,
+      minimap: true,
+      labelsBelowMap: false,
+      showLegend: true
+    }
+  };
+  return item;
+}
+
+function labelPlacementTypePointLightLabel() {
+  const item = {
+    title:
+      "FIXTURE: all label placement options using marker type pointLightLabel",
+    subtitle: "subtitle",
+    sources: [],
+    notes: "",
+    acronym: "abc",
+    geojsonList: [
+      points.zurichHeavyTop,
+      points.zurichHeavyBottom,
+      points.zurichHeavyLeft,
+      points.zurichHeavyRight,
+      points.zurichHeavyTopLeft,
+      points.zurichHeavyTopRight,
+      points.zurichHeavyBottomLeft,
+      points.zurichHeavyBottomRight
+    ].map(geojson => {
+      geojson.properties.type = "pointLightLabel";
+      return geojson;
+    }),
+    options: {
+      baseLayer: "streets",
+      initialZoomLevel: -1,
+      minimapInitialZoomOffset: 0,
+      minimap: true,
+      labelsBelowMap: false,
+      showLegend: true
+    }
+  };
+  return item;
+}
+
+function labelPlacementTypeEvent() {
+  const item = {
+    title: "FIXTURE: all label placement options using marker type event",
+    subtitle: "subtitle",
+    sources: [],
+    notes: "",
+    acronym: "abc",
+    geojsonList: [
+      points.zurichHeavyTop,
+      points.zurichHeavyBottom,
+      points.zurichHeavyLeft,
+      points.zurichHeavyRight,
+      points.zurichHeavyTopLeft,
+      points.zurichHeavyTopRight,
+      points.zurichHeavyBottomLeft,
+      points.zurichHeavyBottomRight
+    ].map(geojson => {
+      geojson.properties.type = "event";
+      return geojson;
+    }),
+    options: {
+      baseLayer: "streets",
+      initialZoomLevel: -1,
+      minimapInitialZoomOffset: 0,
+      minimap: true,
+      labelsBelowMap: false,
+      showLegend: true
+    }
+  };
+  return item;
+}
+
 module.exports = {
   mapPoint: createMapPoint,
   mapFeature: createMapFeature,
@@ -300,5 +395,8 @@ module.exports = {
   mapLayerAerial: createMapLayerAerial,
   showAcronym: showAcronym,
   dontShowAcronym: dontShowAcronym,
-  antimeridian: antimeridian
+  antimeridian: antimeridian,
+  labelPlacementTypePointHeavyLabel: labelPlacementTypePointHeavyLabel,
+  labelPlacementTypePointLightLabel: labelPlacementTypePointLightLabel,
+  labelPlacementTypeEvent: labelPlacementTypeEvent
 };

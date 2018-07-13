@@ -51,6 +51,110 @@ const points = {
       useForInitialView: true
     }
   },
+  zurichHeavyTop: {
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      coordinates: [8.540008664131166, 47.38041593812454]
+    },
+    properties: {
+      label: "oben",
+      type: "pointHeavyLabel",
+      labelPosition: "top",
+      useForInitialView: true
+    }
+  },
+  zurichHeavyBottom: {
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      coordinates: [8.540553823113443, 47.374801772543734]
+    },
+    properties: {
+      label: "unten",
+      type: "pointHeavyLabel",
+      labelPosition: "bottom",
+      useForInitialView: true
+    }
+  },
+  zurichHeavyLeft: {
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      coordinates: [8.536566048860552, 47.37704678398289]
+    },
+    properties: {
+      label: "links",
+      type: "pointHeavyLabel",
+      labelPosition: "left",
+      useForInitialView: true
+    }
+  },
+  zurichHeavyRight: {
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      coordinates: [8.543513640761377, 47.377138053663884]
+    },
+    properties: {
+      label: "rechts",
+      type: "pointHeavyLabel",
+      labelPosition: "right",
+      useForInitialView: true
+    }
+  },
+  zurichHeavyTopRight: {
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      coordinates: [8.545700311660768, 47.378964776293124]
+    },
+    properties: {
+      label: "obenrechts",
+      type: "pointHeavyLabel",
+      labelPosition: "topright",
+      useForInitialView: true
+    }
+  },
+  zurichHeavyTopLeft: {
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      coordinates: [8.535035178065302, 47.37910644341264]
+    },
+    properties: {
+      label: "obenlinks",
+      type: "pointHeavyLabel",
+      labelPosition: "topleft",
+      useForInitialView: true
+    }
+  },
+  zurichHeavyBottomLeft: {
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      coordinates: [8.537571206688883, 47.37489577069226]
+    },
+    properties: {
+      label: "untenlinks",
+      type: "pointHeavyLabel",
+      labelPosition: "bottomleft",
+      useForInitialView: true
+    }
+  },
+  zurichHeavyBottomRight: {
+    type: "Feature",
+    geometry: {
+      type: "Point",
+      coordinates: [8.54492448270321, 47.37463193971521]
+    },
+    properties: {
+      label: "untenrechts",
+      type: "pointHeavyLabel",
+      labelPosition: "bottomright",
+      useForInitialView: true
+    }
+  },
   tiranaLightTop: {
     type: "Feature",
     geometry: {
