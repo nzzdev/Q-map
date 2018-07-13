@@ -2,6 +2,8 @@
   "Karte": "Map",
   "Titel": "Title",
   "Untertitel": "Subtitle",
+  "Wird nur bei komplexeren Karten benötigt.":
+    "Only needed for more complex maps.",
   "Elemente auf der Karte": "Elements on the map",
   "Quelle(n)": "Sources",
   "Quelle": "Source",
