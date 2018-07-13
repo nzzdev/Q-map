@@ -93,11 +93,11 @@
 }
 
 .q-map-marker__label--left {
-  right: 18px;
+  right: 12px;
 }
 
 .q-map-marker__label--right {
-  left: 18px;
+  left: 12px;
 }
 
 .q-map-marker__label--event {
@@ -112,12 +112,20 @@
   }
 
   &.q-map-marker__label--top {
+    left: 4px;
+    transform: translateX(-50%);
+    line-height: 1.2;
+    bottom: 1em;
     &::after {
       content: "\2193";
+      bottom: 0.1em;
     }
   }
 
   &.q-map-marker__label--bottom {
+    left: 4px;
+    transform: translateX(-50%);
+    line-height: 1.1;
     &::before {
       content: "\2191";
       top: -0.2em;
@@ -127,9 +135,10 @@
   &.q-map-marker__label--left {
     display: flex;
     right: 20px;
+    line-height: 0.6;
     &::after {
       content: "\2192";
-      margin-left: 10px;
+      margin-left: 8px;
       top: -0.2em;
     }
   }
@@ -137,16 +146,18 @@
   &.q-map-marker__label--right {
     display: flex;
     left: 20px;
+    line-height: 0.6;
     &::before {
       content: "\2190";
-      margin-right: 10px;
+      margin-right: 8px;
       top: -0.2em;
     }
   }
 
   &.q-map-marker__label--topleft {
-    top: -45px;
+    top: -35px;
     right: 34px;
+    line-height: 0.9;
     &::after {
       content: "\2198";
       display: flex;
@@ -157,7 +168,8 @@
 
   &.q-map-marker__label--topright {
     top: -65px;
-    left: 40px;
+    left: 35px;
+    line-height: 1.1;
     &::before {
       content: "\2199";
       display: flex;
@@ -170,6 +182,7 @@
   &.q-map-marker__label--bottomleft {
     top: 30px;
     right: 34px;
+    line-height: 1.1;
     &::after {
       content: "\2197";
       display: flex;
@@ -180,8 +193,9 @@
   }
 
   &.q-map-marker__label--bottomright {
-    top: 0;
+    top: -4px;
     left: 40px;
+    line-height: 1.3;
     &::before {
       content: "\2196";
       display: flex;
