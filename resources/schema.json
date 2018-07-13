@@ -11,7 +11,7 @@
       "type": "string",
       "title": "Untertitel",
       "Q:options": {
-        "placeholder": "Wird nur bei komplexeren Karten benötigt&#46"
+        "placeholder": "Wird nur bei komplexeren Karten benötigt&#46;"
       }
     },
     "geojsonList": {
