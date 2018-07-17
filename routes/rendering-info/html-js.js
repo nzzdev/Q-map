@@ -1,30 +1,47 @@
-const enjoi = require("enjoi");
 const Boom = require("boom");
-const fs = require("fs");
 
-const resourcesDir = __dirname + "/../../resources/";
-const scriptsDir = __dirname + "/../../scripts/";
-const stylesDir = __dirname + "/../../styles/";
-const dynamicSchema = require(resourcesDir + "dynamicSchema.js");
-const schema = enjoi(dynamicSchema);
-const viewsDir = __dirname + "/../../views/";
+const resourcesDir = `${__dirname}/../../resources/`;
+const scriptsDir = `${__dirname}/../../scripts/`;
+const stylesDir = `${__dirname}/../../styles/`;
+const dynamicSchema = require(`${resourcesDir}dynamicSchema.js`);
+const viewsDir = `${__dirname}/../../views/`;
 
 const scriptHashMap = require(`${scriptsDir}/hashMap.json`);
 const styleHashMap = require(`${stylesDir}/hashMap.json`);
 
-const displayOptionsSchema = enjoi(
-  JSON.parse(
-    fs.readFileSync(resourcesDir + "display-options-schema.json", {
-      encoding: "utf-8"
-    })
-  )
-);
-
 require("svelte/ssr/register");
 const staticTpl = require(`${viewsDir}/HtmlJs.html`);
 
-const simplestyleToLeafletStyle = require(__dirname +
-  "/../../helpers/simplestyleToLeafletStyle.js");
+const simplestyleToLeafletStyle = require(`${__dirname}/../../helpers/simplestyleToLeafletStyle.js`);
+const getConvertedGeojsonList = require(`${__dirname}/../../helpers/getConvertedGeojsonList.js`);
+
+const Ajv = require("ajv");
+const ajv = new Ajv();
+
+// add draft-04 support explicit
+ajv.addMetaSchema(require("ajv/lib/refs/json-schema-draft-04.json"));
+
+const validate = ajv.compile(dynamicSchema);
+function validateAgainstSchema(item, options) {
+  if (validate(item)) {
+    return item;
+  } else {
+    throw Boom.badRequest(JSON.stringify(validate.errors));
+  }
+}
+
+async function validatePayload(payload, options, next) {
+  if (typeof payload !== "object") {
+    return next(Boom.badRequest(), payload);
+  }
+  if (typeof payload.item !== "object") {
+    return next(Boom.badRequest(), payload);
+  }
+  if (typeof payload.toolRuntimeConfig !== "object") {
+    return next(Boom.badRequest(), payload);
+  }
+  await validateAgainstSchema(payload.item, options);
+}
 
 module.exports = {
   method: "POST",
@@ -34,12 +51,7 @@ module.exports = {
       options: {
         allowUnknown: true
       },
-      payload: {
-        item: schema,
-        toolRuntimeConfig: {
-          displayOptions: displayOptionsSchema
-        }
-      }
+      payload: validatePayload
     },
     cors: true,
     cache: false // do not send cache control header to let it be added by Q Server
@@ -105,6 +117,10 @@ module.exports = {
         );
       }
     }
+    // If the geojson features are in the pacific area, all longitude coordinates
+    // should be converted to be between 0 - 360 degrees
+    // See this blog post for more information: https://macwright.org/2016/09/26/the-180th-meridian.html
+    data.geojsonList = getConvertedGeojsonList(data.geojsonList);
 
     let systemConfigScript = `
         System.config({

@@ -1,12 +1,14 @@
 <div class="s-q-item q-map" data-track-id="q-map" data-track-component-id="{{ id }}" style="opacity: 0">
   {{#if options.hideTitle !== true && hideTitle !== true }}
   <h3 class="s-q-item__title">{{title}}</h3>
+  {{/if}} {{#if subtitle && subtitle !== ''}}
+  <div class="s-q-item__subtitle s-font-note">{{ subtitle }}</div>
   {{/if}} {{#if options.showLegend === true }}
-  <div class="q-map-legend">
+  <div class="s-legend-icon-label">
     {{#each legendItems as legendItem}}
-    <div class="q-map-legend__item">
-      <div class="q-map-legend__item__color" style="color: {{ legendItem.color }}; opacity: {{ legendItem.opacity }};"></div>
-      <div class="q-map-legend__item__text s-font-note">{{ legendItem.label }}</div>
+    <div class="s-legend-item-label__item">
+      <div class="s-legend-item-label__item__icon s-legend-item-label__item__icon--{{ legendItem.type }}" style="color: {{ legendItem.color }}; opacity: {{ legendItem.opacity }};"></div>
+      <div class="s-legend-item-label__item__label">{{ legendItem.label }}</div>
     </div>
     {{/each}}
   </div>
@@ -30,7 +32,7 @@
               See also: https://github.com/sveltejs/svelte/issues/189  -->
     {{#if source.text !== ''}}{{#if source.link && source.link.isValid}}
     <a href="{{source.link.url}}" target="blank" rel="noopener noreferrer">{{source.text}}</a>{{else}}{{source.text}}{{/if}}{{#if index !== sources.length - 1 && sources[index + 1] !== ''}}, {{/if}}{{/if}}
-    {{/each}} {{/if}}
+    {{/each}} {{/if}} {{#if shouldHaveAcronym }}{{#if notes || shouldHaveSources }}&ndash;{{/if}} Grafik: {{ acronym }}{{/if}}
   </div>
   {{/if}}
 </div>
@@ -40,11 +42,24 @@
       hideTitle: (toolRuntimeConfig) => {
         return toolRuntimeConfig.displayOptions && toolRuntimeConfig.displayOptions.hideTitle;
       },
-      shouldHaveFooter: (options, notes, sources) => {
-        return options.labelsBelowMap || notes || (sources && sources.length > 0);
+      shouldHaveFooter: (options, notes, sources, acronym) => {
+        return options.labelsBelowMap || notes || (sources && sources.length > 0) || acronym !== '';
       },
       shouldHaveSources: (sources) => {
         return sources !== undefined && sources.length > 0;
+      },
+      shouldHaveAcronym: (acronym, sources, notes, geojsonList) => {
+        const hasAcronym = acronym !== undefined && acronym !== '';
+        const hasSource = sources !== undefined && sources.length > 0;
+        const hasNote = notes !== undefined && notes !== '';
+        const geoJSONFeatureOtherThanPoint = geojsonList.filter(geojson => {
+          if (geojson.type === "Feature") {
+            return geojson.geometry.type !== "Point";
+          }
+          return true;
+        });
+        const hasGeoJSONFeatureOtherThanPoint = geoJSONFeatureOtherThanPoint.length > 0;
+        return hasAcronym && (hasSource || hasNote || hasGeoJSONFeatureOtherThanPoint);
       },
       legendItems: (geojsonList) => {
         if (!Array.isArray(geojsonList)) {
@@ -73,6 +88,7 @@
           .map(item => {
             let opacity = 1;
             let color;
+            let type = "default";
             if (item.geometry.type === 'LineString' || item.geometry.type === 'MultiLineString') {
               if (item.properties.opacity) {
                 opacity = item.properties.opacity;
@@ -80,6 +96,7 @@
               if (item.properties.color) {
                 color = item.properties.color;
               }
+              type = "line";
             }
             if (item.geometry.type === 'Polygon' || item.geometry.type === 'MultiPolygon') {
               if (item.properties.fillOpacity) {
@@ -92,7 +109,8 @@
             return {
               color: color,
               opacity: opacity,
-              label: item.properties.label
+              label: item.properties.label,
+              type: type
             }
           })
         return legend;

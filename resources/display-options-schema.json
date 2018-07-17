@@ -5,6 +5,7 @@
   "properties": {
     "hideTitle": {
       "type": "boolean",
+      "default": true,
       "title": "Titel ausblenden"
     },
     "allowInteraction": {

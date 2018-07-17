@@ -12,7 +12,7 @@ const cssnano = require("cssnano");
 
 const createFixtureData = require("./createFixtureData.js");
 
-const stylesDir = __dirname + "/../styles_src/";
+const stylesDir = `${__dirname}/../styles_src/`;
 
 builder.config({
   map: {
@@ -191,6 +191,30 @@ function buildFixtures() {
   fs.writeFileSync(
     "resources/fixtures/data/baseLayerAerial.json",
     JSON.stringify(createFixtureData.mapLayerAerial())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/showAcronym.json",
+    JSON.stringify(createFixtureData.showAcronym())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/dontShowAcronym.json",
+    JSON.stringify(createFixtureData.dontShowAcronym())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/antimeridian.json",
+    JSON.stringify(createFixtureData.antimeridian())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/labelPlacementTypePointHeavyLabel.json",
+    JSON.stringify(createFixtureData.labelPlacementTypePointHeavyLabel())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/labelPlacementTypePointLightLabel.json",
+    JSON.stringify(createFixtureData.labelPlacementTypePointLightLabel())
+  );
+  fs.writeFileSync(
+    "resources/fixtures/data/labelPlacementTypeEvent.json",
+    JSON.stringify(createFixtureData.labelPlacementTypeEvent())
   );
 }
 

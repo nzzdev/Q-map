@@ -1,5 +1,12 @@
 import Leaflet from "leaflet";
 
+function getAlignLabelClasses(labelPosition) {
+  if (labelPosition) {
+    return `q-map-marker__label--${labelPosition}`;
+  }
+  return "q-map-marker__label--top";
+}
+
 export const markerTypes = {
   pointHeavyLabel: {
     label: "Punkt mit Label",
@@ -8,9 +15,9 @@ export const markerTypes = {
       return Leaflet.divIcon({
         className: "q-map-marker s-color-gray-1",
         iconSize: [8, 8],
-        html: `<div class="s-font-note s-font-note--strong q-map-marker__label q-map-marker__label--${
-          marker.labelPosition ? marker.labelPosition : "top"
-        }">${marker.label || ""}</div>`
+        html: `<div class="s-font-note s-font-note--strong q-map-marker__label ${getAlignLabelClasses(
+          marker.labelPosition
+        )}">${marker.label || ""}</div>`
       });
     }
   },
@@ -22,9 +29,9 @@ export const markerTypes = {
       return Leaflet.divIcon({
         className: "q-map-marker s-color-gray-1",
         iconSize: [7, 7],
-        html: `<div class="s-font-note-s s-font-note--strong q-map-marker__label q-map-marker__label--${
-          marker.labelPosition ? marker.labelPosition : "top"
-        }">${marker.label || ""}</div>`
+        html: `<div class="s-font-note-s s-font-note--strong q-map-marker__label ${getAlignLabelClasses(
+          marker.labelPosition
+        )}">${marker.label || ""}</div>`
       });
     }
   },
@@ -58,9 +65,9 @@ export const markerTypes = {
       return Leaflet.divIcon({
         className: "q-map-marker s-color-gray-1",
         iconSize: [8, 8],
-        html: `<div class="s-font-note s-font-note--strong q-map-marker__label q-map-marker__label--${
-          marker.labelPosition ? marker.labelPosition : "top"
-        } q-map-marker__label--event">${marker.label || ""}</div>`
+        html: `<div class="s-font-note s-font-note--strong q-map-marker__label ${getAlignLabelClasses(
+          marker.labelPosition
+        )} q-map-marker__label--event">${marker.label || ""}</div>`
       });
     }
   },

@@ -16,7 +16,13 @@ const fixtureData = [
   require(`${fixtureDataDirectory}/baseLayerStreetFewLabels.json`),
   require(`${fixtureDataDirectory}/baseLayerStreetNoLabels.json`),
   require(`${fixtureDataDirectory}/baseLayerTerrain.json`),
-  require(`${fixtureDataDirectory}/baseLayerAerial.json`)
+  require(`${fixtureDataDirectory}/baseLayerAerial.json`),
+  require(`${fixtureDataDirectory}/showAcronym.json`),
+  require(`${fixtureDataDirectory}/dontShowAcronym.json`),
+  require(`${fixtureDataDirectory}/antimeridian.json`),
+  require(`${fixtureDataDirectory}/labelPlacementTypePointHeavyLabel.json`),
+  require(`${fixtureDataDirectory}/labelPlacementTypePointLightLabel.json`),
+  require(`${fixtureDataDirectory}/labelPlacementTypeEvent.json`)
 ];
 
 module.exports = {

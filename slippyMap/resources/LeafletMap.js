@@ -166,9 +166,6 @@ export default class LeafletMap {
     if (!url) {
       throw new Error("no tile layer url given");
     }
-    // do not copy the world, see http://leafletjs.com/reference-1.3.0.html#gridlayer-nowrap
-    config.noWrap = true;
-    config.bounds = [[90, -180], [-90, 180]];
     this.baseLayer = Leaflet.tileLayer(url, config).addTo(this.map);
     this.map.getContainer().classList.add(containerClass);
   }
@@ -245,7 +242,8 @@ export default class LeafletMap {
           toggleDisplay: false,
           zoomLevelFixed: this.minimapZoomLevelFixed,
           aimingRectOptions: {
-            color: "#d28b00",
+            color: "#000000",
+            fillOpacity: 0,
             weight: 1,
             interactive: false
           },
@@ -386,7 +384,7 @@ export default class LeafletMap {
 
   setAspectRatio(w, h) {
     let container = this.map.getContainer();
-    container.style.height = container.offsetWidth * (h / w) + "px";
+    container.style.height = `${container.offsetWidth * (h / w)}px`;
 
     if (this.aspectRatio !== w / h) {
       this.aspectRatio = w / h;

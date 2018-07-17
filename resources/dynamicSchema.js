@@ -1,9 +1,9 @@
 const fs = require("fs");
-const resourcesDir = __dirname + "/../resources/";
+const resourcesDir = `${__dirname}/../resources/`;
 
 const layerConfigs = JSON.parse(process.env.LAYER_CONFIGS);
 const schema = JSON.parse(
-  fs.readFileSync(resourcesDir + "schema.json", { encoding: "utf-8" })
+  fs.readFileSync(`${resourcesDir}schema.json`, { encoding: "utf-8" })
 );
 
 schema.properties.options.properties.baseLayer.enum = Object.keys(layerConfigs);

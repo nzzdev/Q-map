@@ -1,5 +1,6 @@
 module.exports = {
   title: "My Q map",
+  subtitle: "subtitle",
   notes: "notes in footer",
   geojsonList: [
     {

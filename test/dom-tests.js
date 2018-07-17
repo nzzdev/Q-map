@@ -34,6 +34,12 @@ lab.experiment("Q map dom tests", () => {
     });
   });
 
+  it("should have a correct subtitle element", () => {
+    return getElement(".s-q-item__subtitle").then(element => {
+      expect(element.innerHTML).to.be.equal("subtitle");
+    });
+  });
+
   it("should have a correct footer element", () => {
     return getElement(".s-q-item__footer span:last-child").then(element => {
       expect(element.innerHTML).to.be.equal("notes in footer");

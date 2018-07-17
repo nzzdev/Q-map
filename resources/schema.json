@@ -7,6 +7,13 @@
       "type": "string",
       "title": "Titel"
     },
+    "subtitle": {
+      "type": "string",
+      "title": "Untertitel",
+      "Q:options": {
+        "placeholder": "Wird nur bei komplexeren Karten benötigt&#46;"
+      }
+    },
     "geojsonList": {
       "title": "Elemente auf der Karte",
       "type": "array",
@@ -26,23 +33,26 @@
       }
     },
     "sources": {
-      "title": "Quellen",
+      "title": "Quelle(n)",
       "type": "array",
       "items": {
         "type": "object",
         "title": "Quelle",
         "properties": {
           "text": {
-            "title": "Text",
+            "title": "Quelle",
             "type": "string"
           },
           "link": {
             "Q:type": "link",
             "title": "Link",
             "type": "object",
+            "Q:options": {
+              "placeholder": "Direktlink zur Quelle, http://..."
+            },
             "properties": {
               "url": {
-                "title": "Url",
+                "title": "Link",
                 "type": "string"
               },
               "isValid": {
@@ -72,7 +82,7 @@
           }
         },
         "initialZoomLevel": {
-          "title": "Zoom Level",
+          "title": "Zoomlevel",
           "type": "number",
           "default": -1,
           "enum": [
@@ -126,7 +136,7 @@
           "default": true
         },
         "minimapInitialZoomOffset": {
-          "title": "Minimap zoom offset",
+          "title": "Minimap-Zoomlevel (Differenz zur Hauptkarte)",
           "type": "number",
           "default": 0,
           "Q:options": {
@@ -145,12 +155,12 @@
           }
         },
         "labelsBelowMap": {
-          "title": "Labels unter Karte anzeigen",
+          "title": "Beschriftungen unter der Karte anzeigen",
           "type": "boolean",
           "default": false
         },
         "labelsBelowMapOneRow": {
-          "title": "Labels unter der Karte nebeneinander anzeigen",
+          "title": "Beschriftungen unter der Karte ohne Zeilenumbruch",
           "type": "boolean",
           "default": false,
           "Q:options": {
@@ -221,19 +231,16 @@
         "properties": {
           "type": "object",
           "required": ["type", "labelPosition"],
-          "default": {
-            "label": "",
-            "type": "pointHeavyLabel",
-            "labelPosition": "top"
-          },
           "properties": {
             "label": {
-              "title": "Beschriftung",
-              "type": "string"
+              "title": "Beschriftung des Punkts",
+              "type": "string",
+              "default": ""
             },
             "type": {
               "title": "Markertyp",
               "type": "string",
+              "default": "pointHeavyLabel",
               "enum": [
                 "pointHeavyLabel",
                 "pointLightLabel",
@@ -244,9 +251,9 @@
               ],
               "Q:options": {
                 "enum_titles": [
-                  "Punkt mit Label",
-                  "Punkt mit Label (klein)",
-                  "Punkt ohne Label",
+                  "Punkt mit Beschriftung",
+                  "Punkt mit Beschriftung (klein)",
+                  "Punkt ohne Beschriftung",
                   "Gebiet",
                   "Ereignis",
                   "Epizentrum"
@@ -254,11 +261,30 @@
               }
             },
             "labelPosition": {
-              "title": "Position des Labels",
+              "title": "Position der Beschriftung",
               "type": "string",
-              "enum": ["top", "bottom"],
+              "default": "top",
+              "enum": [
+                "top",
+                "bottom",
+                "left",
+                "right",
+                "topleft",
+                "topright",
+                "bottomleft",
+                "bottomright"
+              ],
               "Q:options": {
-                "enum_titles": ["oben", "unten"]
+                "enum_titles": [
+                  "oben",
+                  "unten",
+                  "links",
+                  "rechts",
+                  "oben links",
+                  "oben rechts",
+                  "unten links",
+                  "unten rechts"
+                ]
               }
             },
             "useForInitialView": {

@@ -30,7 +30,7 @@
 .leaflet-control-minimap {
   border-radius: 0;
   box-shadow: none;
-  border: 1px solid #92929e;
+  border: 1px solid #000000;
 }
 // end
 
@@ -54,7 +54,6 @@
   position: absolute;
   white-space: nowrap;
   text-align: center;
-
   text-shadow: rgb(250, 250, 250) 2px 0px 0px,
     rgb(250, 250, 250) 1.75517px 0.958851px 0px,
     rgb(250, 250, 250) 1.0806px 1.68294px 0px,
@@ -68,11 +67,6 @@
     rgb(250, 250, 250) 0.567324px -1.91785px 0px,
     rgb(250, 250, 250) 1.41734px -1.41108px 0px,
     rgb(250, 250, 250) 1.92034px -0.558831px 0px;
-
-  left: 4px;
-  transform: translateX(-50%);
-
-  line-height: 1.1;
 }
 
 .q-map-code-point {
@@ -81,36 +75,154 @@
 
 .q-map-marker__label--top {
   bottom: 1.1em;
+  line-height: 1.1;
+  left: 4px;
+  transform: translateX(-50%);
 }
 
 .q-map-marker__label--bottom {
   top: 1.1em;
+  line-height: 1.1;
+  left: 4px;
+  transform: translateX(-50%);
+}
+
+.q-map-marker__label--left {
+  right: 1.4em;
+  line-height: 0.6;
+}
+
+.q-map-marker__label--right {
+  left: 1.4em;
+  line-height: 0.6;
+}
+
+.q-map-marker__label--topleft {
+  bottom: 0.8em;
+  line-height: 1.1;
+  right: 12px;
+}
+
+.q-map-marker__label--topright {
+  bottom: 0.8em;
+  line-height: 1.1;
+  left: 12px;
+}
+
+.q-map-marker__label--bottomleft {
+  top: 0.6em;
+  line-height: 1.1;
+  right: 12px;
+}
+
+.q-map-marker__label--bottomright {
+  top: 0.6em;
+  line-height: 1.1;
+  left: 12px;
 }
 
 .q-map-marker__label--event {
+  &::before,
+  &::after {
+    font-family: Arial, sans;
+    font-size: 25px;
+    display: block;
+    color: black;
+    text-align: center;
+    position: relative;
+  }
+
   &.q-map-marker__label--top {
+    left: 4px;
+    transform: translateX(-50%);
+    line-height: 1.2;
+    bottom: 1em;
     &::after {
       content: "\2193";
-      font-family: Arial, sans;
-      font-size: 25px;
-      display: block;
-      color: black;
-      text-align: center;
-      position: relative;
-      top: -0.1em;
+      bottom: 0.1em;
     }
   }
 
   &.q-map-marker__label--bottom {
+    left: 4px;
+    transform: translateX(-50%);
+    line-height: 1.1;
     &::before {
       content: "\2191";
-      font-family: Arial, sans;
-      font-size: 25px;
-      display: block;
-      color: black;
-      text-align: center;
-      position: relative;
       top: -0.2em;
+    }
+  }
+
+  &.q-map-marker__label--left {
+    display: flex;
+    right: 16px;
+    line-height: 0.6;
+    &::after {
+      content: "\2192";
+      margin-left: 8px;
+      top: -0.2em;
+    }
+  }
+
+  &.q-map-marker__label--right {
+    display: flex;
+    left: 16px;
+    line-height: 0.6;
+    &::before {
+      content: "\2190";
+      margin-right: 8px;
+      top: -0.2em;
+    }
+  }
+
+  &.q-map-marker__label--topleft {
+    top: -35px;
+    right: 34px;
+    line-height: 0.9;
+    &::after {
+      content: "\2198";
+      display: flex;
+      justify-content: flex-end;
+      left: 1em;
+    }
+  }
+
+  &.q-map-marker__label--topright {
+    top: -62px;
+    left: 35px;
+    line-height: 1.1;
+    &::before {
+      content: "\2199";
+      display: flex;
+      justify-content: flex-start;
+      top: 1.5em;
+      left: -1em;
+    }
+  }
+
+  &.q-map-marker__label--bottomleft {
+    top: 30px;
+    right: 34px;
+    line-height: 1.1;
+    &::after {
+      content: "\2197";
+      display: flex;
+      justify-content: flex-end;
+      top: -35px;
+      left: 1em;
+    }
+  }
+
+  &.q-map-marker__label--bottomright {
+    top: -6px;
+    left: 34px;
+    line-height: 1.3;
+    &::before {
+      content: "\2196";
+      display: flex;
+      justify-content: flex-start;
+      top: 0.4em;
+      left: -1em;
     }
   }
 }
@@ -124,6 +236,13 @@
 
   &.q-map-marker__label--bottom {
     bottom: 0;
+  }
+  &.q-map-marker__label--left {
+    left: 0;
+  }
+
+  &.q-map-marker__label--right {
+    right: 0;
   }
   transform: translate(-50%, -50%);
 }
@@ -146,32 +265,6 @@
     white-space: nowrap;
     padding-left: 10px;
   }
-}
-
-.q-map-legend {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 10px 0;
-}
-
-.q-map-legend__item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 10px;
-}
-
-.q-map-legend__item__color {
-  display: block;
-  width: 12px;
-  height: 12px;
-  background-color: currentColor;
-  margin-right: 3px;
-  flex-shrink: 0;
-}
-
-.q-map-legend__item__text {
-  white-space: nowrap;
 }
 
 .leaflet-control-button {
