@@ -16,29 +16,25 @@ const pacificArea = {
 // `range[0]` and `range[1]`. The returned value will be always smaller than
 // `range[1]` unless `includeMax` is set to `true`.
 function wrapNum(x, range, includeMax) {
-  var max = range[1],
+  let max = range[1],
     min = range[0],
     d = max - min;
   return x === max && includeMax ? x : ((((x - min) % d) + d) % d) + min;
 }
 
 function convertGeojsonList(geojsonList, range) {
-  for (let geojson of geojsonList) {
+  return geojsonList.map(geojson => {
     turf.coordEach(geojson, currentCoord => {
       currentCoord[0] = wrapNum(currentCoord[0], range, true);
     });
-  }
-  return geojsonList;
+    return geojson;
+  });
 }
 
 function insidePacificArea(geojsonList) {
-  let allInsidePacificArea = false;
-  for (let geojson of geojsonList) {
-    allInsidePacificArea =
-      allInsidePacificArea &&
-      turf.booleanContains(pacificArea, turf.center(geojson));
-  }
-  return allInsidePacificArea;
+  return geojsonList.every(geojson => {
+    return turf.booleanContains(pacificArea, turf.center(geojson));
+  });
 }
 
 function getConvertedGeojsonList(geojsonList) {
