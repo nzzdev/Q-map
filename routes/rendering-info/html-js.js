@@ -13,6 +13,7 @@ require("svelte/ssr/register");
 const staticTpl = require(`${viewsDir}/HtmlJs.html`);
 
 const simplestyleToLeafletStyle = require(`${__dirname}/../../helpers/simplestyleToLeafletStyle.js`);
+const getConvertedGeojsonList = require(`${__dirname}/../../helpers/getConvertedGeojsonList.js`);
 
 const Ajv = require("ajv");
 const ajv = new Ajv();
@@ -116,6 +117,10 @@ module.exports = {
         );
       }
     }
+    // If the geojson features are in the pacific area, all longitude coordinates
+    // should be converted to be between 0 - 360 degrees
+    // See this blog post for more information: https://macwright.org/2016/09/26/the-180th-meridian.html
+    data.geojsonList = getConvertedGeojsonList(data.geojsonList);
 
     let systemConfigScript = `
         System.config({

@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/nzzdev/Q-map#readme",
   "dependencies": {
+    "@turf/turf": "^5.1.6",
     "ajv": "^5.5.2",
     "autoprefixer": "^7.2.6",
     "babel-plugin-import": "^1.8.0",
