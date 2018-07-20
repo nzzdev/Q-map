@@ -33,7 +33,12 @@ function convertGeojsonList(geojsonList, range) {
 
 function insidePacificArea(geojsonList) {
   return geojsonList.every(geojson => {
-    return turf.booleanContains(pacificArea, turf.center(geojson));
+    try {
+      return turf.booleanContains(pacificArea, turf.center(geojson));
+    } catch (e) {
+      // if the geojson can't be handled by turfjs we ignore this geometry for the isInPacificArea calculation
+      return true;
+    }
   });
 }
 
