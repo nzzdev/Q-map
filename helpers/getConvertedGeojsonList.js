@@ -23,7 +23,9 @@ function wrapNum(x, range, includeMax) {
 }
 
 function convertGeojsonList(geojsonList, range) {
-  return geojsonList.map(geojson => {
+  // create a copy of the geojsonList, so the original will not be altered
+  const geojsonListCopy = JSON.parse(JSON.stringify(geojsonList));
+  return geojsonListCopy.map(geojson => {
     turf.coordEach(geojson, currentCoord => {
       currentCoord[0] = wrapNum(currentCoord[0], range, true);
     });
