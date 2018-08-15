@@ -23,6 +23,7 @@
     "ajv": "^5.5.2",
     "autoprefixer": "^7.2.6",
     "babel-plugin-import": "^1.8.0",
+    "clone": "^2.1.2",
     "cssnano": "^3.10.0",
     "hapi": "^17.5.2",
     "inert": "^5.1.0",
