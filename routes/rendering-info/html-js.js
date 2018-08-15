@@ -120,8 +120,9 @@ module.exports = {
     // If the geojson features are in the pacific area, all longitude coordinates
     // should be converted to be between 0 - 360 degrees
     // See this blog post for more information: https://macwright.org/2016/09/26/the-180th-meridian.html
-    data.geojsonList = getConvertedGeojsonList(data.geojsonList);
-
+    request.payload.item.geojsonList = getConvertedGeojsonList(
+      request.payload.item.geojsonList
+    );
     let systemConfigScript = `
         System.config({
           map: {

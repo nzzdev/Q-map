@@ -1,4 +1,5 @@
 const turf = require("@turf/turf");
+const clone = require("clone");
 
 const pacificArea = {
   type: "Feature",
@@ -23,9 +24,7 @@ function wrapNum(x, range, includeMax) {
 }
 
 function convertGeojsonList(geojsonList, range) {
-  // create a copy of the geojsonList, so the original will not be altered
-  const geojsonListCopy = JSON.parse(JSON.stringify(geojsonList));
-  return geojsonListCopy.map(geojson => {
+  return clone(geojsonList).map(function(geojson) {
     turf.coordEach(geojson, currentCoord => {
       currentCoord[0] = wrapNum(currentCoord[0], range, true);
     });
@@ -46,16 +45,15 @@ function insidePacificArea(geojsonList) {
 
 function getConvertedGeojsonList(geojsonList) {
   // Normalize all longitude coordinates to be between -180 and 180 degrees
-  geojsonList = convertGeojsonList(geojsonList, [-180, 180]);
-  const convertedGeojsonList = convertGeojsonList(geojsonList, [0, 360]);
-  const allInsidePacificArea = insidePacificArea(convertedGeojsonList);
+  const normalizedGeojsonList = convertGeojsonList(geojsonList, [-180, 180]);
   // If all features are inside the pacific area
   // return the geojsonList which is converted to longitude values
   // between 0 and 360 degrees
-  if (allInsidePacificArea) {
+  const convertedGeojsonList = convertGeojsonList(geojsonList, [0, 360]);
+  if (insidePacificArea(convertedGeojsonList)) {
     return convertedGeojsonList;
   }
-  return geojsonList;
+  return normalizedGeojsonList;
 }
 
 module.exports = getConvertedGeojsonList;
