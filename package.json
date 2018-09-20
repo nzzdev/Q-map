@@ -1,6 +1,6 @@
 {
   "name": "@nzz/q-map",
-  "version": "1.10.3",
+  "version": "1.10.4",
   "description": "Q map tool",
   "main": "index.js",
   "scripts": {
@@ -22,12 +22,12 @@
     "@turf/turf": "^5.1.6",
     "ajv": "^5.5.2",
     "autoprefixer": "^7.2.6",
-    "babel-plugin-import": "^1.8.0",
+    "babel-plugin-import": "^1.9.1",
     "clone": "^2.1.2",
     "cssnano": "^3.10.0",
-    "hapi": "^17.5.2",
+    "hapi": "^17.5.4",
     "inert": "^5.1.0",
-    "node-sass": "^4.9.2",
+    "node-sass": "^4.9.3",
     "postcss-import": "^11.1.0",
     "svelte": "1.22.5",
     "systemjs": "0.20.19",
@@ -101,8 +101,8 @@
   "devDependencies": {
     "code": "^5.2.0",
     "escape-json-node": "^1.0.8",
-    "jsdom": "^11.11.0",
-    "jspm": "^0.17.0-beta.48",
+    "jsdom": "^11.12.0",
+    "jspm": "^0.17.0-beta.49",
     "lab": "^15.5.0"
   }
 }
