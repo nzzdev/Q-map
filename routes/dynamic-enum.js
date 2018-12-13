@@ -36,9 +36,10 @@ module.exports = {
     cors: true
   },
   handler: function(request, h) {
+    const item = request.payload.item;
     if (request.params.optionName === "minimapInitialZoomOffset") {
       const minimapInitialZoomOffsetEnum = getMinimapInitialZoomOffsetEnum(
-        request.payload
+        item
       );
       return minimapInitialZoomOffsetEnum;
     }

@@ -142,14 +142,18 @@
           "Q:options": {
             "dynamicEnum": {
               "type": "ToolEndpoint",
-              "withData": true,
-              "endpoint": "dynamic-enum/minimapInitialZoomOffset"
+              "config": {
+                "endpoint": "dynamic-enum/minimapInitialZoomOffset",
+                "fields": ["options.initialZoomLevel"]
+              }
             },
             "availabilityChecks": [
               {
                 "type": "ToolEndpoint",
-                "withData": true,
-                "endpoint": "option-availability/minimapInitialZoomOffset"
+                "config": {
+                  "endpoint": "option-availability/minimapInitialZoomOffset",
+                  "fields": ["options.minimap"]
+                }
               }
             ]
           }
@@ -167,8 +171,10 @@
             "availabilityChecks": [
               {
                 "type": "ToolEndpoint",
-                "withData": true,
-                "endpoint": "option-availability/labelsBelowMapOneRow"
+                "config": {
+                  "endpoint": "option-availability/labelsBelowMapOneRow",
+                  "fields": ["options.labelsBelowMap", "geojsonList"]
+                }
               }
             ]
           }
