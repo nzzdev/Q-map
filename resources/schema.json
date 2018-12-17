@@ -187,7 +187,9 @@
             "availabilityChecks": [
               {
                 "type": "UserHasRole",
-                "role": "expert-map"
+                "config": {
+                  "role": "expert-map"
+                }
               }
             ]
           }
@@ -325,7 +327,9 @@
         "availabilityChecks": [
           {
             "type": "UserHasRole",
-            "role": "expert-map"
+            "config": {
+              "role": "expert-map"
+            }
           }
         ]
       }
@@ -338,7 +342,9 @@
         "availabilityChecks": [
           {
             "type": "UserHasRole",
-            "role": "expert-map"
+            "config": {
+              "role": "expert-map"
+            }
           }
         ]
       },
