@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy everthing to work directory
 COPY . /app
 RUN npm install -g jspm
-RUN npm install
+RUN npm install --production
 RUN jspm install
 
 # Expose server port
