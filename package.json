@@ -101,8 +101,8 @@
   "devDependencies": {
     "code": "^5.2.0",
     "escape-json-node": "^1.0.8",
-    "jsdom": "^11.12.0",
+    "jsdom": "^13.2.0",
     "jspm": "^0.17.0-beta.49",
-    "lab": "^15.5.0"
+    "lab": "^18.0.1"
   }
 }
