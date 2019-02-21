@@ -1,54 +1,54 @@
-<div class="s-q-item q-map" data-track-id="q-map" data-track-component-id="{{ id }}" style="opacity: 0">
-  {{#if options.hideTitle !== true && hideTitle !== true }}
-  <h3 class="s-q-item__title">{{title}}</h3>
-  {{/if}} {{#if subtitle && subtitle !== ''}}
-  <div class="s-q-item__subtitle s-font-note">{{ subtitle }}</div>
-  {{/if}} {{#if options.showLegend === true }}
+<div class="s-q-item q-map" data-track-id="q-map" data-track-component-id="{ id }" style="opacity: 0">
+  {#if options.hideTitle !== true && hideTitle !== true }
+  <h3 class="s-q-item__title">{title}</h3>
+  {/if} {#if subtitle && subtitle !== ''}
+  <div class="s-q-item__subtitle s-font-note">{ subtitle }</div>
+  {/if} {#if options.showLegend === true }
   <div class="s-legend-icon-label">
-    {{#each legendItems as legendItem}}
+    {#each legendItems as legendItem}
     <div class="s-legend-item-label__item">
-      <div class="s-legend-item-label__item__icon s-legend-item-label__item__icon--{{ legendItem.type }}" style="color: {{ legendItem.color }}; opacity: {{ legendItem.opacity }};"></div>
-      <div class="s-legend-item-label__item__label">{{ legendItem.label }}</div>
+      <div class="s-legend-item-label__item__icon s-legend-item-label__item__icon--{ legendItem.type }" style="color: { legendItem.color }; opacity: { legendItem.opacity };"></div>
+      <div class="s-legend-item-label__item__label">{ legendItem.label }</div>
     </div>
-    {{/each}}
+    {/each}
   </div>
-  {{/if}}
-  <div class="q-map-container s-font-sans" id="{{ mapContainerId }}" style="height: 250px;"></div>
-  {{#if shouldHaveFooter}}
+  {/if}
+  <div class="q-map-container s-font-sans" id="{ mapContainerId }" style="height: 250px;"></div>
+  {#if shouldHaveFooter}
   <div class="s-q-item__footer">
-    {{#if options.labelsBelowMap === true}}
-    <div class="q-map-footer__marker-labels {{options.labelsBelowMapOneRow === true ? 'q-map-footer__marker-labels--one-row' : ''}}">
-      {{#each numberedLabels as label}}
+    {#if options.labelsBelowMap === true}
+    <div class="q-map-footer__marker-labels {options.labelsBelowMapOneRow === true ? 'q-map-footer__marker-labels--one-row' : ''}">
+      {#each numberedLabels as label}
       <div class="q-map-footer__marker-labels__label s-font-note">
-        <span class="q-map-code-point">{{label.codePoint}}</span>{{label.text}}</div>
-      {{/each}}
+        <span class="q-map-code-point">{label.codePoint}</span>{label.text}</div>
+      {/each}
     </div>
-    {{/if}} {{#if notes}}
-    <span>{{notes}}</span>
-    {{/if}} {{#if shouldHaveSources}} {{#if notes}}&ndash;{{/if}} {{#if sources.length > 1}} Quellen: {{else}} Quelle: {{/if}}
-    {{#each sources as source, index}}
+    {/if} {#if notes}
+    <span>{notes}</span>
+    {/if} {#if shouldHaveSources} {#if notes}&ndash;{/if} {#if sources.length > 1} Quellen: {:else} Quelle: {/if}
+    {#each sources as source, index}
     <!-- 	If you separate DOM siblings with newlines whitespaces cannot be removed by svelte renderer
               To avoid unwanted whitespaces around commas separating each source, we keep render infos for sources at one line here.
               See also: https://github.com/sveltejs/svelte/issues/189  -->
-    {{#if source.text !== ''}}{{#if source.link && source.link.isValid}}
-    <a href="{{source.link.url}}" target="blank" rel="noopener noreferrer">{{source.text}}</a>{{else}}{{source.text}}{{/if}}{{#if index !== sources.length - 1 && sources[index + 1] !== ''}}, {{/if}}{{/if}}
-    {{/each}} {{/if}} {{#if shouldHaveAcronym }}{{#if notes || shouldHaveSources }}&ndash;{{/if}} Grafik: {{ acronym }}{{/if}}
+    {#if source.text !== ''}{#if source.link && source.link.isValid}
+    <a href="{source.link.url}" target="blank" rel="noopener noreferrer">{source.text}</a>{:else}{source.text}{/if}{#if index !== sources.length - 1 && sources[index + 1] !== ''}, {/if}{/if}
+    {/each} {/if} {#if shouldHaveAcronym }{#if notes || shouldHaveSources }&ndash;{/if} Grafik: { acronym }{/if}
   </div>
-  {{/if}}
+  {/if}
 </div>
 <script>
   export default {
     computed: {
-      hideTitle: (toolRuntimeConfig) => {
+      hideTitle: ({ toolRuntimeConfig }) => {
         return toolRuntimeConfig.displayOptions && toolRuntimeConfig.displayOptions.hideTitle;
       },
-      shouldHaveFooter: (options, notes, sources, acronym) => {
+      shouldHaveFooter: ({ options, notes, sources, acronym }) => {
         return options.labelsBelowMap || notes || (sources && sources.length > 0) || acronym !== '';
       },
-      shouldHaveSources: (sources) => {
+      shouldHaveSources: ({ sources }) => {
         return sources !== undefined && sources.length > 0;
       },
-      shouldHaveAcronym: (acronym, sources, notes, geojsonList) => {
+      shouldHaveAcronym: ({ acronym, sources, notes, geojsonList }) => {
         const hasAcronym = acronym !== undefined && acronym !== '';
         const hasSource = sources !== undefined && sources.length > 0;
         const hasNote = notes !== undefined && notes !== '';
@@ -61,7 +61,7 @@
         const hasGeoJSONFeatureOtherThanPoint = geoJSONFeatureOtherThanPoint.length > 0;
         return hasAcronym && (hasSource || hasNote || hasGeoJSONFeatureOtherThanPoint);
       },
-      legendItems: (geojsonList) => {
+      legendItems: ({ geojsonList }) => {
         if (!Array.isArray(geojsonList)) {
           return null;
         }
@@ -115,7 +115,7 @@
           })
         return legend;
       },
-      numberedLabels: (geojsonList) => {
+      numberedLabels: ({ geojsonList }) => {
         if (!Array.isArray(geojsonList)) {
           return null;
         }

@@ -172,7 +172,7 @@ module.exports = {
           content: loaderScript
         }
       ],
-      markup: staticTpl.render(data)
+      markup: staticTpl.render(data).html
     };
 
     return responseData;
