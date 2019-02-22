@@ -1,5 +1,7 @@
 # Q Map
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/nzzdev/Q-map.svg)](https://greenkeeper.io/)
+
 **Maintainer**: [manuelroth](https://github.com/manuelroth)
 
 Q map is one tool of the Q toolbox to produce simple pointer maps.

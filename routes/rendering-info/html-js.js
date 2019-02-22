@@ -18,9 +18,6 @@ const getConvertedGeojsonList = require(`${__dirname}/../../helpers/getConverted
 const Ajv = require("ajv");
 const ajv = new Ajv();
 
-// add draft-04 support explicit
-ajv.addMetaSchema(require("ajv/lib/refs/json-schema-draft-04.json"));
-
 const validate = ajv.compile(dynamicSchema);
 function validateAgainstSchema(item, options) {
   if (validate(item)) {
@@ -175,7 +172,7 @@ module.exports = {
           content: loaderScript
         }
       ],
-      markup: staticTpl.render(data)
+      markup: staticTpl.render(data).html
     };
 
     return responseData;

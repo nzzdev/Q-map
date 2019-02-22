@@ -23,17 +23,16 @@ module.exports = {
     cors: true
   },
   handler: function(request, h) {
+    const item = request.payload.item;
     if (request.params.optionName === "labelsBelowMapOneRow") {
       return {
-        available:
-          hasLabelsBelowMap(request.payload) &&
-          hasMoreThanOneLabel(request.payload)
+        available: hasLabelsBelowMap(item) && hasMoreThanOneLabel(item)
       };
     }
 
     if (request.params.optionName === "minimapInitialZoomOffset") {
       return {
-        available: hasMinimap(request.payload)
+        available: hasMinimap(item)
       };
     }
 

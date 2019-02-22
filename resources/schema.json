@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Karte",
   "type": "object",
   "properties": {
@@ -142,14 +142,18 @@
           "Q:options": {
             "dynamicEnum": {
               "type": "ToolEndpoint",
-              "withData": true,
-              "endpoint": "dynamic-enum/minimapInitialZoomOffset"
+              "config": {
+                "endpoint": "dynamic-enum/minimapInitialZoomOffset",
+                "fields": ["options.initialZoomLevel"]
+              }
             },
             "availabilityChecks": [
               {
                 "type": "ToolEndpoint",
-                "withData": true,
-                "endpoint": "option-availability/minimapInitialZoomOffset"
+                "config": {
+                  "endpoint": "option-availability/minimapInitialZoomOffset",
+                  "fields": ["options.minimap"]
+                }
               }
             ]
           }
@@ -167,8 +171,10 @@
             "availabilityChecks": [
               {
                 "type": "ToolEndpoint",
-                "withData": true,
-                "endpoint": "option-availability/labelsBelowMapOneRow"
+                "config": {
+                  "endpoint": "option-availability/labelsBelowMapOneRow",
+                  "fields": ["options.labelsBelowMap", "geojsonList"]
+                }
               }
             ]
           }
@@ -181,7 +187,9 @@
             "availabilityChecks": [
               {
                 "type": "UserHasRole",
-                "role": "expert-map"
+                "config": {
+                  "role": "expert-map"
+                }
               }
             ]
           }
@@ -319,7 +327,9 @@
         "availabilityChecks": [
           {
             "type": "UserHasRole",
-            "role": "expert-map"
+            "config": {
+              "role": "expert-map"
+            }
           }
         ]
       }
@@ -332,7 +342,9 @@
         "availabilityChecks": [
           {
             "type": "UserHasRole",
-            "role": "expert-map"
+            "config": {
+              "role": "expert-map"
+            }
           }
         ]
       },
