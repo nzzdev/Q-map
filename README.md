@@ -93,12 +93,12 @@ Of course with another mapbox configuration you have to adjust the LAYER_CONFIGS
 Install the [Q cli](https://github.com/nzzdev/Q-cli) and start the Q dev server:
 
 ```
-$ Q server
+$ Q server -c ./dev-config/server-config.js
 ```
 
 Run the Q tool:
 ```
-$ npm run index.js
+$ npm run dev.js
 ```
 
 [to the top](#table-of-contents)
