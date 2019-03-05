@@ -100,6 +100,7 @@
   "devDependencies": {
     "code": "^5.2.4",
     "escape-json-node": "^2.0.0",
+    "glob": "^7.1.3",
     "jsdom": "^13.2.0",
     "jspm": "^0.17.0-beta.49",
     "lab": "^18.0.2"
