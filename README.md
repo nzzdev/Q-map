@@ -125,6 +125,36 @@ The tool structure follows the general structure of each Q tool. Further informa
 
 [to the top](#table-of-contents)
 
+## Features
+
+Q Map uses the [svelte framework](https://svelte.technology/guide) to render the markup on server-side. Additionally a jspm bundle is transpiled for all interactive parts on client-side.
+
+[to the top](#table-of-contents)
+
+## Options
+
+### Baselayer
+
+This option allows to switch between six different basemaps.
+
+### Zoomlevel
+
+Allows to specify the zoomlevel of the basemap.
+
+### Show minimap and minimap zoomlevel
+
+Show a minimap and specify a minimap zoomlevel.
+
+### Show labels below map
+
+Allows to show the marker labels below the map.
+
+### Show legend
+
+This options allows to show the legend. The legend only shows something if features where added as geojson.
+
+[to the top](#table-of-contents)
+
 ## License
 Copyright (c) 2019 Neue Zürcher Zeitung. All rights reserved.
 
