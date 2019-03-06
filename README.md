@@ -103,7 +103,7 @@ npx @nzz/q-cli server -c ./dev-config/server-config.js
 Run the Q tool:
 
 ```
-$ npm run dev.js
+node dev.js
 ```
 
 [to the top](#table-of-contents)
@@ -115,7 +115,7 @@ The testing framework used in this repository is [Code](https://github.com/hapij
 Run the tests:
 
 ```
-$ npm run test
+npm run test
 ```
 
 ### Implementing a new test
