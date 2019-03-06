@@ -123,27 +123,11 @@ When changing or implementing...
 
 The tool structure follows the general structure of each Q tool. Further information can be found in [Q server documentation - Developing tools](https://nzzdev.github.io/Q-server/developing-tools.html).
 
-## Installation
-
-```bash
-$ npm install
-$ npm run build
-```
-
-## Development
-
-Install the [Q cli](https://github.com/nzzdev/Q-cli) and start the Q dev server:
-
-```
-$ Q server
-```
-
-Run the Q tool:
-```
-$ npm run dev
-```
+[to the top](#table-of-contents)
 
 ## License
 Copyright (c) 2019 Neue Zürcher Zeitung. All rights reserved.
 
 This software is published under the MIT license.
+
+[to the top](#table-of-contents)
