@@ -4,8 +4,7 @@
   "description": "Q map tool",
   "main": "index.js",
   "scripts": {
-    "test": "LAYER_CONFIGS='{\"terrain\":{\"label\":\"Terrain\",\"url\":\"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png\",\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18},\"toner\":{\"label\":\"Toner\",\"url\":{\"full\":\"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\"background\":\"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png\",\"labels\":\"https://stamen-tiles.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png\"},\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18},\"toner-background\":{\"label\":\"Toner (background)\",\"url\":\"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png\",\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18}}' lab -a code -t 85 -P tests -m 3000 --verbose --leaks",
-    "dev": "LAYER_CONFIGS='{\"streets\":{\"label\":\"Strassenkarte\"},\"streetsFewLabels\":{\"label\":\"Strassenkarte wenig Labels\"},\"streetsNoLabels\":{\"label\":\"Strassenkarte ohne Labels\"},\"terrain\":{\"label\":\"Terrain\"},\"terrainNoLabels\":{\"label\":\"Terrain ohne Labels\"},\"reduced\":{\"label\":\"Reduziert\"},\"reducedNoLabels\":{\"label\":\"Reduziert ohne Labels\"},\"aerial\":{\"label\":\"Satellit\"}}' node index.js",
+    "test": "lab -a code -c -P tests --verbose --leaks",
     "build": "rm -rf scripts && mkdir scripts && rm -rf styles && mkdir styles && rm -rf resources/fixtures && mkdir -p resources/fixtures/data && node tasks/build.js"
   },
   "repository": {
@@ -101,6 +100,7 @@
   "devDependencies": {
     "code": "^5.2.4",
     "escape-json-node": "^2.0.0",
+    "glob": "^7.1.3",
     "jsdom": "^13.2.0",
     "jspm": "^0.17.0-beta.49",
     "lab": "^18.0.2"
