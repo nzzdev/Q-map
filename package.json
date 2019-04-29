@@ -18,12 +18,14 @@
   },
   "homepage": "https://github.com/nzzdev/Q-map#readme",
   "dependencies": {
+    "@hapi/hapi": "^18.3.1",
+    "@hapi/boom": "^7.4.2",
+    "@hapi/inert": "^5.2.0",
+    "@hapi/joi": "^15.0.0",
     "@turf/turf": "^5.1.6",
     "ajv": "^6.10.0",
     "babel-plugin-import": "^1.11.0",
     "clone": "^2.1.2",
-    "hapi": "^18.1.0",
-    "inert": "^5.1.2",
     "svelte": "^2.16.1",
     "systemjs": "^3.0.1",
     "systemjs-builder": "^0.16.13"

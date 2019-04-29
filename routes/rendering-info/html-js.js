@@ -1,4 +1,4 @@
-const Boom = require("boom");
+const Boom = require("@hapi/boom");
 
 const resourcesDir = `${__dirname}/../../resources/`;
 const scriptsDir = `${__dirname}/../../scripts/`;
