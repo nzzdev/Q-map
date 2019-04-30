@@ -1,7 +1,7 @@
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
-const Lab = require("lab");
-const Code = require("code");
+const Lab = require("@hapi/lab");
+const Code = require("@hapi/code");
 const lab = (exports.lab = Lab.script());
 
 const expect = Code.expect;
