@@ -1,5 +1,5 @@
-# Use following version of Node slim as the base image
-FROM node:10-slim
+# Use following version of Node as the base image
+FROM node:10
 
 # Set work directory for run/cmd
 WORKDIR /app
