@@ -27,7 +27,7 @@
     "babel-plugin-import": "^1.11.0",
     "clone": "^2.1.2",
     "svelte": "^2.16.1",
-    "systemjs": "^3.1.6",
+    "systemjs": "^4.0.0",
     "systemjs-builder": "^0.16.13"
   },
   "jspm": {
