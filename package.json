@@ -58,7 +58,7 @@
       "vm": "npm:jspm-nodelibs-vm@^0.2.0"
     },
     "overrides": {
-      "npm:debug@2.6.0": {
+      "npm:debug@2.6.9": {
         "main": "src/browser.js",
         "jspmNodeConversion": false,
         "format": "cjs",
@@ -75,7 +75,7 @@
           "util": "@node/util"
         }
       },
-      "npm:inherits@2.0.3": {
+      "npm:inherits@2.0.4": {
         "ignore": [
           "test.js"
         ]
@@ -83,15 +83,17 @@
       "npm:leaflet@1.2.0": {
         "jspmNodeConversion": false
       },
-      "npm:lodash@4.17.4": {
+      "npm:lodash@4.17.15": {
         "map": {
           "buffer": "@empty",
           "process": "@empty"
         }
       },
-      "npm:ms@0.7.2": {
-        "jspmNodeConversion": false,
-        "format": "cjs"
+      "npm:pbkdf2@3.0.17": {
+        "main": "browser.js"
+      },
+      "npm:safe-buffer@5.1.2": {
+        "browser": "index.js"
       }
     }
   },
