@@ -10,7 +10,7 @@ cache:
     - node_modules
     - jspm_packages
 before_install:
-  - npm install -g jspm
+  - npm install -g jspm@0.17.0-beta.49
   - jspm config registries.github.auth $JSPM_GITHUB_AUTH_TOKEN
 install:
   - npm install
