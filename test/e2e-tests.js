@@ -4,6 +4,8 @@ const Lab = require("@hapi/lab");
 const Code = require("@hapi/code");
 const glob = require("glob");
 const lab = (exports.lab = Lab.script());
+const stylesDir = `${__dirname}/../styles/`;
+const scriptsDir = `${__dirname}/../scripts/`;
 
 const expect = Code.expect;
 const before = lab.before;
@@ -54,7 +56,7 @@ lab.experiment("stylesheets route", () => {
     "returns existing stylesheet with right cache control header",
     { plan: 2 },
     async () => {
-      const filename = require("../styles/hashMap.json").default;
+      const filename = require(`${stylesDir}/hashMap.json`).default;
       const response = await server.inject(`/stylesheet/${filename}`);
       expect(response.statusCode).to.be.equal(200);
       expect(response.headers["cache-control"]).to.be.equal(
@@ -74,7 +76,7 @@ lab.experiment("scripts route", () => {
     "returns existing script with right cache control header",
     { plan: 2 },
     async () => {
-      const filename = require("../scripts/hashMap.json")["slippy-map"];
+      const filename = require(`${scriptsDir}/hashMap.json`)["slippy-map"];
       const response = await server.inject(`/script/${filename}`);
       expect(response.statusCode).to.be.equal(200);
       expect(response.headers["cache-control"]).to.be.equal(

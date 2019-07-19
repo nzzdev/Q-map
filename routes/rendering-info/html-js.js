@@ -6,11 +6,11 @@ const stylesDir = `${__dirname}/../../styles/`;
 const dynamicSchema = require(`${resourcesDir}dynamicSchema.js`);
 const viewsDir = `${__dirname}/../../views/`;
 
-const scriptHashMap = require(`${scriptsDir}/hashMap.json`);
-const styleHashMap = require(`${stylesDir}/hashMap.json`);
+const scriptHashMap = require(`${scriptsDir}hashMap.json`);
+const styleHashMap = require(`${stylesDir}hashMap.json`);
 
 require("svelte/ssr/register");
-const staticTpl = require(`${viewsDir}/HtmlJs.html`);
+const staticTpl = require(`${viewsDir}HtmlJs.html`);
 
 const simplestyleToLeafletStyle = require(`${__dirname}/../../helpers/simplestyleToLeafletStyle.js`);
 const getConvertedGeojsonList = require(`${__dirname}/../../helpers/getConvertedGeojsonList.js`);
