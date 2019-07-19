@@ -1,7 +1,11 @@
-const Lab = require("lab");
-const Code = require("code");
-const Hapi = require("hapi");
+process.env.LAYER_CONFIGS =
+  '{"terrain":{"label":"Terrain","url":"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png","minimapLayerUrl":"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png","config":{"attribution":"Map tiles by <a href=\\"http://stamen.com\\">Stamen Design</a>, under <a href=\\"http://creativecommons.org/licenses/by/3.0\\">CC BY 3.0</a>. Data by <a href=\\"http://openstreetmap.org\\">OpenStreetMap</a>, under <a href=\\"http://www.openstreetmap.org/copyright\\">ODbL</a>."},"containerClass":"with-base-layer-streets","maxZoom":18},"aerial":{"label":"Aerial","url":"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png","minimapLayerUrl":"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png","config":{"attribution":"Map tiles by <a href=\\"http://stamen.com\\">Stamen Design</a>, under <a href=\\"http://creativecommons.org/licenses/by/3.0\\">CC BY 3.0</a>. Data by <a href=\\"http://openstreetmap.org\\">OpenStreetMap</a>, under <a href=\\"http://www.openstreetmap.org/copyright\\">ODbL</a>."},"containerClass":"with-base-layer-streets","maxZoom":18},"streetsFewLabels":{"label":"StreetsFewLabels","url":"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png","minimapLayerUrl":"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png","config":{"attribution":"Map tiles by <a href=\\"http://stamen.com\\">Stamen Design</a>, under <a href=\\"http://creativecommons.org/licenses/by/3.0\\">CC BY 3.0</a>. Data by <a href=\\"http://openstreetmap.org\\">OpenStreetMap</a>, under <a href=\\"http://www.openstreetmap.org/copyright\\">ODbL</a>."},"containerClass":"with-base-layer-streets","maxZoom":18},"streetsNoLabels":{"label":"StreetsNoLabels","url":"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png","minimapLayerUrl":"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png","config":{"attribution":"Map tiles by <a href=\\"http://stamen.com\\">Stamen Design</a>, under <a href=\\"http://creativecommons.org/licenses/by/3.0\\">CC BY 3.0</a>. Data by <a href=\\"http://openstreetmap.org\\">OpenStreetMap</a>, under <a href=\\"http://www.openstreetmap.org/copyright\\">ODbL</a>."},"containerClass":"with-base-layer-streets","maxZoom":18},"streetsNoLabels":{"label":"StreetsNoLabels","url":"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png","minimapLayerUrl":"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png","config":{"attribution":"Map tiles by <a href=\\"http://stamen.com\\">Stamen Design</a>, under <a href=\\"http://creativecommons.org/licenses/by/3.0\\">CC BY 3.0</a>. Data by <a href=\\"http://openstreetmap.org\\">OpenStreetMap</a>, under <a href=\\"http://www.openstreetmap.org/copyright\\">ODbL</a>."},"containerClass":"with-base-layer-streets","maxZoom":18},"streets":{"label":"Streets","url":"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png","minimapLayerUrl":"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png","config":{"attribution":"Map tiles by <a href=\\"http://stamen.com\\">Stamen Design</a>, under <a href=\\"http://creativecommons.org/licenses/by/3.0\\">CC BY 3.0</a>. Data by <a href=\\"http://openstreetmap.org\\">OpenStreetMap</a>, under <a href=\\"http://www.openstreetmap.org/copyright\\">ODbL</a>."},"containerClass":"with-base-layer-streets","maxZoom":18},"toner":{"label":"Toner","url":{"full":"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png","background":"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png","labels":"https://stamen-tiles.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png"},"minimapLayerUrl":"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png","config":{"attribution":"Map tiles by <a href=\\"http://stamen.com\\">Stamen Design</a>, under <a href=\\"http://creativecommons.org/licenses/by/3.0\\">CC BY 3.0</a>. Data by <a href=\\"http://openstreetmap.org\\">OpenStreetMap</a>, under <a href=\\"http://www.openstreetmap.org/copyright\\">ODbL</a>."},"containerClass":"with-base-layer-streets","maxZoom":18},"toner-background":{"label":"Toner (background)","url":"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png","minimapLayerUrl":"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png","config":{"attribution":"Map tiles by <a href=\\"http://stamen.com\\">Stamen Design</a>, under <a href=\\"http://creativecommons.org/licenses/by/3.0\\">CC BY 3.0</a>. Data by <a href=\\"http://openstreetmap.org\\">OpenStreetMap</a>, under <a href=\\"http://www.openstreetmap.org/copyright\\">ODbL</a>."},"containerClass":"with-base-layer-streets","maxZoom":18}}';
+const Lab = require("@hapi/lab");
+const Code = require("@hapi/code");
+const glob = require("glob");
 const lab = (exports.lab = Lab.script());
+const stylesDir = `${__dirname}/../styles/`;
+const scriptsDir = `${__dirname}/../scripts/`;
 
 const expect = Code.expect;
 const before = lab.before;
@@ -52,7 +56,7 @@ lab.experiment("stylesheets route", () => {
     "returns existing stylesheet with right cache control header",
     { plan: 2 },
     async () => {
-      const filename = require("../styles/hashMap.json").default;
+      const filename = require(`${stylesDir}/hashMap.json`).default;
       const response = await server.inject(`/stylesheet/${filename}`);
       expect(response.statusCode).to.be.equal(200);
       expect(response.headers["cache-control"]).to.be.equal(
@@ -72,7 +76,7 @@ lab.experiment("scripts route", () => {
     "returns existing script with right cache control header",
     { plan: 2 },
     async () => {
-      const filename = require("../scripts/hashMap.json")["slippy-map"];
+      const filename = require(`${scriptsDir}/hashMap.json`)["slippy-map"];
       const response = await server.inject(`/script/${filename}`);
       expect(response.statusCode).to.be.equal(200);
       expect(response.headers["cache-control"]).to.be.equal(
@@ -132,4 +136,29 @@ lab.experiment("rendering-info route", () => {
     });
     expect(response.statusCode).to.be.equal(200);
   });
+});
+
+// all the fixtures render
+lab.experiment("all fixtures render", async () => {
+  const fixtureFiles = glob.sync(
+    `${__dirname}/../resources/fixtures/data/*.json`
+  );
+  for (let fixtureFile of fixtureFiles) {
+    const fixture = require(fixtureFile);
+    it(`doesnt fail in rendering fixture ${fixture.title}`, async () => {
+      const request = {
+        method: "POST",
+        url: "/rendering-info/html-js",
+        payload: {
+          item: fixture,
+          toolRuntimeConfig: {
+            toolBaseUrl: "http://localhost:3000",
+            displayOptions: {}
+          }
+        }
+      };
+      const response = await server.inject(request);
+      expect(response.statusCode).to.be.equal(200);
+    });
+  }
 });

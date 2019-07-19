@@ -1,17 +1,19 @@
-# Use following version of Node alpine as the base image
-FROM node:10-alpine
+# Use following version of node as the base image
+FROM node:10
 
 # Set work directory for run/cmd
 WORKDIR /app
 
-# Copy everthing to work directory
-COPY . /app
-RUN npm install -g jspm
+# Copy package.json and package-lock.json into work directory and install dependencies
+COPY package.json /app/package.json
+COPY package-lock.json /app/package-lock.json
 RUN npm install --production
-RUN jspm install
+
+# Copy everthing else in work directory
+COPY . /app
 
 # Expose server port
 EXPOSE 3000
 
 # Run node
-CMD ["node", "/app/index.js"]
+CMD node index.js

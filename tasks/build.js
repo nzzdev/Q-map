@@ -4,7 +4,7 @@ const crypto = require("crypto");
 const Builder = require("systemjs-builder");
 const builder = new Builder("", "jspm.config.js");
 
-const sass = require("node-sass");
+const sass = require("sass");
 const postcss = require("postcss");
 const postcssImport = require("postcss-import");
 const autoprefixer = require("autoprefixer");

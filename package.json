@@ -1,11 +1,10 @@
 {
   "name": "@nzz/q-map",
-  "version": "1.10.5",
+  "version": "1.10.6",
   "description": "Q map tool",
   "main": "index.js",
   "scripts": {
-    "test": "LAYER_CONFIGS='{\"terrain\":{\"label\":\"Terrain\",\"url\":\"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png\",\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18},\"toner\":{\"label\":\"Toner\",\"url\":{\"full\":\"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\"background\":\"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png\",\"labels\":\"https://stamen-tiles.a.ssl.fastly.net/toner-labels/{z}/{x}/{y}.png\"},\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18},\"toner-background\":{\"label\":\"Toner (background)\",\"url\":\"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png\",\"minimapLayerUrl\":\"https://stamen-tiles.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png\",\"config\":{\"attribution\":\"Map tiles by <a href=\\\"http://stamen.com\\\">Stamen Design</a>, under <a href=\\\"http://creativecommons.org/licenses/by/3.0\\\">CC BY 3.0</a>. Data by <a href=\\\"http://openstreetmap.org\\\">OpenStreetMap</a>, under <a href=\\\"http://www.openstreetmap.org/copyright\\\">ODbL</a>.\"},\"containerClass\":\"with-base-layer-streets\",\"maxZoom\":18}}' lab -a code -t 85 -P tests -m 3000 --verbose --leaks",
-    "dev": "LAYER_CONFIGS='{\"streets\":{\"label\":\"Strassenkarte\"},\"streetsFewLabels\":{\"label\":\"Strassenkarte wenig Labels\"},\"streetsNoLabels\":{\"label\":\"Strassenkarte ohne Labels\"},\"terrain\":{\"label\":\"Terrain\"},\"terrainNoLabels\":{\"label\":\"Terrain ohne Labels\"},\"reduced\":{\"label\":\"Reduziert\"},\"reducedNoLabels\":{\"label\":\"Reduziert ohne Labels\"},\"aerial\":{\"label\":\"Satellit\"}}' node index.js",
+    "test": "lab -a @hapi/code -c -P tests --verbose --leaks",
     "build": "rm -rf scripts && mkdir scripts && rm -rf styles && mkdir styles && rm -rf resources/fixtures && mkdir -p resources/fixtures/data && node tasks/build.js"
   },
   "repository": {
@@ -19,19 +18,17 @@
   },
   "homepage": "https://github.com/nzzdev/Q-map#readme",
   "dependencies": {
+    "@hapi/boom": "^7.4.2",
+    "@hapi/hapi": "^18.3.1",
+    "@hapi/inert": "^5.2.1",
+    "@hapi/joi": "^15.1.0",
     "@turf/turf": "^5.1.6",
-    "ajv": "^6.9.1",
-    "autoprefixer": "^9.4.7",
-    "babel-plugin-import": "^1.9.1",
+    "ajv": "^6.10.2",
+    "babel-plugin-import": "^1.12.0",
     "clone": "^2.1.2",
-    "cssnano": "^4.1.8",
-    "hapi": "^18.1.0",
-    "inert": "^5.1.0",
-    "node-sass": "^4.9.3",
-    "postcss-import": "^12.0.1",
-    "svelte": "2.16.1",
-    "systemjs": "3.0.0",
-    "systemjs-builder": "^0.16.13"
+    "svelte": "^2.16.1",
+    "systemjs": "^3.1.6",
+    "systemjs-builder": "^0.16.15"
   },
   "jspm": {
     "name": "q-map",
@@ -61,7 +58,7 @@
       "vm": "npm:jspm-nodelibs-vm@^0.2.0"
     },
     "overrides": {
-      "npm:debug@2.6.0": {
+      "npm:debug@2.6.9": {
         "main": "src/browser.js",
         "jspmNodeConversion": false,
         "format": "cjs",
@@ -78,7 +75,7 @@
           "util": "@node/util"
         }
       },
-      "npm:inherits@2.0.3": {
+      "npm:inherits@2.0.4": {
         "ignore": [
           "test.js"
         ]
@@ -86,23 +83,31 @@
       "npm:leaflet@1.2.0": {
         "jspmNodeConversion": false
       },
-      "npm:lodash@4.17.4": {
+      "npm:lodash@4.17.15": {
         "map": {
           "buffer": "@empty",
           "process": "@empty"
         }
       },
-      "npm:ms@0.7.2": {
-        "jspmNodeConversion": false,
-        "format": "cjs"
+      "npm:pbkdf2@3.0.17": {
+        "main": "browser.js"
+      },
+      "npm:safe-buffer@5.1.2": {
+        "browser": "index.js"
       }
     }
   },
   "devDependencies": {
-    "code": "^5.2.0",
+    "@hapi/code": "^5.3.1",
+    "@hapi/lab": "^19.0.0",
+    "autoprefixer": "^9.6.1",
+    "cssnano": "^4.1.10",
     "escape-json-node": "^2.0.0",
-    "jsdom": "^13.2.0",
+    "glob": "^7.1.4",
+    "jsdom": "^15.1.1",
     "jspm": "^0.17.0-beta.49",
-    "lab": "^18.0.1"
+    "postcss": "^7.0.17",
+    "postcss-import": "^12.0.1",
+    "sass": "^1.22.7"
   }
 }

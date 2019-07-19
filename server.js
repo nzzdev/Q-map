@@ -1,4 +1,4 @@
-const Hapi = require("hapi");
+const Hapi = require("@hapi/hapi");
 
 const hapiOptions = {
   port: process.env.PORT || 3000
