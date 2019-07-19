@@ -20,15 +20,15 @@
   "dependencies": {
     "@hapi/boom": "^7.4.2",
     "@hapi/hapi": "^18.3.1",
-    "@hapi/inert": "^5.2.0",
-    "@hapi/joi": "^15.0.0",
+    "@hapi/inert": "^5.2.1",
+    "@hapi/joi": "^15.1.0",
     "@turf/turf": "^5.1.6",
-    "ajv": "^6.10.0",
-    "babel-plugin-import": "^1.11.0",
+    "ajv": "^6.10.2",
+    "babel-plugin-import": "^1.12.0",
     "clone": "^2.1.2",
     "svelte": "^2.16.1",
     "systemjs": "^3.1.6",
-    "systemjs-builder": "^0.16.13"
+    "systemjs-builder": "^0.16.15"
   },
   "jspm": {
     "name": "q-map",
@@ -96,16 +96,16 @@
     }
   },
   "devDependencies": {
-    "@hapi/lab": "^19.0.0",
     "@hapi/code": "^5.3.1",
-    "autoprefixer": "^9.5.1",
+    "@hapi/lab": "^19.0.0",
+    "autoprefixer": "^9.6.1",
     "cssnano": "^4.1.10",
     "escape-json-node": "^2.0.0",
-    "glob": "^7.1.3",
-    "jsdom": "^15.0.0",
+    "glob": "^7.1.4",
+    "jsdom": "^15.1.1",
     "jspm": "^0.17.0-beta.49",
-    "postcss": "^7.0.14",
+    "postcss": "^7.0.17",
     "postcss-import": "^12.0.1",
-    "sass": "^1.19.0"
+    "sass": "^1.22.7"
   }
 }
