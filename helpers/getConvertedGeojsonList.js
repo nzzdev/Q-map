@@ -11,6 +11,16 @@ const pacificArea = {
   bbox: [[70, -90], [335, 90]]
 };
 
+const negativePacificArea = {
+  type: "Feature",
+  properties: {},
+  geometry: {
+    type: "Polygon",
+    coordinates: [[[70, -90], [-25, -90], [-25, 90], [70, 90], [70, -90]]]
+  },
+  bbox: [[70, -90], [-25, 90]]
+};
+
 // leaflet@1.3.1 implementation
 // @function wrapNum(num: Number, range: Number[], includeMax?: Boolean): Number
 // Returns the number `num` modulo `range` in such a way so it lies within
@@ -35,7 +45,25 @@ function convertGeojsonList(geojsonList, range) {
 function insidePacificArea(geojsonList) {
   return geojsonList.every(geojson => {
     try {
-      return turf.booleanContains(pacificArea, turf.center(geojson));
+      const center = turf.center(geojson);
+      const insidePacificArea = turf.booleanContains(pacificArea, center);
+      return insidePacificArea;
+    } catch (e) {
+      // if the geojson can't be handled by turfjs we ignore this geometry for the isInPacificArea calculation
+      return true;
+    }
+  });
+}
+
+function insideNegativePacificArea(geojsonList) {
+  return geojsonList.every(geojson => {
+    try {
+      const center = turf.center(geojson);
+      const insideNegativePacificArea = turf.booleanContains(
+        negativePacificArea,
+        center
+      );
+      return insideNegativePacificArea;
     } catch (e) {
       // if the geojson can't be handled by turfjs we ignore this geometry for the isInPacificArea calculation
       return true;
@@ -50,7 +78,10 @@ function getConvertedGeojsonList(geojsonList) {
   // return the geojsonList which is converted to longitude values
   // between 0 and 360 degrees
   const convertedGeojsonList = convertGeojsonList(geojsonList, [0, 360]);
-  if (insidePacificArea(convertedGeojsonList)) {
+  if (
+    !insideNegativePacificArea(normalizedGeojsonList) &&
+    insidePacificArea(convertedGeojsonList)
+  ) {
     return convertedGeojsonList;
   }
   return normalizedGeojsonList;
