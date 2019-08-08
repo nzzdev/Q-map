@@ -99,7 +99,7 @@
   },
   "devDependencies": {
     "@hapi/code": "^5.3.1",
-    "@hapi/lab": "^19.0.0",
+    "@hapi/lab": "^20.0.0",
     "autoprefixer": "^9.6.1",
     "cssnano": "^4.1.10",
     "escape-json-node": "^2.0.0",
