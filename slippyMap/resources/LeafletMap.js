@@ -342,12 +342,12 @@ export default class LeafletMap {
         .getContainer()
         .addEventListener("click", event => {
           this.enableInteraction();
-          let enableInteractionEvent = new CustomEvent(
-            "q-map-enableInteraction",
-            {
-              bubbles: true
+          let enableInteractionEvent = new CustomEvent("q-tracking-event", {
+            bubbles: true,
+            detail: {
+              eventAction: "q-map-enableInteraction"
             }
-          );
+          });
           this.element.parentNode.dispatchEvent(enableInteractionEvent);
         });
     }
