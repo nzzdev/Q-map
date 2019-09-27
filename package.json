@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/nzzdev/Q-map#readme",
   "dependencies": {
-    "@hapi/boom": "^7.4.2",
+    "@hapi/boom": "^8.0.0",
     "@hapi/hapi": "^18.3.1",
     "@hapi/inert": "^5.2.1",
     "@hapi/joi": "^15.1.0",
