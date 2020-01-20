@@ -104,7 +104,7 @@
     "cssnano": "^4.1.10",
     "escape-json-node": "^2.0.0",
     "glob": "^7.1.4",
-    "jsdom": "^15.1.1",
+    "jsdom": "^16.0.1",
     "jspm": "^0.17.0-beta.49",
     "postcss": "^7.0.17",
     "postcss-import": "^12.0.1",
