@@ -20,7 +20,6 @@ module.exports = {
     validate: {
       payload: Joi.object()
     },
-    cors: true
   },
   handler: function(request, h) {
     const item = request.payload.item;

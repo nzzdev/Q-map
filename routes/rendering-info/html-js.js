@@ -50,7 +50,6 @@ module.exports = {
       },
       payload: validatePayload
     },
-    cors: true,
     cache: false // do not send cache control header to let it be added by Q Server
   },
   handler: function(request, h) {

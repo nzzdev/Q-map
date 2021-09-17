@@ -5,7 +5,6 @@ module.exports = [
     method: "GET",
     path: "/script/{filename}.{hash}.{extension}",
     options: {
-      cors: true,
       files: {
         relativeTo: path.join(__dirname, "/../scripts/")
       }
