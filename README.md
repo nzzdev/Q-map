@@ -22,6 +22,7 @@ git clone git@github.com:nzzdev/Q-map.git
 cd ./Q-map
 nvm use
 npm install
+jspm install
 npm run build
 ```
 
